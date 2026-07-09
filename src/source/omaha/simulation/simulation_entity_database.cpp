@@ -218,7 +218,7 @@ bool simulation_entity_type_is_object(enum e_simulation_entity_type entity_type)
     bool entity_is_object = false;
     switch (entity_type)
     {
-        case _simulation_entity_type_unit:
+        case _simulation_entity_type_biped:
         case _simulation_entity_type_item:
         case _simulation_entity_type_generic:
         case _simulation_entity_type_generic_garbage:
