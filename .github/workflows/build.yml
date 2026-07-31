@@ -27,13 +27,13 @@ jobs:
 
       # Clone the current repo
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: 'recursive'
 
       # Clone the secondary repo
       - name: Checkout build
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
           repository: ChimpsAtSea/Reach-Build
           token: ${{ secrets.GH_PAT }}
@@ -57,7 +57,7 @@ jobs:
 
       # Upload progress report
       - name: Upload report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.version }}_report
           path: build/${{ matrix.version }}/report.json
