@@ -11,6 +11,7 @@
 ###
 
 import argparse
+import hashlib
 import io
 import os
 import platform
@@ -91,7 +92,71 @@ TOOLS: Dict[str, Callable[[str], str]] = {
     "wibo": wibo_url,
 }
 
+def discard(path: Path) -> None:
+    try:
+        path.unlink()
+    except OSError:
+        pass  # still in use, a later download will clean it up
+
+
+def same_contents(a: Path, b: Path) -> bool:
+    try:
+        if a.stat().st_size != b.stat().st_size:
+            return False
+        with open(a, "rb") as f:
+            digest_a = hashlib.sha256(f.read()).digest()
+        with open(b, "rb") as f:
+            digest_b = hashlib.sha256(f.read()).digest()
+    except OSError:
+        return False
+    return digest_a == digest_b
+
+
+def replace_locked(src: Path, dst: Path) -> None:
+    try:
+        os.replace(src, dst)
+        return
+    except PermissionError:
+        pass
+
+    # The destination is in use -- a running dtk.exe, an antivirus scan, an
+    # editor holding it open. If it already holds exactly what we downloaded,
+    # keep it and just freshen its timestamp so the build system stops
+    # considering it out of date.
+    if same_contents(src, dst):
+        discard(src)
+        try:
+            dst.touch()
+        except OSError:
+            pass
+        print(f"{dst} is in use but already up to date, keeping it")
+        return
+
+    # On Windows a running executable cannot be overwritten, but it can usually
+    # be renamed out of the way. Move the old file aside, put the new one in
+    # place, then delete the old one once nothing holds it open any more.
+    for index in range(16):
+        stale = dst.with_name(f"{dst.name}.old{index if index else ''}")
+        try:
+            if stale.exists():
+                stale.unlink()
+            os.replace(dst, stale)
+        except OSError:
+            continue
+        try:
+            os.replace(src, dst)
+        except OSError:
+            os.replace(stale, dst)  # put the original back
+            break
+        discard(stale)
+        return
+
+    discard(src)
+    raise PermissionError(f"{dst} is in use and could not be replaced")
+
+
 def download(url, response, output) -> None:
+    output.parent.mkdir(parents=True, exist_ok=True)
     if url.endswith(".zip"):
         data = io.BytesIO(response.read())
         with zipfile.ZipFile(data) as f:
@@ -102,10 +167,23 @@ def download(url, response, output) -> None:
                 os.chmod(os.path.join(root, name), 0o755)
         output.touch(mode=0o755)  # Update dir modtime
     else:
-        with open(output, "wb") as f:
+        # The pid keeps concurrent builds from fighting over one scratch file.
+        temporary = output.with_name(f"{output.name}.{os.getpid()}.download")
+        with open(temporary, "wb") as f:
             shutil.copyfileobj(response, f)
-        st = os.stat(output)
-        os.chmod(output, st.st_mode | stat.S_IEXEC)
+        st = os.stat(temporary)
+        os.chmod(temporary, st.st_mode | stat.S_IEXEC)
+        try:
+            replace_locked(temporary, output)
+        except OSError as e:
+            discard(temporary)
+            if not output.exists():
+                raise
+            try:
+                output.touch()
+            except OSError:
+                pass
+            print(f"WARNING: {e}, keeping the existing {output}")
 
 def main() -> None:
     parser = argparse.ArgumentParser()
