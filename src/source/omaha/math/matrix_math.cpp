@@ -16,6 +16,20 @@
 
 /* ---------- public code */
 
+float magnitude_squared4d(union vector4d const * v)
+{
+    mangled_ppc("?magnitude_squared4d@@YAMPBTvector4d@@@Z");
+
+	return v->i * v->i + v->j * v->j + v->k * v->k + v->l * v->l;
+};
+
+float magnitude4d(union vector4d const * v)
+{
+    mangled_ppc("?magnitude4d@@YAMPBTvector4d@@@Z");
+
+	return square_root(magnitude_squared4d(v));
+};
+
 /* ---------- private code */
 
 /* ---------- reverse engineering */

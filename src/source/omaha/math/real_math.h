@@ -20,10 +20,10 @@ const float k_degrees_to_radians = 0.0174533f;
 const float k_radians_to_degrees = 57.2957802f;
 const float k_real_precision = __FLT_EPSILON__;
 const float k_pi = 3.1415927f;
-const float k_2pi = k_pi * 2.0f;
-const float k_3pi = k_pi * 3.0f;
-const float k_half_pi = k_pi / 2.0f;
-const float k_quarter_pi = k_pi / 4.0f;
+const float k_2pi = 6.2831855f;
+const float k_3pi = 9.424778f;
+const float k_half_pi = 1.5707964f;
+const float k_quarter_pi = 0.7853982f;
 const float k_one_over_root2 = 0.7071068f;
 const float k_cosine30 = 0.8660254f;
 const float k_sine30 = 0.5f;
@@ -45,6 +45,8 @@ const float k_real_min = -__FLT_MAX__;
 const float k_real_max = __FLT_MAX__;
 const float REAL_MIN = -__FLT_MAX__;
 const float REAL_MAX = __FLT_MAX__;
+
+#define realcmp(a, b) (fabs((a) - (b)) < k_real_epsilon)
 
 /* ---------- definitions */
 
@@ -416,26 +418,16 @@ extern inline bool valid_real_vector3d_axes3(vector3d const * f, vector3d const 
 //    mangled_ppc("?valid_real_vector3d_axes3@@YA_NPBTvector3d@@00@Z");
 //};
 
-inline float cross_product2d(vector2d const * a, vector2d const * b)
-{
-    mangled_ppc("?cross_product2d@@YAMPBTvector2d@@0@Z");
+extern float cross_product2d(vector2d const * a, vector2d const * b);
+//float cross_product2d(vector2d const * a, vector2d const * b)
+//{
+//    mangled_ppc("?cross_product2d@@YAMPBTvector2d@@0@Z");
+//
+//	return a->i * b->j - a->j * b->i;
+//};
 
-	return a->i * b->j - a->j * b->i;
-};
-
-float magnitude_squared4d(union vector4d const * v)
-{
-    mangled_ppc("?magnitude_squared4d@@YAMPBTvector4d@@@Z");
-
-	return v->i * v->i + v->j * v->j + v->k * v->k + v->l * v->l;
-};
-
-float magnitude4d(union vector4d const * v)
-{
-    mangled_ppc("?magnitude4d@@YAMPBTvector4d@@@Z");
-
-	return square_root(magnitude_squared4d(v));
-};
+extern float magnitude_squared4d(union vector4d const * v);
+extern float magnitude4d(union vector4d const * v);
 
 extern double abs(double d);
 /*double abs(double d)
