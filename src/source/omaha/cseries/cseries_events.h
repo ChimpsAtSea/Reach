@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __CSERIES_EVENTS_H__
-#define __CSERIES_EVENTS_H__
+#ifndef __OMAHA_CSERIES_EVENTS_H__
+#define __OMAHA_CSERIES_EVENTS_H__
 
 /* ---------- headers */
 
@@ -10,9 +10,14 @@
 
 /* ---------- prototypes */
 
+struct s_file_reference;
+
+s_file_reference * create_report_file_reference(s_file_reference * reference, char const * name, bool place_in_report_directory);
+void events_disable_suppression(bool disable);
+
 /* ---------- globals */
 
 /* ---------- public code */
 
-#endif // __CSERIES_EVENTS_H__
+#endif // __OMAHA_CSERIES_EVENTS_H__
 

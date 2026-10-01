@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+bool system_get_console_user_name(char * buffer, long buffer_size);
+
 /* ---------- globals */
 
 /* ---------- public code */

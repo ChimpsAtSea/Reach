@@ -8,7 +8,11 @@
 
 /* ---------- definitions */
 
+struct s_compression_info;
+
 /* ---------- prototypes */
+
+void render_mesh_submit_compression(s_compression_info const * compression_info);
 
 /* ---------- globals */
 

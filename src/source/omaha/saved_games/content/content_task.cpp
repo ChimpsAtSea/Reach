@@ -1,6 +1,10 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\saved_games\\content\\content_task.cpp"
 /* ---------- headers */
 
 #include "omaha\saved_games\content\content_task.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "omaha\cseries\async_spasm.h"
+#include "omaha\cseries\async_xoverlapped.h"
 
 /* ---------- constants */
 
@@ -50,168 +54,177 @@
 // struct s_async_task_id async_task_add<class c_content_task *>(long, class c_content_task *const *, long, enum e_async_completion (*)(void *), class c_async_completion_flag *);
 // struct s_async_task_id async_task_add_ex<class c_content_task *>(long, class c_content_task *const *, long, enum e_async_completion (*)(void *), class c_async_completion_flag *, enum e_async_block_if_full);
 
-//public: c_content_task::c_content_task(void)
-//{
-//    mangled_ppc("??0c_content_task@@QAA@XZ");
-//};
+c_content_task::c_content_task(void)
+{
+    mangled_ppc("??0c_content_task@@QAA@XZ");
+
+    if (m_private_data.alive())
+    {
+        m_private_data.destruct();
+    }
+    m_private_data.construct();
+};
 
 //merged_835C3968
 //{
 //    mangled_ppc("merged_835C3968");
 //};
 
-//public: virtual c_content_task::~c_content_task(void)
-//{
-//    mangled_ppc("??1c_content_task@@UAA@XZ");
-//};
+c_content_task::~c_content_task(void)
+{
+    mangled_ppc("??1c_content_task@@UAA@XZ");
 
-//void content_task_initialize(class c_content_task *const, enum e_content_task_type)
-//{
-//    mangled_ppc("?content_task_initialize@@YAXQAVc_content_task@@W4e_content_task_type@@@Z");
-//};
+    if (m_private_data.alive())
+    {
+        m_private_data.destruct();
+    }
+};
 
-//void content_task_per_use_initialize(class c_content_task *const)
-//{
-//    mangled_ppc("?content_task_per_use_initialize@@YAXQAVc_content_task@@@Z");
-//};
+void content_task_initialize(c_content_task * const task, e_content_task_type type)
+{
+    mangled_ppc("?content_task_initialize@@YAXQAVc_content_task@@W4e_content_task_type@@@Z");
 
-//void content_task_pre_submit(class c_content_task *const, enum e_controller_index)
-//{
-//    mangled_ppc("?content_task_pre_submit@@YAXQAVc_content_task@@W4e_controller_index@@@Z");
-//};
+    if (task->m_private_data.alive())
+    {
+        task->m_private_data.destruct();
+    }
+    task->m_private_data.construct();
+    task->m_private_data.get()->type = type;
+    task->m_private_data.get()->handle_type = _content_task_handle_type_none;
+    content_task_per_use_initialize(task);
+};
 
-//void content_task_post_submit(class c_content_task *const, bool)
-//{
-//    mangled_ppc("?content_task_post_submit@@YAXQAVc_content_task@@_N@Z");
-//};
+void content_task_per_use_initialize(c_content_task * const task)
+{
+    mangled_ppc("?content_task_per_use_initialize@@YAXQAVc_content_task@@@Z");
 
-//void content_task_set_complete(class c_content_task *const, bool)
-//{
-//    mangled_ppc("?content_task_set_complete@@YAXQAVc_content_task@@_N@Z");
-//};
+    task->m_private_data.get()->m_async_handle.task_id = k_invalid_async_task_id;
+    task->m_private_data.get()->overlapped_task = NULL;
+    task->m_private_data.get()->submitted = false;
+    task->m_private_data.get()->succeeded = false;
+    task->m_private_data.get()->complete.set(false);
+};
 
-//void content_task_set_overlapped_handle(class c_content_task *const, class c_overlapped_task *const)
-//{
-//    mangled_ppc("?content_task_set_overlapped_handle@@YAXQAVc_content_task@@QAVc_overlapped_task@@@Z");
-//};
+void content_task_pre_submit(c_content_task * const task, e_controller_index controller_index)
+{
+    mangled_ppc("?content_task_pre_submit@@YAXQAVc_content_task@@W4e_controller_index@@@Z");
 
-//bool content_task_async_task_add(class c_content_task *const, enum e_async_completion (*)(void *))
-//{
-//    mangled_ppc("?content_task_async_task_add@@YA_NQAVc_content_task@@P6A?AW4e_async_completion@@PAX@Z@Z");
-//};
+    task->m_private_data.get()->controller_index = controller_index;
+};
 
-//enum e_content_task_type content_task_get_type(class c_content_task const *const)
-//{
-//    mangled_ppc("?content_task_get_type@@YA?AW4e_content_task_type@@QBVc_content_task@@@Z");
-//};
+void content_task_post_submit(c_content_task * const task, bool submitted)
+{
+    mangled_ppc("?content_task_post_submit@@YAXQAVc_content_task@@_N@Z");
 
-//bool content_task_in_progress(class c_content_task const *const)
-//{
-//    mangled_ppc("?content_task_in_progress@@YA_NQBVc_content_task@@@Z");
-//};
+    if (submitted)
+    {
+        task->m_private_data.get()->submitted = true;
+    }
+};
 
-//bool content_task_is_complete(class c_content_task const *const)
-//{
-//    mangled_ppc("?content_task_is_complete@@YA_NQBVc_content_task@@@Z");
-//};
+void content_task_set_complete(c_content_task * const task, bool succeeded)
+{
+    mangled_ppc("?content_task_set_complete@@YAXQAVc_content_task@@_N@Z");
 
-//bool content_task_is_complete_and_succeeded(class c_content_task const *const)
-//{
-//    mangled_ppc("?content_task_is_complete_and_succeeded@@YA_NQBVc_content_task@@@Z");
-//};
+    task->m_private_data.get()->succeeded = succeeded;
+    task->m_private_data.get()->complete.set(true);
+};
 
-//bool content_task_is_complete_and_failed(class c_content_task const *const)
-//{
-//    mangled_ppc("?content_task_is_complete_and_failed@@YA_NQBVc_content_task@@@Z");
-//};
+void content_task_set_overlapped_handle(c_content_task * const task, c_overlapped_task * const overlapped_task)
+{
+    mangled_ppc("?content_task_set_overlapped_handle@@YAXQAVc_content_task@@QAVc_overlapped_task@@@Z");
 
-//void content_task_block_until_complete(class c_content_task *const)
-//{
-//    mangled_ppc("?content_task_block_until_complete@@YAXQAVc_content_task@@@Z");
-//};
+    task->m_private_data.get()->handle_type = _content_task_handle_type_overlapped;
+    task->m_private_data.get()->overlapped_task = overlapped_task;
+};
 
-//enum e_controller_index content_task_get_controller_index(class c_content_task const *const)
-//{
-//    mangled_ppc("?content_task_get_controller_index@@YA?AW4e_controller_index@@QBVc_content_task@@@Z");
-//};
+bool content_task_async_task_add(c_content_task * const task, e_async_completion (*callback)(void *))
+{
+    mangled_ppc("?content_task_async_task_add@@YA_NQAVc_content_task@@P6A?AW4e_async_completion@@PAX@Z@Z");
 
-//void content_task_set_async_handle(class c_content_task *const)
-//{
-//    mangled_ppc("?content_task_set_async_handle@@YAXQAVc_content_task@@@Z");
-//};
+    bool result = false;
+    task->m_private_data.get()->m_async_handle.task_id = async_task_add(0, &task, 10, callback, &task->m_private_data.get()->m_async_handle.completion_flag);
+    if (async_task_id_is_valid(task->m_private_data.get()->m_async_handle.task_id))
+    {
+        result = true;
+        content_task_set_async_handle(task);
+    }
 
-//public: c_typed_opaque_data<struct s_content_task_private_data, 36, 4>::c_typed_opaque_data<struct s_content_task_private_data, 36, 4>(void)
-//{
-//    mangled_ppc("??0?$c_typed_opaque_data@Us_content_task_private_data@@$0CE@$03@@QAA@XZ");
-//};
+    return result;
+};
 
-//public: c_typed_opaque_data<struct s_content_task_private_data, 36, 4>::~c_typed_opaque_data<struct s_content_task_private_data, 36, 4>(void)
-//{
-//    mangled_ppc("??1?$c_typed_opaque_data@Us_content_task_private_data@@$0CE@$03@@QAA@XZ");
-//};
+e_content_task_type content_task_get_type(c_content_task const * const task)
+{
+    mangled_ppc("?content_task_get_type@@YA?AW4e_content_task_type@@QBVc_content_task@@@Z");
 
-//public: struct s_content_task_private_data * c_typed_opaque_data<struct s_content_task_private_data, 36, 4>::construct(void)
-//{
-//    mangled_ppc("?construct@?$c_typed_opaque_data@Us_content_task_private_data@@$0CE@$03@@QAAPAUs_content_task_private_data@@XZ");
-//};
+    return task->m_private_data.get_const()->type;
+};
 
-//public: void c_typed_opaque_data<struct s_content_task_private_data, 36, 4>::destruct(void)
-//{
-//    mangled_ppc("?destruct@?$c_typed_opaque_data@Us_content_task_private_data@@$0CE@$03@@QAAXXZ");
-//};
+bool content_task_in_progress(c_content_task const * const task)
+{
+    mangled_ppc("?content_task_in_progress@@YA_NQBVc_content_task@@@Z");
 
-//public: struct s_content_task_private_data * c_typed_opaque_data<struct s_content_task_private_data, 36, 4>::get(void)
-//{
-//    mangled_ppc("?get@?$c_typed_opaque_data@Us_content_task_private_data@@$0CE@$03@@QAAPAUs_content_task_private_data@@XZ");
-//};
+    return task->m_private_data.get_const()->submitted && !content_task_is_complete(task);
+};
 
-//public: struct s_content_task_private_data const * c_typed_opaque_data<struct s_content_task_private_data, 36, 4>::get_const(void) const
-//{
-//    mangled_ppc("?get_const@?$c_typed_opaque_data@Us_content_task_private_data@@$0CE@$03@@QBAPBUs_content_task_private_data@@XZ");
-//};
+bool content_task_is_complete(c_content_task const * const task)
+{
+    mangled_ppc("?content_task_is_complete@@YA_NQBVc_content_task@@@Z");
 
-//public: bool c_typed_opaque_data<struct s_content_task_private_data, 36, 4>::alive(void) const
-//{
-//    mangled_ppc("?alive@?$c_typed_opaque_data@Us_content_task_private_data@@$0CE@$03@@QBA_NXZ");
-//};
+    return static_cast<bool>(task->m_private_data.get_const()->complete.peek());
+};
 
-//public: s_content_task_private_data::s_content_task_private_data(void)
-//{
-//    mangled_ppc("??0s_content_task_private_data@@QAA@XZ");
-//};
+bool content_task_is_complete_and_succeeded(c_content_task const * const task)
+{
+    mangled_ppc("?content_task_is_complete_and_succeeded@@YA_NQBVc_content_task@@@Z");
 
-//public: void * s_content_task_private_data::`scalar deleting destructor'(unsigned int)
-//{
-//    mangled_ppc("??_Gs_content_task_private_data@@QAAPAXI@Z");
-//};
+    return content_task_is_complete(task) && task->m_private_data.get_const()->succeeded;
+};
 
-//public: s_content_task_private_data::<unnamed-type-m_async_handle>::<unnamed-type-m_async_handle>(void)
-//{
-//    mangled_ppc("??0<unnamed-type-m_async_handle>@s_content_task_private_data@@QAA@XZ");
-//};
+bool content_task_is_complete_and_failed(c_content_task const * const task)
+{
+    mangled_ppc("?content_task_is_complete_and_failed@@YA_NQBVc_content_task@@@Z");
 
-//public: s_content_task_private_data::~s_content_task_private_data(void)
-//{
-//    mangled_ppc("??1s_content_task_private_data@@QAA@XZ");
-//};
+    return content_task_is_complete(task) && !task->m_private_data.get_const()->succeeded;
+};
 
-//public: s_content_task_private_data::<unnamed-type-m_async_handle>::~<unnamed-type-m_async_handle>(void)
-//{
-//    mangled_ppc("??1<unnamed-type-m_async_handle>@s_content_task_private_data@@QAA@XZ");
-//};
+void content_task_block_until_complete(c_content_task * const task)
+{
+    mangled_ppc("?content_task_block_until_complete@@YAXQAVc_content_task@@@Z");
 
-//public: struct s_content_task_private_data * c_opaque_data<struct s_content_task_private_data, 36, 4>::get(void)
-//{
-//    mangled_ppc("?get@?$c_opaque_data@Us_content_task_private_data@@$0CE@$03@@QAAPAUs_content_task_private_data@@XZ");
-//};
+    if (content_task_in_progress(task))
+    {
+        switch (task->m_private_data.get()->handle_type)
+        {
+        case _content_task_handle_type_overlapped:
+        {
+            overlapped_task_block_until_finished(task->m_private_data.get()->overlapped_task);
+        }
+        break;
+        case _content_task_handle_type_async:
+        {
+            async_yield_until_done_internal(&task->m_private_data.get()->m_async_handle.completion_flag, true, false);
+        }
+        break;
+        default:
+        {
+            dassert_tag_debug_untracked_jul_11_2011(217, false, "unreachable");
+        }
+        break;
+        }
+    }
+};
 
-//struct s_async_task_id async_task_add<class c_content_task *>(long, class c_content_task *const *, long, enum e_async_completion (*)(void *), class c_async_completion_flag *)
-//{
-//    mangled_ppc("??$async_task_add@PAVc_content_task@@@@YA?AUs_async_task_id@@JPBQAVc_content_task@@JP6A?AW4e_async_completion@@PAX@ZPAVc_async_completion_flag@@@Z");
-//};
+e_controller_index content_task_get_controller_index(c_content_task const * const task)
+{
+    mangled_ppc("?content_task_get_controller_index@@YA?AW4e_controller_index@@QBVc_content_task@@@Z");
 
-//struct s_async_task_id async_task_add_ex<class c_content_task *>(long, class c_content_task *const *, long, enum e_async_completion (*)(void *), class c_async_completion_flag *, enum e_async_block_if_full)
-//{
-//    mangled_ppc("??$async_task_add_ex@PAVc_content_task@@@@YA?AUs_async_task_id@@JPBQAVc_content_task@@JP6A?AW4e_async_completion@@PAX@ZPAVc_async_completion_flag@@W4e_async_block_if_full@@@Z");
-//};
+    return task->m_private_data.get_const()->controller_index;
+};
 
+void content_task_set_async_handle(c_content_task * const task)
+{
+    mangled_ppc("?content_task_set_async_handle@@YAXQAVc_content_task@@@Z");
+
+    task->m_private_data.get()->handle_type = _content_task_handle_type_async;
+};

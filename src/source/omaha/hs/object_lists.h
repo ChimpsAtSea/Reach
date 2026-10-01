@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+extern long object_list_new(void);
+extern void object_list_add(long object_list_index, long object_index);
+
 /* ---------- globals */
 
 /* ---------- public code */

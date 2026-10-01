@@ -1,6 +1,9 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\bitmaps\\bitmap_usage.cpp"
 /* ---------- headers */
 
 #include "omaha\bitmaps\bitmap_usage.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "omaha\cseries\cseries.h"
 
 /* ---------- constants */
 
@@ -35,23 +38,55 @@
 // bool operator!=<enum c_bitmap_usage::e_format>(enum c_bitmap_usage::e_format const &, enum e_none_sentinel const &);
 // bool operator==<enum c_bitmap_usage::e_format>(enum c_bitmap_usage::e_format const &, enum e_none_sentinel const &);
 
-//public: static long c_bitmap_usage::get_pc_bitmap_format(enum c_bitmap_usage::e_format)
-//{
-//    mangled_ppc("?get_pc_bitmap_format@c_bitmap_usage@@SAJW4e_format@1@@Z");
-//};
+long c_bitmap_usage::get_pc_bitmap_format(e_format format)
+{
+    mangled_ppc("?get_pc_bitmap_format@c_bitmap_usage@@SAJW4e_format@1@@Z");
 
-//public: static long c_bitmap_usage::get_xenon_bitmap_format(enum c_bitmap_usage::e_format)
-//{
-//    mangled_ppc("?get_xenon_bitmap_format@c_bitmap_usage@@SAJW4e_format@1@@Z");
-//};
+    static long const k_pc_bitmap_formats[k_format_count] =
+    {
+        16, 16, 11, 22, 22, 1, 1, 1,
+        NONE, NONE, NONE, NONE, NONE, NONE, 14, 15,
+        16, 11, 3, 37, 29, 30, 25, 24,
+        2, 2, 2, 3, 9, NONE, 1, NONE,
+        NONE, 32, 33, 34, 27, NONE, NONE, NONE,
+        27, 1, 1, 11, 11, 11, NONE, 0,
+        0, 0, NONE, NONE, NONE, NONE, 22, 22,
+        22, 31, 28
+    };
 
-//bool operator!=<enum c_bitmap_usage::e_format>(enum c_bitmap_usage::e_format const &, enum e_none_sentinel const &)
-//{
-//    mangled_ppc("??$?9W4e_format@c_bitmap_usage@@@@YA_NABW4e_format@c_bitmap_usage@@ABW4e_none_sentinel@@@Z");
-//};
+    long result = NONE;
+    if (format != NONE)
+    {
+        assert_tag_debug_untracked_jul_11_2011(96, format>=0 && format<k_format_count);
+        result = k_pc_bitmap_formats[format];
+    }
 
-//bool operator==<enum c_bitmap_usage::e_format>(enum c_bitmap_usage::e_format const &, enum e_none_sentinel const &)
-//{
-//    mangled_ppc("??$?8W4e_format@c_bitmap_usage@@@@YA_NABW4e_format@c_bitmap_usage@@ABW4e_none_sentinel@@@Z");
-//};
+    return result;
+};
+
+long c_bitmap_usage::get_xenon_bitmap_format(e_format format)
+{
+    mangled_ppc("?get_xenon_bitmap_format@c_bitmap_usage@@SAJW4e_format@1@@Z");
+
+    static long const k_xenon_bitmap_formats[k_format_count] =
+    {
+        16, 16, 11, 39, 22, 43, 1, 43,
+        NONE, NONE, NONE, NONE, NONE, NONE, 14, 15,
+        16, 11, 3, 37, 29, 30, 25, 24,
+        2, 35, 36, 44, 9, NONE, 1, NONE,
+        NONE, 32, 33, 34, 27, NONE, NONE, NONE,
+        26, 41, 43, 45, 46, 47, NONE, 40,
+        42, 0, NONE, NONE, NONE, NONE, 38, 39,
+        22, 31, 28
+    };
+
+    long result = NONE;
+    if (format != NONE)
+    {
+        assert_tag_debug_untracked_jul_11_2011(187, format>=0 && format<k_format_count);
+        result = k_xenon_bitmap_formats[format];
+    }
+
+    return result;
+};
 

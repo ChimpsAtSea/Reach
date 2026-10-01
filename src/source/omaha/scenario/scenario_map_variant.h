@@ -8,6 +8,15 @@
 
 /* ---------- definitions */
 
+class c_bitstream;
+
+// $TODO: members not yet reversed
+class c_map_variant
+{
+public:
+    bool decode(c_bitstream * packet);
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

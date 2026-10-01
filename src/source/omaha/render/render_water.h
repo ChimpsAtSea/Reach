@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void water_interaction_clear_all(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

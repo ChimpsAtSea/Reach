@@ -8,9 +8,14 @@
 
 /* ---------- definitions */
 
+struct s_tag_resource_definition;
+
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+extern s_tag_resource_definition bitmap_texture_interop_resource;
+extern s_tag_resource_definition bitmap_texture_interleaved_interop_resource;
 
 /* ---------- public code */
 

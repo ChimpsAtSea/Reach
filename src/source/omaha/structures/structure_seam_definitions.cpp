@@ -1,6 +1,7 @@
 /* ---------- headers */
 
 #include "omaha\structures\structure_seam_definitions.h"
+#include "omaha\physics\havok_mopp_code_definitions.h"
 
 /* ---------- constants */
 
@@ -28,13 +29,19 @@
 // bool structure_seams_postprocess(long, bool);
 // bool structure_seam_identifiers_are_equal(struct s_structure_seam_identifier const *, struct s_structure_seam_identifier const *);
 
-//bool structure_seams_postprocess(long, bool)
-//{
-//    mangled_ppc("?structure_seams_postprocess@@YA_NJ_N@Z");
-//};
+bool structure_seams_postprocess(long structure_seams_index, bool for_editor)
+{
+    mangled_ppc("?structure_seams_postprocess@@YA_NJ_N@Z");
 
-//bool structure_seam_identifiers_are_equal(struct s_structure_seam_identifier const *, struct s_structure_seam_identifier const *)
-//{
-//    mangled_ppc("?structure_seam_identifiers_are_equal@@YA_NPBUs_structure_seam_identifier@@0@Z");
-//};
+    havok_mopp_code_definitions_fixup(&static_cast<s_structure_seams *>(tag_get(STRUCTURE_SEAMS_TAG, structure_seams_index))->seam_triangle_mopp_codes);
+
+    return true;
+};
+
+bool structure_seam_identifiers_are_equal(s_structure_seam_identifier const * structure_seam_identifier0, s_structure_seam_identifier const * structure_seam_identifier1)
+{
+    mangled_ppc("?structure_seam_identifiers_are_equal@@YA_NPBUs_structure_seam_identifier@@0@Z");
+
+    return system_global_unique_identifiers_equal(&structure_seam_identifier0->identifier, &structure_seam_identifier1->identifier);
+};
 

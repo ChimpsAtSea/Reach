@@ -8,7 +8,13 @@
 
 /* ---------- definitions */
 
+struct s_network_configuration;
+
 /* ---------- prototypes */
+
+s_network_configuration & get_network_configuration();
+void simulation_prepare_to_load_saved_game(long game_state_proc_flags);
+void simulation_initialize_for_saved_game(long game_state_proc_flags);
 
 /* ---------- globals */
 

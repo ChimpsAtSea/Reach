@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void byte_swap_recording_stream_v1(void * data, long size, unsigned char unit_control_version);
+
 /* ---------- globals */
 
 /* ---------- public code */

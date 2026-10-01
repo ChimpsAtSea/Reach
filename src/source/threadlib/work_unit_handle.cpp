@@ -2,6 +2,11 @@
 
 #include "threadlib\work_unit_handle.h"
 
+#include "baselib\thread_execution_windows.h"
+#include "foundation\threadlib\jobmanager\job_manager.h"
+#include "foundation\threadlib\jobmanager\work_unit\work_unit.h"
+#include "threadlib\kernel.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
@@ -35,68 +40,109 @@
 // public: bool c_jm_work_unit_handle::a_depends_on_b(class c_job_handle const &, class c_job_handle const &);
 // public: void c_jm_work_unit_handle::thread_entry_point(unsigned long);
 
-//public: bool c_jm_work_unit_handle::allocate_inactive(unsigned long, class c_job_handle *, class c_job **)
-//{
-//    mangled_ppc("?allocate_inactive@c_jm_work_unit_handle@@QAA_NKPAVc_job_handle@@PAPAVc_job@@@Z");
-//};
+bool c_jm_work_unit_handle::allocate_inactive(unsigned long count, c_job_handle * handles, c_job ** jobs)
+{
+    mangled_ppc("?allocate_inactive@c_jm_work_unit_handle@@QAA_NKPAVc_job_handle@@PAPAVc_job@@@Z");
 
-//public: void c_jm_work_unit_handle::free_unused_job(class c_job *)
-//{
-//    mangled_ppc("?free_unused_job@c_jm_work_unit_handle@@QAAXPAVc_job@@@Z");
-//};
+    return m_work_unit->m_job_list.allocate_inactive(count, handles, jobs);
+};
 
-//public: class c_job_handle c_jm_work_unit_handle::add_job(class c_job const &, unsigned long)
-//{
-//    mangled_ppc("?add_job@c_jm_work_unit_handle@@QAA?AVc_job_handle@@ABVc_job@@K@Z");
-//};
+void c_jm_work_unit_handle::free_unused_job(c_job * job)
+{
+    mangled_ppc("?free_unused_job@c_jm_work_unit_handle@@QAAXPAVc_job@@@Z");
 
-//public: void c_jm_work_unit_handle::activate(class c_job_handle &)
-//{
-//    mangled_ppc("?activate@c_jm_work_unit_handle@@QAAXAAVc_job_handle@@@Z");
-//};
+    c_job * jobs = job;
+    m_work_unit->m_job_list.return_to_free_list(&jobs, 1);
+};
 
-//public: void c_jm_work_unit_handle::activate_array(class c_job_handle *, unsigned long)
-//{
-//    mangled_ppc("?activate_array@c_jm_work_unit_handle@@QAAXPAVc_job_handle@@K@Z");
-//};
+c_job_handle c_jm_work_unit_handle::add_job(c_job const & job, unsigned long flags)
+{
+    mangled_ppc("?add_job@c_jm_work_unit_handle@@QAA?AVc_job_handle@@ABVc_job@@K@Z");
 
-//public: void c_jm_work_unit_handle::add_to_active(class c_job_handle *, unsigned long)
-//{
-//    mangled_ppc("?add_to_active@c_jm_work_unit_handle@@QAAXPAVc_job_handle@@K@Z");
-//};
+    return m_work_unit->m_job_list.add(job, flags);
+};
 
-//public: void c_jm_work_unit_handle::do_not_use_wait_until_all_work_done(void)
-//{
-//    mangled_ppc("?do_not_use_wait_until_all_work_done@c_jm_work_unit_handle@@QAAXXZ");
-//};
+void c_jm_work_unit_handle::activate(c_job_handle & handle)
+{
+    mangled_ppc("?activate@c_jm_work_unit_handle@@QAAXAAVc_job_handle@@@Z");
 
-//public: void c_jm_work_unit_handle::block_wait_until_done(class c_job_handle const &)
-//{
-//    mangled_ppc("?block_wait_until_done@c_jm_work_unit_handle@@QAAXABVc_job_handle@@@Z");
-//};
+    m_work_unit->m_job_list.activate(handle, true);
+};
 
-//public: bool c_work_unit::is_done(class c_job_handle const &)
-//{
-//    mangled_ppc("?is_done@c_work_unit@@QAA_NABVc_job_handle@@@Z");
-//};
+void c_jm_work_unit_handle::activate_array(c_job_handle * handles, unsigned long count)
+{
+    mangled_ppc("?activate_array@c_jm_work_unit_handle@@QAAXPAVc_job_handle@@K@Z");
 
-//public: bool c_jm_work_unit_handle::job_is_done(class c_job_handle const &)
-//{
-//    mangled_ppc("?job_is_done@c_jm_work_unit_handle@@QAA_NABVc_job_handle@@@Z");
-//};
+    m_work_unit->m_job_list.activate_array(handles, count);
+};
 
-//public: void c_jm_work_unit_handle::relinquish_until_done(class c_job_handle const &)
-//{
-//    mangled_ppc("?relinquish_until_done@c_jm_work_unit_handle@@QAAXABVc_job_handle@@@Z");
-//};
+void c_jm_work_unit_handle::add_to_active(c_job_handle * handles, unsigned long count)
+{
+    mangled_ppc("?add_to_active@c_jm_work_unit_handle@@QAAXPAVc_job_handle@@K@Z");
 
-//public: bool c_jm_work_unit_handle::a_depends_on_b(class c_job_handle const &, class c_job_handle const &)
-//{
-//    mangled_ppc("?a_depends_on_b@c_jm_work_unit_handle@@QAA_NABVc_job_handle@@0@Z");
-//};
+    m_work_unit->m_job_list.add_to_active(handles, count);
+};
 
-//public: void c_jm_work_unit_handle::thread_entry_point(unsigned long)
-//{
-//    mangled_ppc("?thread_entry_point@c_jm_work_unit_handle@@QAAXK@Z");
-//};
+void c_jm_work_unit_handle::do_not_use_wait_until_all_work_done()
+{
+    mangled_ppc("?do_not_use_wait_until_all_work_done@c_jm_work_unit_handle@@QAAXXZ");
+
+    while (!m_work_unit->m_job_list.free_list_full())
+    {
+        thread_sleep(1);
+        get_job_manager().invoke_block_callback();
+    }
+};
+
+void c_jm_work_unit_handle::block_wait_until_done(c_job_handle const & handle)
+{
+    mangled_ppc("?block_wait_until_done@c_jm_work_unit_handle@@QAAXABVc_job_handle@@@Z");
+
+    while (!m_work_unit->is_done(handle))
+    {
+        thread_sleep(0);
+        get_job_manager().invoke_block_callback();
+    }
+};
+
+bool c_work_unit::is_done(c_job_handle const & handle)
+{
+    mangled_ppc("?is_done@c_work_unit@@QAA_NABVc_job_handle@@@Z");
+
+    return m_job_list.is_done(handle);
+};
+
+bool c_jm_work_unit_handle::job_is_done(c_job_handle const & handle)
+{
+    mangled_ppc("?job_is_done@c_jm_work_unit_handle@@QAA_NABVc_job_handle@@@Z");
+
+    return m_work_unit->is_done(handle);
+};
+
+void c_jm_work_unit_handle::relinquish_until_done(c_job_handle const & handle)
+{
+    mangled_ppc("?relinquish_until_done@c_jm_work_unit_handle@@QAAXABVc_job_handle@@@Z");
+
+    unsigned long thread_index = 0;
+
+    while (!m_work_unit->is_done(handle))
+    {
+        execute_one_job(&m_work_unit->m_scheduler, thread_index);
+        get_job_manager().invoke_block_callback();
+    }
+};
+
+bool c_jm_work_unit_handle::a_depends_on_b(c_job_handle const & a, c_job_handle const & b)
+{
+    mangled_ppc("?a_depends_on_b@c_jm_work_unit_handle@@QAA_NABVc_job_handle@@0@Z");
+
+    return m_work_unit->m_job_list.depends(a, b);
+};
+
+void c_jm_work_unit_handle::thread_entry_point(unsigned long thread_index)
+{
+    mangled_ppc("?thread_entry_point@c_jm_work_unit_handle@@QAAXK@Z");
+
+    m_work_unit->execute(thread_index);
+};
 

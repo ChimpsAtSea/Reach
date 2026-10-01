@@ -25,8 +25,10 @@
 
 // public: static bool s_fx_test::postprocess_proc(long, bool);
 
-//public: static bool s_fx_test::postprocess_proc(long, bool)
-//{
-//    mangled_ppc("?postprocess_proc@s_fx_test@@SA_NJ_N@Z");
-//};
+bool s_fx_test::postprocess_proc(long tag_index, bool for_editor)
+{
+    mangled_ppc("?postprocess_proc@s_fx_test@@SA_NJ_N@Z");
+
+    return true;
+};
 

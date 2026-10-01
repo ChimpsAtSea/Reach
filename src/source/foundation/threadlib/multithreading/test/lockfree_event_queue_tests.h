@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+extern void lockfree_event_queue_run_unit_test(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

@@ -21,6 +21,11 @@ enum e_output_user_index
 /* ---------- prototypes */
 
 long player_mapping_get_unit_by_output_user(e_output_user_index user_index);
+long player_mapping_get_player_by_output_user(e_output_user_index output_user_index);
+long player_mapping_get_player_by_input_controller(enum e_controller_index controller_index);
+enum e_controller_index player_mapping_get_input_controller(long player_index);
+void player_mapping_attach_output_user(e_output_user_index output_user_index, long player_index);
+e_output_user_index player_mapping_first_active_output_user();
 
 /* ---------- globals */
 

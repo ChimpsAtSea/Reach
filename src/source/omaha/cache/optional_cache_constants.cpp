@@ -24,28 +24,27 @@
 // public: unsigned long & s_static_array<unsigned long, 3>::operator[]<enum e_optional_cache_user_priority>(enum e_optional_cache_user_priority);
 // public: static bool s_static_array<unsigned long, 3>::valid<enum e_optional_cache_user_priority>(enum e_optional_cache_user_priority);
 
-//void optional_cache_calculate_priority_sizes(class s_static_array<struct s_optional_cache_user_memory_configuration, 6> const *, struct s_optional_cache_priority_sizes *)
-//{
-//    mangled_ppc("?optional_cache_calculate_priority_sizes@@YAXPBV?$s_static_array@Us_optional_cache_user_memory_configuration@@$05@@PAUs_optional_cache_priority_sizes@@@Z");
-//};
+void optional_cache_calculate_priority_sizes(s_static_array<s_optional_cache_user_memory_configuration, k_number_of_optional_cache_users> const * memory_configurations, s_optional_cache_priority_sizes * out_priority_sizes)
+{
+    mangled_ppc("?optional_cache_calculate_priority_sizes@@YAXPBV?$s_static_array@Us_optional_cache_user_memory_configuration@@$05@@PAUs_optional_cache_priority_sizes@@@Z");
 
-//public: void s_static_array<unsigned long, 3>::set_all(unsigned long const &)
-//{
-//    mangled_ppc("?set_all@?$s_static_array@K$02@@QAAXABK@Z");
-//};
+    s_static_array<unsigned long, k_number_of_optional_cache_user_priorities> maximum_sizes;
+    s_static_array<unsigned long, k_number_of_optional_cache_user_priorities> minimum_sizes;
 
-//public: struct s_optional_cache_user_memory_configuration const & s_static_array<struct s_optional_cache_user_memory_configuration, 6>::operator[]<long>(long) const
-//{
-//    mangled_ppc("??$?AJ@?$s_static_array@Us_optional_cache_user_memory_configuration@@$05@@QBAABUs_optional_cache_user_memory_configuration@@J@Z");
-//};
+    minimum_sizes.set_all(0);
+    maximum_sizes.set_all(0);
 
-//public: unsigned long & s_static_array<unsigned long, 3>::operator[]<enum e_optional_cache_user_priority>(enum e_optional_cache_user_priority)
-//{
-//    mangled_ppc("??$?AW4e_optional_cache_user_priority@@@?$s_static_array@K$02@@QAAAAKW4e_optional_cache_user_priority@@@Z");
-//};
+    for (long memory_configuration_index = 0; memory_configuration_index < k_number_of_optional_cache_users; memory_configuration_index++)
+    {
+        s_optional_cache_user_memory_configuration const * user_configuration = &(*memory_configurations)[memory_configuration_index];
 
-//public: static bool s_static_array<unsigned long, 3>::valid<enum e_optional_cache_user_priority>(enum e_optional_cache_user_priority)
-//{
-//    mangled_ppc("??$valid@W4e_optional_cache_user_priority@@@?$s_static_array@K$02@@SA_NW4e_optional_cache_user_priority@@@Z");
-//};
+        minimum_sizes[user_configuration->maximum_priority] = MAX(minimum_sizes[user_configuration->maximum_priority], user_configuration->maximum_size);
+        maximum_sizes[user_configuration->maximum_priority] += user_configuration->maximum_size;
+    }
+
+    out_priority_sizes->minimum_no_fail_size = MAX(minimum_sizes[_optional_cache_user_cant_fail_blocking], minimum_sizes[_optional_cache_user_cant_fail_nonblocking]);
+    out_priority_sizes->desired_no_fail_size = maximum_sizes[_optional_cache_user_cant_fail_blocking] + maximum_sizes[_optional_cache_user_cant_fail_nonblocking];
+    out_priority_sizes->minimum_can_fail_size = minimum_sizes[_optional_cache_user_can_fail];
+    out_priority_sizes->desired_can_fail_size = maximum_sizes[_optional_cache_user_can_fail];
+};
 

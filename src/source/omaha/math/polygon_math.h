@@ -8,7 +8,11 @@
 
 /* ---------- definitions */
 
+union real_point2d;
+
 /* ---------- prototypes */
+
+bool point_in_polygon2d(real_point2d const * point, long point_count, real_point2d const * points);
 
 /* ---------- globals */
 

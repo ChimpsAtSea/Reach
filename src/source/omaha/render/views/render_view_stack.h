@@ -8,6 +8,15 @@
 
 /* ---------- definitions */
 
+struct render_camera;
+
+class c_view_stack
+{
+public:
+    static c_view_stack * top(void);
+    render_camera const * get_rasterizer_camera(void) const;
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

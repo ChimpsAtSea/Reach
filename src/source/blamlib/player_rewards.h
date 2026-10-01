@@ -8,7 +8,11 @@
 
 /* ---------- definitions */
 
+enum e_controller_index;
+
 /* ---------- prototypes */
+
+bool player_rewards_reward_state_is_online(e_controller_index controller_index);
 
 /* ---------- globals */
 

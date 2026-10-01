@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void network_memory_get_address_range(void ** low_address, void ** high_address);
+
 /* ---------- globals */
 
 /* ---------- public code */

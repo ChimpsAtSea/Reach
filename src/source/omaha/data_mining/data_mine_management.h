@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+bool data_mine_enabled();
+
 /* ---------- globals */
 
 /* ---------- public code */

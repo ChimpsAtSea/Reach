@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void player_award_heat(long player_index, long heat);
+
 /* ---------- globals */
 
 /* ---------- public code */

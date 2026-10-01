@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void recorded_animations_clear_debug_storage(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

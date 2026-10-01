@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+long render_model_find_marker_group_by_name(long render_model_definition_index, long marker_name);
+
 /* ---------- globals */
 
 /* ---------- public code */

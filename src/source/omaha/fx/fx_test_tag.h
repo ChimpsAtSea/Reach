@@ -8,6 +8,11 @@
 
 /* ---------- definitions */
 
+struct s_fx_test
+{
+    static bool postprocess_proc(long tag_index, bool for_editor);
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

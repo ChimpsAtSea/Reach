@@ -10,6 +10,11 @@
 
 /* ---------- prototypes */
 
+struct s_file_reference;
+
+void hs_scenario_report_scripts(void);
+void hs_dump_script_to_file(long scenario_index, long source_file_index, s_file_reference const * file);
+
 /* ---------- globals */
 
 /* ---------- public code */

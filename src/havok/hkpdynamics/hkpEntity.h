@@ -4,9 +4,17 @@
 
 /* ---------- headers */
 
+#include "havok\hkpdynamics\hkpWorldObject.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
+
+// $TODO layout not reversed; only used through pointers so far
+class hkpEntity :
+    public hkpWorldObject
+{
+};
 
 /* ---------- prototypes */
 

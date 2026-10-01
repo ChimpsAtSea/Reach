@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+extern bool thread_switch(void);
+extern void thread_sleep(unsigned long milliseconds);
+
 /* ---------- globals */
 
 /* ---------- public code */

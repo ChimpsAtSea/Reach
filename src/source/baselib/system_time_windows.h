@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+extern __int64 system_performance_timer_get(void);
+extern __int64 system_performance_timer_frequency(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

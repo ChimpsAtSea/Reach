@@ -2,6 +2,8 @@
 
 #include "threadlib\scheduler.h"
 
+#include "foundation\threadlib\jobmanager\scheduler\job_list.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
@@ -23,33 +25,42 @@
 // public: void c_scheduler_fifo::kick_semaphore(void);
 // public: void c_scheduler_fifo::block_until_work_available(bool);
 
-//public: void c_scheduler_fifo::initialize(class c_job_list *)
-//{
-//    mangled_ppc("?initialize@c_scheduler_fifo@@QAAXPAVc_job_list@@@Z");
-//};
+void c_scheduler_fifo::initialize(c_job_list * job_list)
+{
+    mangled_ppc("?initialize@c_scheduler_fifo@@QAAXPAVc_job_list@@@Z");
 
-//public: void c_scheduler_fifo::dispose(void)
-//{
-//    mangled_ppc("?dispose@c_scheduler_fifo@@QAAXXZ");
-//};
+    m_job_list = job_list;
+};
 
-//public: unsigned long c_scheduler_fifo::request_jobs(class c_job **, class c_job_handle *, unsigned long)
-//{
-//    mangled_ppc("?request_jobs@c_scheduler_fifo@@QAAKPAPAVc_job@@PAVc_job_handle@@K@Z");
-//};
+void c_scheduler_fifo::dispose()
+{
+    mangled_ppc("?dispose@c_scheduler_fifo@@QAAXXZ");
+};
 
-//public: void c_scheduler_fifo::report_jobs_complete(class c_job **, unsigned long)
-//{
-//    mangled_ppc("?report_jobs_complete@c_scheduler_fifo@@QAAXPAPAVc_job@@K@Z");
-//};
+unsigned long c_scheduler_fifo::request_jobs(c_job ** jobs, c_job_handle * handles, unsigned long max_count)
+{
+    mangled_ppc("?request_jobs@c_scheduler_fifo@@QAAKPAPAVc_job@@PAVc_job_handle@@K@Z");
 
-//public: void c_scheduler_fifo::kick_semaphore(void)
-//{
-//    mangled_ppc("?kick_semaphore@c_scheduler_fifo@@QAAXXZ");
-//};
+    return m_job_list->get_executable_jobs(jobs, handles, max_count);
+};
 
-//public: void c_scheduler_fifo::block_until_work_available(bool)
-//{
-//    mangled_ppc("?block_until_work_available@c_scheduler_fifo@@QAAX_N@Z");
-//};
+void c_scheduler_fifo::report_jobs_complete(c_job ** jobs, unsigned long count)
+{
+    mangled_ppc("?report_jobs_complete@c_scheduler_fifo@@QAAXPAPAVc_job@@K@Z");
 
+    m_job_list->return_to_free_list(jobs, count);
+};
+
+void c_scheduler_fifo::kick_semaphore()
+{
+    mangled_ppc("?kick_semaphore@c_scheduler_fifo@@QAAXXZ");
+
+    m_job_list->kick_semaphore();
+};
+
+void c_scheduler_fifo::block_until_work_available(bool unused)
+{
+    mangled_ppc("?block_until_work_available@c_scheduler_fifo@@QAAX_N@Z");
+
+    m_job_list->block_until_work_available(unused);
+};

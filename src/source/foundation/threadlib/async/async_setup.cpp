@@ -1,14 +1,32 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\foundation\\threadlib\\async\\async_setup.cpp"
 /* ---------- headers */
 
 #include "foundation\threadlib\async\async_setup.h"
+#include "foundation\threadlib\async\async_profile.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "core\corelib\cseries\cseries_macros.h"
+#include "omaha\cseries\cseries.h"
 
 /* ---------- constants */
 
 /* ---------- definitions */
 
+struct s_async_globals
+{
+    s_static_array<long, k_maximum_async_category> thread_index_for_category;
+    s_static_array<s_async_thread_context, k_max_async_thread_count> thread_contexts;
+    long max_thread_count;
+    c_synchronized_int32 total_tasks_added;
+    c_async_profile_interface * profiler;
+};
+static_assert(sizeof(s_async_globals) == 0x27B7C, "s_async_globals");
+
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+static bool g_async_setup_initialized;
+static s_async_globals g_async_globals;
 
 /* ---------- public code */
 
@@ -72,268 +90,284 @@
 // public: t_thread_safe_list<struct s_async_task_element>::~t_thread_safe_list<struct s_async_task_element>(void);
 // void g_async_globals::`dynamic atexit destructor'(void);
 
-//void `vector destructor iterator'(void *, unsigned int, int, void (*)(void *))
-//{
-//    mangled_ppc("??_I@YAXPAXIHP6AX0@Z@Z");
-//};
+void async_setup_initialize(void)
+{
+    mangled_ppc("?async_setup_initialize@@YAXXZ");
 
-//void async_setup_initialize(void)
-//{
-//    mangled_ppc("?async_setup_initialize@@YAXXZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(46, !g_async_setup_initialized);
 
-//void async_setup_dispose(void)
-//{
-//    mangled_ppc("?async_setup_dispose@@YAXXZ");
-//};
+    g_async_globals.total_tasks_added.set(0);
+    g_async_globals.profiler = NULL;
+    g_async_globals.thread_index_for_category.set_all(NONE);
+    g_async_globals.max_thread_count = NONE;
 
-//long async_setup_get_encoding_bit_count_for_thread_indices(void)
-//{
-//    mangled_ppc("?async_setup_get_encoding_bit_count_for_thread_indices@@YAJXZ");
-//};
+    for (long thread_index = 0; thread_index < g_async_globals.thread_contexts.get_count(); thread_index++)
+    {
+        s_async_thread_context * context = &g_async_globals.thread_contexts[thread_index];
+        context->work_available_semaphore.object_id = NONE;
+        context->unknown9C2C.set(0);
+        context->free_list_blocked_callback = NULL;
+        context->statistics.unknown4.set(0);
+        context->statistics.unknown0 = 0;
+        context->statistics.unknown8.set_memory(0);
+        context->statistics.unknown88.set_memory(0);
+        context->statistics.priority_timings.set_memory(0);
+        context->compare_interface.unknown0 = NULL;
+        context->compare_interface.unknown8 = NULL;
+        context->compare_interface.compare = NULL;
+    }
 
-//void async_setup_set_thread_count(long)
-//{
-//    mangled_ppc("?async_setup_set_thread_count@@YAXJ@Z");
-//};
+    g_async_setup_initialized = true;
+};
 
-//long async_setup_get_thread_count(void)
-//{
-//    mangled_ppc("?async_setup_get_thread_count@@YAJXZ");
-//};
+void async_setup_dispose(void)
+{
+    mangled_ppc("?async_setup_dispose@@YAXXZ");
 
-//void async_setup_set_categories_for_thread(long, long const *, long)
-//{
-//    mangled_ppc("?async_setup_set_categories_for_thread@@YAXJPBJJ@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(84, g_async_setup_initialized);
 
-//void async_setup_synchronization_for_thread(long, struct s_semaphore, struct s_critical_section, struct s_critical_section, struct s_virtual_guard_block)
-//{
-//    mangled_ppc("?async_setup_synchronization_for_thread@@YAXJUs_semaphore@@Us_critical_section@@1Us_virtual_guard_block@@@Z");
-//};
+    g_async_globals.thread_index_for_category.set_all(NONE);
+    g_async_globals.max_thread_count = NONE;
 
-//void async_setup_set_thread_work_delay(long, long)
-//{
-//    mangled_ppc("?async_setup_set_thread_work_delay@@YAXJJ@Z");
-//};
+    for (long thread_index = 0; thread_index < g_async_globals.max_thread_count; thread_index++)
+    {
+        s_async_thread_context * context = &g_async_globals.thread_contexts[thread_index];
+        context->thread_index = thread_index;
+        context->free_list.dispose();
+        context->work_list.dispose();
+        context->free_list_blocked_callback = NULL;
+    }
 
-//void async_setup_set_free_list_blocked_callback_for_thread(long, void (*)(void))
-//{
-//    mangled_ppc("?async_setup_set_free_list_blocked_callback_for_thread@@YAXJP6AXXZ@Z");
-//};
+    g_async_setup_initialized = false;
+};
 
-//void async_setup_set_profiler(class c_async_profile_interface *)
-//{
-//    mangled_ppc("?async_setup_set_profiler@@YAXPAVc_async_profile_interface@@@Z");
-//};
+long async_setup_get_encoding_bit_count_for_thread_indices(void)
+{
+    mangled_ppc("?async_setup_get_encoding_bit_count_for_thread_indices@@YAJXZ");
 
-//void async_setup_set_compare_interface_for_thread(long, struct s_async_task_compare_interface *)
-//{
-//    mangled_ppc("?async_setup_set_compare_interface_for_thread@@YAXJPAUs_async_task_compare_interface@@@Z");
-//};
+    return 2;
+};
 
-//long async_setup_get_thread_work_delay(long)
-//{
-//    mangled_ppc("?async_setup_get_thread_work_delay@@YAJJ@Z");
-//};
+void async_setup_set_thread_count(long thread_count)
+{
+    mangled_ppc("?async_setup_set_thread_count@@YAXJ@Z");
 
-//public: long c_interlocked_int32::operator long(void) const
-//{
-//    mangled_ppc("??Bc_interlocked_int32@@QBAJXZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(115, g_async_setup_initialized);
+    assert_tag_debug_untracked_jul_11_2011(116, thread_count>0);
+    assert_tag_debug_untracked_jul_11_2011(117, thread_count<k_max_async_thread_count);
 
-//public: long c_interlocked_int32::peek(void) const volatile
-//{
-//    mangled_ppc("?peek@c_interlocked_int32@@QDAJXZ");
-//};
+    g_async_globals.max_thread_count = thread_count;
+};
 
-//long async_setup_get_thread_index_for_category(long)
-//{
-//    mangled_ppc("?async_setup_get_thread_index_for_category@@YAJJ@Z");
-//};
+long async_setup_get_thread_count(void)
+{
+    mangled_ppc("?async_setup_get_thread_count@@YAJXZ");
 
-//bool async_setup_is_thread_index_valid(long)
-//{
-//    mangled_ppc("?async_setup_is_thread_index_valid@@YA_NJ@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(127, g_async_setup_initialized);
 
-//struct s_async_thread_context * async_setup_get_context_for_thread(long)
-//{
-//    mangled_ppc("?async_setup_get_context_for_thread@@YAPAUs_async_thread_context@@J@Z");
-//};
+    return g_async_globals.max_thread_count;
+};
 
-//struct s_async_thread_context * async_setup_get_context_for_category(long)
-//{
-//    mangled_ppc("?async_setup_get_context_for_category@@YAPAUs_async_thread_context@@J@Z");
-//};
+void async_setup_set_categories_for_thread(long thread_index, long const * categories, long category_count)
+{
+    mangled_ppc("?async_setup_set_categories_for_thread@@YAXJPBJJ@Z");
 
-//long async_setup_get_total_tasks_added(void)
-//{
-//    mangled_ppc("?async_setup_get_total_tasks_added@@YAJXZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(137, g_async_setup_initialized);
+    assert_tag_debug_untracked_jul_11_2011(138, async_setup_is_thread_index_valid(thread_index));
+    assert_tag_debug_untracked_jul_11_2011(139, categories!=NULL);
+    assert_tag_debug_untracked_jul_11_2011(140, VALID_COUNT(category_count, k_maximum_async_category));
 
-//long async_setup_increment_total_tasks_added(void)
-//{
-//    mangled_ppc("?async_setup_increment_total_tasks_added@@YAJXZ");
-//};
+    for (long category_index = 0; category_index < category_count; category_index++)
+    {
+        long category = categories[category_index];
+        g_async_globals.thread_index_for_category[category] = thread_index;
+    }
+};
 
-//class c_async_profile_interface * async_setup_get_registered_profiler(void)
-//{
-//    mangled_ppc("?async_setup_get_registered_profiler@@YAPAVc_async_profile_interface@@XZ");
-//};
+void async_setup_synchronization_for_thread(long thread_index, s_semaphore work_available_semaphore, s_critical_section free_list_section, s_critical_section work_list_section, s_virtual_guard_block guard_block)
+{
+    mangled_ppc("?async_setup_synchronization_for_thread@@YAXJUs_semaphore@@Us_critical_section@@1Us_virtual_guard_block@@@Z");
 
-//struct s_async_task_compare_interface * async_setup_get_compare_interface_for_thread(long)
-//{
-//    mangled_ppc("?async_setup_get_compare_interface_for_thread@@YAPAUs_async_task_compare_interface@@J@Z");
-//};
+    s_async_thread_context * context = NULL;
 
-//public: void s_static_array<long, 32>::set_all(long const &)
-//{
-//    mangled_ppc("?set_all@?$s_static_array@J$0CA@@@QAAXABJ@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(160, g_async_setup_initialized);
+    assert_tag_debug_untracked_jul_11_2011(163, free_list_section.object_id!=work_list_section.object_id);
+    assert_tag_debug_untracked_jul_11_2011(166, free_list_section.object_id!=NONE);
+    assert_tag_debug_untracked_jul_11_2011(167, work_list_section.object_id!=NONE);
+    assert_tag_debug_untracked_jul_11_2011(170, work_available_semaphore.object_id!=NONE);
+    assert_tag_debug_untracked_jul_11_2011(173, semaphore_get_initial_count(work_available_semaphore)==0);
+    assert_tag_debug_untracked_jul_11_2011(174, semaphore_get_maximum_count(work_available_semaphore)==k_maximum_async_work_items_per_thread);
 
-//public: void s_static_array<long, 32>::set_memory(long)
-//{
-//    mangled_ppc("?set_memory@?$s_static_array@J$0CA@@@QAAXJ@Z");
-//};
+    context = async_setup_get_context_for_thread(thread_index);
+    context->work_available_semaphore = work_available_semaphore;
+    context->free_list.initialize(free_list_section);
+    context->work_list.initialize(work_list_section);
+    context->guard_block = guard_block;
+    context->element_storage.set_memory(0);
 
-//bool pointer_is_aligned(void const *, long)
-//{
-//    mangled_ppc("?pointer_is_aligned@@YA_NPBXJ@Z");
-//};
+    for (long element_index = 0; element_index < context->element_storage.get_count(); element_index++)
+    {
+        context->element_storage[element_index].data.task_id = k_invalid_async_task_id;
+        context->free_list.add_element_to_front(&context->element_storage[element_index]);
+    }
+};
 
-//unsigned long address_from_pointer(void const *)
-//{
-//    mangled_ppc("?address_from_pointer@@YAKPBX@Z");
-//};
+void async_setup_set_thread_work_delay(long thread_index, long work_delay)
+{
+    mangled_ppc("?async_setup_set_thread_work_delay@@YAXJJ@Z");
 
-//bool address_is_aligned(unsigned long, long)
-//{
-//    mangled_ppc("?address_is_aligned@@YA_NKJ@Z");
-//};
+    async_setup_get_context_for_thread(thread_index)->work_delay.set(work_delay);
+};
 
-//public: void s_static_array<struct s_async_task_priority_timings, 32>::set_memory(long)
-//{
-//    mangled_ppc("?set_memory@?$s_static_array@Us_async_task_priority_timings@@$0CA@@@QAAXJ@Z");
-//};
+void async_setup_set_free_list_blocked_callback_for_thread(long thread_index, void (*callback)(void))
+{
+    mangled_ppc("?async_setup_set_free_list_blocked_callback_for_thread@@YAXJP6AXXZ@Z");
 
-//public: void s_static_array<struct t_thread_safe_list<struct s_async_task_element>::s_list_element, 128>::set_memory(long)
-//{
-//    mangled_ppc("?set_memory@?$s_static_array@Us_list_element@?$t_thread_safe_list@Us_async_task_element@@@@$0IA@@@QAAXJ@Z");
-//};
+    s_async_thread_context * context = NULL;
 
-//public: static long s_static_array<struct s_async_thread_context, 4>::get_count(void)
-//{
-//    mangled_ppc("?get_count@?$s_static_array@Us_async_thread_context@@$03@@SAJXZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(212, g_async_setup_initialized);
 
-//public: void t_thread_safe_list<struct s_async_task_element>::initialize(struct s_critical_section)
-//{
-//    mangled_ppc("?initialize@?$t_thread_safe_list@Us_async_task_element@@@@QAAXUs_critical_section@@@Z");
-//};
+    context = async_setup_get_context_for_thread(thread_index);
+    context->free_list_blocked_callback = callback;
+};
 
-//public: void t_thread_safe_list<struct s_async_task_element>::dispose(void)
-//{
-//    mangled_ppc("?dispose@?$t_thread_safe_list@Us_async_task_element@@@@QAAXXZ");
-//};
+void async_setup_set_profiler(c_async_profile_interface * profiler)
+{
+    mangled_ppc("?async_setup_set_profiler@@YAXPAVc_async_profile_interface@@@Z");
 
-//public: void t_thread_safe_list<struct s_async_task_element>::add_element_to_front(struct t_thread_safe_list<struct s_async_task_element>::s_list_element *)
-//{
-//    mangled_ppc("?add_element_to_front@?$t_thread_safe_list@Us_async_task_element@@@@QAAXPAUs_list_element@1@@Z");
-//};
+    char const * block_names[k_async_profile_block_count] = { NULL };
 
-//public: struct s_async_thread_context & s_static_array<struct s_async_thread_context, 4>::operator[]<long>(long)
-//{
-//    mangled_ppc("??$?AJ@?$s_static_array@Us_async_thread_context@@$03@@QAAAAUs_async_thread_context@@J@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(224, g_async_setup_initialized);
 
-//public: long & s_static_array<long, 32>::operator[]<long>(long)
-//{
-//    mangled_ppc("??$?AJ@?$s_static_array@J$0CA@@@QAAAAJJ@Z");
-//};
+    g_async_globals.profiler = profiler;
 
-//bool operator!=<unsigned long>(unsigned long const &, enum e_none_sentinel const &)
-//{
-//    mangled_ppc("??$?9K@@YA_NABKABW4e_none_sentinel@@@Z");
-//};
+    for (long block_index = 0; block_index < NUMBEROF(block_names); block_index++)
+    {
+        block_names[block_index] = async_profile_get_block_name(static_cast<e_async_profile_blocks>(block_index));
+    }
 
-//public: static bool s_static_array<struct s_async_thread_context, 4>::valid<long>(long)
-//{
-//    mangled_ppc("??$valid@J@?$s_static_array@Us_async_thread_context@@$03@@SA_NJ@Z");
-//};
+    profiler->register_profile_blocks(block_names, NUMBEROF(block_names));
+};
 
-//public: static bool s_static_array<long, 32>::valid<long>(long)
-//{
-//    mangled_ppc("??$valid@J@?$s_static_array@J$0CA@@@SA_NJ@Z");
-//};
+void async_setup_set_compare_interface_for_thread(long thread_index, s_async_task_compare_interface * compare_interface)
+{
+    mangled_ppc("?async_setup_set_compare_interface_for_thread@@YAXJPAUs_async_task_compare_interface@@@Z");
 
-//bool operator==<unsigned long>(unsigned long const &, enum e_none_sentinel const &)
-//{
-//    mangled_ppc("??$?8K@@YA_NABKABW4e_none_sentinel@@@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(243, g_async_setup_initialized);
 
-//public: s_async_globals::s_async_globals(void)
-//{
-//    mangled_ppc("??0s_async_globals@@QAA@XZ");
-//};
+    s_async_thread_context * context = async_setup_get_context_for_thread(thread_index);
+    if (compare_interface != NULL)
+    {
+        context->compare_interface = *compare_interface;
+    }
+    else
+    {
+        context->compare_interface.unknown0 = NULL;
+        context->compare_interface.compare = NULL;
+        context->compare_interface.unknown8 = NULL;
+    }
+};
 
-//public: s_static_array<struct s_async_thread_context, 4>::s_static_array<struct s_async_thread_context, 4>(void)
-//{
-//    mangled_ppc("??0?$s_static_array@Us_async_thread_context@@$03@@QAA@XZ");
-//};
+long async_setup_get_thread_work_delay(long thread_index)
+{
+    mangled_ppc("?async_setup_get_thread_work_delay@@YAJJ@Z");
 
-//public: s_async_thread_context::s_async_thread_context(void)
-//{
-//    mangled_ppc("??0s_async_thread_context@@QAA@XZ");
-//};
+    long work_delay = 0;
+    work_delay = async_setup_get_context_for_thread(thread_index)->work_delay;
 
-//public: c_interlocked_int32::c_interlocked_int32(void)
-//{
-//    mangled_ppc("??0c_interlocked_int32@@QAA@XZ");
-//};
+    return work_delay;
+};
 
-//public: s_async_thread_internal_statistics::s_async_thread_internal_statistics(void)
-//{
-//    mangled_ppc("??0s_async_thread_internal_statistics@@QAA@XZ");
-//};
+long async_setup_get_thread_index_for_category(long category)
+{
+    mangled_ppc("?async_setup_get_thread_index_for_category@@YAJJ@Z");
 
-//public: t_thread_safe_list<struct s_async_task_element>::t_thread_safe_list<struct s_async_task_element>(void)
-//{
-//    mangled_ppc("??0?$t_thread_safe_list@Us_async_task_element@@@@QAA@XZ");
-//};
+    long thread_index = NONE;
 
-//public: s_async_globals::~s_async_globals(void)
-//{
-//    mangled_ppc("??1s_async_globals@@QAA@XZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(278, g_async_setup_initialized);
 
-//public: s_static_array<struct s_async_thread_context, 4>::~s_static_array<struct s_async_thread_context, 4>(void)
-//{
-//    mangled_ppc("??1?$s_static_array@Us_async_thread_context@@$03@@QAA@XZ");
-//};
+    thread_index = g_async_globals.thread_index_for_category[category];
 
-//public: s_async_thread_context::~s_async_thread_context(void)
-//{
-//    mangled_ppc("??1s_async_thread_context@@QAA@XZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(284, VALID_INDEX(thread_index, g_async_globals.max_thread_count));
 
-//public: c_interlocked_int32::~c_interlocked_int32(void)
-//{
-//    mangled_ppc("??1c_interlocked_int32@@QAA@XZ");
-//};
+    return thread_index;
+};
 
-//public: s_async_thread_internal_statistics::~s_async_thread_internal_statistics(void)
-//{
-//    mangled_ppc("??1s_async_thread_internal_statistics@@QAA@XZ");
-//};
+bool async_setup_is_thread_index_valid(long thread_index)
+{
+    mangled_ppc("?async_setup_is_thread_index_valid@@YA_NJ@Z");
 
-//public: t_thread_safe_list<struct s_async_task_element>::~t_thread_safe_list<struct s_async_task_element>(void)
-//{
-//    mangled_ppc("??1?$t_thread_safe_list@Us_async_task_element@@@@QAA@XZ");
-//};
+    bool valid = false;
+    if (g_async_setup_initialized)
+    {
+        valid = VALID_INDEX(thread_index, k_max_async_thread_count);
+        valid = valid && VALID_INDEX(thread_index, g_async_globals.max_thread_count);
+    }
 
-//void g_async_globals::`dynamic atexit destructor'(void)
-//{
-//    mangled_ppc("??__Fg_async_globals@@YAXXZ");
-//};
+    return valid;
+};
 
+s_async_thread_context * async_setup_get_context_for_thread(long thread_index)
+{
+    mangled_ppc("?async_setup_get_context_for_thread@@YAPAUs_async_thread_context@@J@Z");
+
+    assert_tag_debug_untracked_jul_11_2011(306, g_async_setup_initialized);
+    assert_tag_debug_untracked_jul_11_2011(307, async_setup_is_thread_index_valid(thread_index));
+
+    return &g_async_globals.thread_contexts[thread_index];
+};
+
+s_async_thread_context * async_setup_get_context_for_category(long category)
+{
+    mangled_ppc("?async_setup_get_context_for_category@@YAPAUs_async_thread_context@@J@Z");
+
+    long thread_index = NONE;
+    s_async_thread_context * context = NULL;
+
+    assert_tag_debug_untracked_jul_11_2011(318, g_async_setup_initialized);
+
+    thread_index = async_setup_get_thread_index_for_category(category);
+    context = async_setup_get_context_for_thread(thread_index);
+
+    return context;
+};
+
+long async_setup_get_total_tasks_added(void)
+{
+    mangled_ppc("?async_setup_get_total_tasks_added@@YAJXZ");
+
+    assert_tag_debug_untracked_jul_11_2011(329, g_async_setup_initialized);
+
+    return g_async_globals.total_tasks_added.peek();
+};
+
+long async_setup_increment_total_tasks_added(void)
+{
+    mangled_ppc("?async_setup_increment_total_tasks_added@@YAJXZ");
+
+    assert_tag_debug_untracked_jul_11_2011(337, g_async_setup_initialized);
+
+    return g_async_globals.total_tasks_added.add(1);
+};
+
+c_async_profile_interface * async_setup_get_registered_profiler(void)
+{
+    mangled_ppc("?async_setup_get_registered_profiler@@YAPAVc_async_profile_interface@@XZ");
+
+    assert_tag_debug_untracked_jul_11_2011(346, g_async_setup_initialized);
+
+    return g_async_globals.profiler;
+};
+
+s_async_task_compare_interface * async_setup_get_compare_interface_for_thread(long thread_index)
+{
+    mangled_ppc("?async_setup_get_compare_interface_for_thread@@YAPAUs_async_task_compare_interface@@J@Z");
+
+    s_async_thread_context * context = NULL;
+
+    assert_tag_debug_untracked_jul_11_2011(356, g_async_setup_initialized);
+
+    context = async_setup_get_context_for_thread(thread_index);
+
+    return &context->compare_interface;
+};

@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void ai_debug_initialize_for_new_map(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

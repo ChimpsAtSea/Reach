@@ -8,6 +8,12 @@
 
 /* ---------- definitions */
 
+class hkpShapeContainer
+{
+public:
+    virtual ~hkpShapeContainer();
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

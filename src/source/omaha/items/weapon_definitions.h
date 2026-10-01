@@ -6,6 +6,11 @@
 
 /* ---------- constants */
 
+enum
+{
+    WEAPON_DEFINITION_TAG = 'weap',
+};
+
 /* ---------- definitions */
 
 /* ---------- prototypes */

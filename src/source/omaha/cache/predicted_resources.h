@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+bool predicted_resources_can_predict_through_tag(long tag_index);
+
 /* ---------- globals */
 
 /* ---------- public code */

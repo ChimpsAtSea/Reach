@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+extern long system_processor_get_physical_count(void);
+extern long system_processor_get_logical_count(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

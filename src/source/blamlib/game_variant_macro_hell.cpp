@@ -1,6 +1,7 @@
 /* ---------- headers */
 
 #include "blamlib\game_variant_macro_hell.h"
+#include "omaha\game\game_variant.h"
 
 /* ---------- constants */
 
@@ -18,8 +19,3839 @@
 
 // public: static enum e_text_value_pair_parameter_type c_game_variant::get_expected_game_engine_setting_parameter_type(enum e_game_variant_parameter);
 
-//public: static enum e_text_value_pair_parameter_type c_game_variant::get_expected_game_engine_setting_parameter_type(enum e_game_variant_parameter)
-//{
-//    mangled_ppc("?get_expected_game_engine_setting_parameter_type@c_game_variant@@SA?AW4e_text_value_pair_parameter_type@@W4e_game_variant_parameter@@@Z");
-//};
+// $TODO nonmatching: only the jump table differs (the target .obj has no relocations for the table words or the lis/subi of its base,
+// so objdiff cannot match them); every case body and the case->body mapping are identical (generated from the target table)
+e_text_value_pair_parameter_type c_game_variant::get_expected_game_engine_setting_parameter_type(e_game_variant_parameter parameter)
+{
+    mangled_ppc("?get_expected_game_engine_setting_parameter_type@c_game_variant@@SA?AW4e_text_value_pair_parameter_type@@W4e_game_variant_parameter@@@Z");
+
+    e_text_value_pair_parameter_type result;
+    switch (parameter)
+    {
+    case _game_variant_parameter_game_misc_score_to_win_round:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_misc_teams:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_misc_round_reset_map:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_misc_round_time_limit:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_misc_sudden_death_time_limit:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_misc_perfection_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_misc_round_limit:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_misc_early_win_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_inherit_timer:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_with_teammate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_at_location:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_on_kill:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_lives_per_round:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_team_lives_per_round:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_respawn_time:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_suicide_penalty:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_betrayal_penalty:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_growth:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_initial_loadout_selection_time:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_respawn_traits_duration:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_respawn_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_respawn_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_respawn_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_respawn_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_social_observers:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_social_team_changing:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_social_friendly_fire:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_social_betrayal_booting:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_social_enemy_voice:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_social_open_channel_voice:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_social_dead_player_voice:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_turrets:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_shortcuts:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_powerups:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_indestructible_vehicles:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_player_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_player_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_player_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_player_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_weapon_set:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_game_map_vehicle_set:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_powerup_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_powerup_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_powerup_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_powerup_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_powerup_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_powerup_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_powerup_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_powerup_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_powerup_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_powerup_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_red_powerup_duration:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_blue_powerup_duration:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_map_yellow_powerup_duration:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_open_voice_channel:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_enter_editor_mode:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_respawn_time:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_sandbox_editor_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_1_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_2_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_3_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_megalo_custom_4_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_template_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_template_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_template_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_vision:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_hearing:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_luck:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_weapon:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_equipment_drop:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_ai_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_ai_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_ai_damage_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_template_ai_damage_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_enable_scenario_hazards:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_enable_weapon_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_enable_ammo_crates:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_generator_defend_all:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_generator_random_spawn:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_game_difficulty:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_set_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_lives_awarded:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_target:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_spartan_lives_on_elite_death:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_extra_life_score_target:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_shared_team_life_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_elite_life_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_maximum_lives:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_generator_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_inherit_timer:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_with_teammate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_at_location:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_on_kill:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_lives_per_round:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_team_lives_per_round:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_respawn_time:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_suicide_penalty:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_betrayal_penalty:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_growth:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_initial_loadout_selection_time:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_game_elite_respawn_traits_duration:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_respawn_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_respawn_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_respawn_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_respawn_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_vision:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_hearing:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_luck:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_weapon:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_equipment_drop:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_ai_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_ai_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_ai_damage_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_ai_traits_ai_damage_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull0:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull1:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull2:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull3:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull4:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull5:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull6:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull7:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull8:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull9:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull10:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull11:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull12:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull13:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull14:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull15:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull16:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_skull17:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_initial_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_primary_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_0_boss_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull0:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull1:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull2:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull3:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull4:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull5:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull6:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull7:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull8:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull9:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull10:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull11:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull12:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull13:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull14:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull15:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull16:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_skull17:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_initial_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_primary_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_1_boss_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull0:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull1:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull2:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull3:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull4:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull5:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull6:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull7:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull8:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull9:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull10:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull11:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull12:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull13:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull14:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull15:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull16:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_skull17:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_initial_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_primary_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_2_boss_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_duration:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull0:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull1:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull2:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull3:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull4:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull5:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull6:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull7:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull8:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull9:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull10:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull11:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull12:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull13:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull14:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull15:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull16:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_skull17:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_bonus_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_spartan_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_elite_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_vision:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_hearing:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_luck:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_weapon:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_equipment_drop:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_ai_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_ai_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_ai_damage_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_red_skull_ai_traits_ai_damage_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_spartan_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_elite_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_vision:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_hearing:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_luck:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_weapon:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_equipment_drop:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_ai_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_ai_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_ai_damage_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_yellow_skull_ai_traits_ai_damage_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_spartan_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_shld_dmg_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_body_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_body_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_shld_multiplier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_shld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_overshld_recharge_rate:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_deathless:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_vampirism:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_melee_dmg_modifier_percentage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_initial_primary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_initial_secondary_weapon:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_initial_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_initial_grenade_count:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_recharging_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_infinite_ammo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_infinite_equipment:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_weapon_pickup:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_equipment_usage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_equipment_drops:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_walking_speed:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_personal_gravity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_vehicle_use:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_jump_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_double_jump:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_motion_tracker:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_motion_tracker_range:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_directional_damage:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_active_camo:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_waypoint:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_visual:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_forced_change_colors:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_elite_player_traits_gamertag_visibility:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_vision:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_hearing:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_luck:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_weapon:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_equipment_drop:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_ai_assassination_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_ai_headshot_immunity:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_ai_damage_resistance:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_blue_skull_ai_traits_ai_damage_modifier:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull0:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull1:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull2:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull3:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull4:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull5:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull6:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull7:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull8:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull9:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull10:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull11:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull12:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull13:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull14:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull15:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull16:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_skull17:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_initial_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_primary_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_delivered_via_dropship:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_wave_squad_advance_type:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type0:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type1:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type2:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type3:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type4:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type5:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type6:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type7:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type8:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type9:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type10:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_survival_round_template_boss_wave_squad_type11:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout0_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout0_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout0_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout0_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout0_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout0_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout1_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout1_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout1_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout1_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout1_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout1_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout2_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout2_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout2_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout2_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout2_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout2_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout3_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout3_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout3_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout3_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout3_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout3_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout4_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout4_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout4_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout4_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout4_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier1_loadout4_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout0_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout0_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout0_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout0_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout0_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout0_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout1_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout1_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout1_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout1_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout1_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout1_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout2_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout2_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout2_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout2_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout2_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout2_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout3_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout3_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout3_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout3_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout3_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout3_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout4_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout4_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout4_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout4_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout4_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier2_loadout4_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout0_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout0_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout0_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout0_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout0_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout0_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout1_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout1_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout1_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout1_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout1_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout1_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout2_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout2_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout2_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout2_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout2_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout2_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout3_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout3_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout3_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout3_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout3_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout3_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout4_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout4_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout4_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout4_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout4_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_spartan_loadouts_tier3_loadout4_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout0_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout0_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout0_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout0_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout0_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout0_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout1_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout1_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout1_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout1_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout1_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout1_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout2_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout2_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout2_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout2_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout2_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout2_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout3_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout3_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout3_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout3_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout3_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout3_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout4_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout4_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout4_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout4_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout4_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier1_loadout4_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout0_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout0_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout0_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout0_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout0_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout0_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout1_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout1_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout1_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout1_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout1_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout1_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout2_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout2_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout2_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout2_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout2_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout2_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout3_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout3_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout3_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout3_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout3_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout3_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout4_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout4_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout4_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout4_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout4_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier2_loadout4_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout0_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout0_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout0_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout0_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout0_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout0_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout1_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout1_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout1_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout1_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout1_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout1_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout2_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout2_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout2_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout2_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout2_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout2_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout3_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout3_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout3_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout3_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout3_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout3_grenades:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout4_enabled:
+        result = _integer_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout4_name:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout4_primary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout4_secondary:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout4_equipment:
+        result = _string_id_value;
+        break;
+    case _game_variant_parameter_elite_loadouts_tier3_loadout4_grenades:
+        result = _integer_value;
+        break;
+    default:
+        result = _parameter_type_invalid;
+        break;
+    }
+
+    return result;
+};
 

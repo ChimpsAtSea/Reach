@@ -10,6 +10,10 @@
 
 /* ---------- prototypes */
 
+enum e_controller_index;
+
+void user_interface_content_invalidate_cache(e_controller_index controller_index);
+
 /* ---------- globals */
 
 /* ---------- public code */

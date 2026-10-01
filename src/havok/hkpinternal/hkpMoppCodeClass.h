@@ -4,9 +4,16 @@
 
 /* ---------- headers */
 
+#include "havok\hkbase\hkReferencedObject.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
+
+class hkpMoppCode :
+    public hkReferencedObject
+{
+};
 
 /* ---------- prototypes */
 

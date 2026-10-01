@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void data_mine_usability_restore_from_gamestate(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

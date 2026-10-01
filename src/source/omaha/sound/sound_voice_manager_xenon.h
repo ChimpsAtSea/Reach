@@ -8,6 +8,9 @@
 
 /* ---------- definitions */
 
+struct s_sound_preferences;
+struct sound_datum;
+
 /* ---------- prototypes */
 
 /* ---------- globals */

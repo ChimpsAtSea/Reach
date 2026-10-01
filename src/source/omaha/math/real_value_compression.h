@@ -10,6 +10,11 @@
 
 /* ---------- prototypes */
 
+union vector3d;
+
+unsigned long compress_real_vector3d_normalized_to_DHenN3(vector3d const * v);
+void uncompress_DHenN3_to_real_vector3d_normalized(unsigned long compressed, vector3d * v);
+
 /* ---------- globals */
 
 /* ---------- public code */

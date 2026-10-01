@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+extern bool memory_is_bad_read_pointer(void const * pointer, unsigned int size);
+
 /* ---------- globals */
 
 /* ---------- public code */

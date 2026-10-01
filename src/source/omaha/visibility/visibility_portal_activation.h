@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void game_state_after_load_proc_machine_door_portals(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

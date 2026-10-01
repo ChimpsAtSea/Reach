@@ -8,6 +8,13 @@
 
 /* ---------- definitions */
 
+// $TODO: layout not reversed yet (derives from c_aim_target_base in the target)
+class c_aim_target_object
+{
+public:
+    long get_object_index() const;
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

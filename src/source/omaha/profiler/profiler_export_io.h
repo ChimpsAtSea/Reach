@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+bool profiler_export_io_connected(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

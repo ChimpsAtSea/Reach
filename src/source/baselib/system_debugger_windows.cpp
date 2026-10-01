@@ -2,6 +2,8 @@
 
 #include "baselib\system_debugger_windows.h"
 
+#include <xtl.h>
+
 /* ---------- constants */
 
 /* ---------- definitions */
@@ -18,8 +20,9 @@
 
 // void system_output_debug_string(char const *);
 
-//void system_output_debug_string(char const *)
-//{
-//    mangled_ppc("?system_output_debug_string@@YAXPBD@Z");
-//};
+void system_output_debug_string(char const *string)
+{
+    mangled_ppc("?system_output_debug_string@@YAXPBD@Z");
+    OutputDebugStringA(string);
+};
 

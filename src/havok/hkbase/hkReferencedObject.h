@@ -8,6 +8,23 @@
 
 /* ---------- definitions */
 
+class hkBaseObject
+{
+public:
+    virtual ~hkBaseObject();
+};
+
+class hkReferencedObject :
+    public hkBaseObject
+{
+public:
+    int getReferenceCount() const; // $TODO inline in the target (f i, instanced_geometry_definitions.obj); body not reversed yet
+    void removeReference() const;
+
+    unsigned short m_memSizeAndFlags; // 0x4
+    short m_referenceCount; // 0x6
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

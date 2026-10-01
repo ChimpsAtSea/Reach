@@ -10,6 +10,10 @@
 
 /* ---------- prototypes */
 
+class c_game_variant;
+
+extern long multiplayer_game_hopper_pack_game_variant(void * buffer, long buffer_size, c_game_variant const * game_variant);
+
 /* ---------- globals */
 
 /* ---------- public code */

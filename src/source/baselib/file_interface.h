@@ -8,7 +8,12 @@
 
 /* ---------- definitions */
 
+struct s_file_accessor;
+
 /* ---------- prototypes */
+
+void file_invalidate(s_file_accessor * file);
+bool file_valid(s_file_accessor const * file);
 
 /* ---------- globals */
 

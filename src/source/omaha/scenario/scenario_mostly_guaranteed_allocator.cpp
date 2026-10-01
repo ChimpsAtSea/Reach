@@ -1,6 +1,9 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\scenario\\scenario_mostly_guaranteed_allocator.cpp"
 /* ---------- headers */
 
 #include "omaha\scenario\scenario_mostly_guaranteed_allocator.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "omaha\tag_files\tag_resource_runtime.h"
 
 /* ---------- constants */
 
@@ -9,6 +12,8 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+c_scenario_mostly_guaranteed_allocation g_scenario_single_allocation;
 
 /* ---------- public code */
 
@@ -33,63 +38,80 @@
 // private: virtual void c_scenario_mostly_guaranteed_allocation::deallocate_internal(void *);
 // public: c_tracked_allocation_base::c_tracked_allocation_base(void);
 
-//class c_allocation_interface * scenario_mostly_guaranteed_allocator_initialize(void)
-//{
-//    mangled_ppc("?scenario_mostly_guaranteed_allocator_initialize@@YAPAVc_allocation_interface@@XZ");
-//};
+// $TODO nonmatching: target leaf uses the unrelocated absolute address of g_scenario_single_allocation (lis/subi); ours is a lis/addi relocation pair (only diff)
+c_allocation_interface * scenario_mostly_guaranteed_allocator_initialize(void)
+{
+    mangled_ppc("?scenario_mostly_guaranteed_allocator_initialize@@YAPAVc_allocation_interface@@XZ");
 
-//void scenario_mostly_guaranteed_allocator_dispose(void)
-//{
-//    mangled_ppc("?scenario_mostly_guaranteed_allocator_dispose@@YAXXZ");
-//};
+    return &g_scenario_single_allocation;
+};
 
-//public: c_scenario_mostly_guaranteed_allocation::c_scenario_mostly_guaranteed_allocation(void)
-//{
-//    mangled_ppc("??0c_scenario_mostly_guaranteed_allocation@@QAA@XZ");
-//};
+void scenario_mostly_guaranteed_allocator_dispose(void)
+{
+    mangled_ppc("?scenario_mostly_guaranteed_allocator_dispose@@YAXXZ");
+};
 
-//public: virtual void * c_tracked_allocation_base::allocate(unsigned int, char const *, long, char const *, char const *, char const *)
-//{
-//    mangled_ppc("?allocate@c_tracked_allocation_base@@UAAPAXIPBDJ000@Z");
-//};
+c_scenario_mostly_guaranteed_allocation::c_scenario_mostly_guaranteed_allocation(void)
+{
+    mangled_ppc("??0c_scenario_mostly_guaranteed_allocation@@QAA@XZ");
+};
 
-//public: virtual void c_tracked_allocation_base::deallocate(void *, char const *, long)
-//{
-//    mangled_ppc("?deallocate@c_tracked_allocation_base@@UAAXPAXPBDJ@Z");
-//};
+// c_tracked_allocation_base::allocate / deallocate / constructor are inline (f i) in scenario_mostly_guaranteed_allocator.h
 
-//private: virtual char const * c_scenario_mostly_guaranteed_allocation::get_name(void)
-//{
-//    mangled_ppc("?get_name@c_scenario_mostly_guaranteed_allocation@@EAAPBDXZ");
-//};
+char const * c_scenario_mostly_guaranteed_allocation::get_name(void)
+{
+    mangled_ppc("?get_name@c_scenario_mostly_guaranteed_allocation@@EAAPBDXZ");
 
-//private: virtual void c_scenario_mostly_guaranteed_allocation::get_memory_configuration(enum e_map_memory_configuration, struct s_optional_cache_user_memory_configuration *)
-//{
-//    mangled_ppc("?get_memory_configuration@c_scenario_mostly_guaranteed_allocation@@EAAXW4e_map_memory_configuration@@PAUs_optional_cache_user_memory_configuration@@@Z");
-//};
+    return "scenario_single_allocation";
+};
 
-//private: virtual void c_scenario_mostly_guaranteed_allocation::idle(void const *)
-//{
-//    mangled_ppc("?idle@c_scenario_mostly_guaranteed_allocation@@EAAXPBX@Z");
-//};
+void c_scenario_mostly_guaranteed_allocation::get_memory_configuration(e_map_memory_configuration map_configuration, s_optional_cache_user_memory_configuration * memory_configuration)
+{
+    mangled_ppc("?get_memory_configuration@c_scenario_mostly_guaranteed_allocation@@EAAXW4e_map_memory_configuration@@PAUs_optional_cache_user_memory_configuration@@@Z");
 
-//private: virtual void c_scenario_mostly_guaranteed_allocation::terminate(void const *)
-//{
-//    mangled_ppc("?terminate@c_scenario_mostly_guaranteed_allocation@@EAAXPBX@Z");
-//};
+    memory_configuration->maximum_priority = _optional_cache_user_cant_fail_blocking;
+    memory_configuration->maximum_size = 0;
+};
 
-//private: virtual void * c_scenario_mostly_guaranteed_allocation::allocate_internal(unsigned int)
-//{
-//    mangled_ppc("?allocate_internal@c_scenario_mostly_guaranteed_allocation@@EAAPAXI@Z");
-//};
+void c_scenario_mostly_guaranteed_allocation::idle(void const * pointer)
+{
+    mangled_ppc("?idle@c_scenario_mostly_guaranteed_allocation@@EAAXPBX@Z");
+};
 
-//private: virtual void c_scenario_mostly_guaranteed_allocation::deallocate_internal(void *)
-//{
-//    mangled_ppc("?deallocate_internal@c_scenario_mostly_guaranteed_allocation@@EAAXPAX@Z");
-//};
+void c_scenario_mostly_guaranteed_allocation::terminate(void const * pointer)
+{
+    mangled_ppc("?terminate@c_scenario_mostly_guaranteed_allocation@@EAAXPBX@Z");
 
-//public: c_tracked_allocation_base::c_tracked_allocation_base(void)
-//{
-//    mangled_ppc("??0c_tracked_allocation_base@@QAA@XZ");
-//};
+    dassert_tag_debug_untracked_jul_11_2011(46, false, "can't free single scenario allocation while it is use! :(");
+};
+
+void * c_scenario_mostly_guaranteed_allocation::allocate_internal(unsigned int size)
+{
+    mangled_ppc("?allocate_internal@c_scenario_mostly_guaranteed_allocation@@EAAPAXI@Z");
+
+    assert_tag_debug_untracked_jul_11_2011(55, m_allocation.empty());
+
+    m_allocation = tag_resources_try_to_steal_memory(size);
+    if (!m_allocation.empty())
+    {
+        m_allocation_type = _allocation_type_resource_stoler;
+    }
+
+    return m_allocation.empty() ? NULL : m_allocation.begin();
+};
+
+void c_scenario_mostly_guaranteed_allocation::deallocate_internal(void * ptr)
+{
+    mangled_ppc("?deallocate_internal@c_scenario_mostly_guaranteed_allocation@@EAAXPAX@Z");
+
+    assert_tag_debug_untracked_jul_11_2011(70, ptr==m_allocation.begin());
+    assert_tag_debug_untracked_jul_11_2011(71, m_allocation_type==_allocation_type_resource_stoler);
+
+    if (m_allocation_type == _allocation_type_resource_stoler)
+    {
+        tag_resources_return_memory(m_allocation);
+    }
+    m_allocation.clear();
+    m_allocation_type = _allocation_type_none;
+};
 

@@ -26,13 +26,40 @@
 // bool postprocess_gamepad_stick_info_block(long, void *, bool);
 // bool postprocess_player_control_block(long, void *, bool);
 
-//bool postprocess_gamepad_stick_info_block(long, void *, bool)
-//{
-//    mangled_ppc("?postprocess_gamepad_stick_info_block@@YA_NJPAX_N@Z");
-//};
+bool postprocess_gamepad_stick_info_block(long element_index, void * element, bool for_editor)
+{
+    mangled_ppc("?postprocess_gamepad_stick_info_block@@YA_NJPAX_N@Z");
 
-//bool postprocess_player_control_block(long, void *, bool)
-//{
-//    mangled_ppc("?postprocess_player_control_block@@YA_NJPAX_N@Z");
-//};
+    if (!for_editor)
+    {
+        real default_peg_max_angular_velocity = k_2pi;
+        s_gamepad_stick_settings * stick_info = static_cast<s_gamepad_stick_settings *>(element);
+        if (stick_info->peg_max_angular_velocity < k_real_epsilon)
+        {
+            stick_info->peg_max_angular_velocity = default_peg_max_angular_velocity;
+        }
+    }
+
+    return true;
+};
+
+bool postprocess_player_control_block(long element_index, void * element, bool for_editor)
+{
+    mangled_ppc("?postprocess_player_control_block@@YA_NJPAX_N@Z");
+
+    if (!for_editor)
+    {
+        s_game_globals_player_control * player_control = static_cast<s_game_globals_player_control *>(element);
+        if (player_control->minimum_action_hold_time <= 0.0f)
+        {
+            player_control->minimum_action_hold_time = 0.2333f;
+        }
+        if (player_control->auto_unzoom_ticks <= 0)
+        {
+            player_control->auto_unzoom_ticks = 15;
+        }
+    }
+
+    return true;
+};
 

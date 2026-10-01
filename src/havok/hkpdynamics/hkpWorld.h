@@ -4,9 +4,21 @@
 
 /* ---------- headers */
 
+#include "havok\hkbase\hkArray.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
+
+class hkpSimulationIsland;
+
+class hkpWorld
+{
+public:
+    hkArray<hkpSimulationIsland *, hkContainerHeapAllocator> const & getActiveSimulationIslands() const; // $TODO inline in the target (f i); body not reversed yet
+    hkArray<hkpSimulationIsland *, hkContainerHeapAllocator> const & getInactiveSimulationIslands() const; // $TODO inline in the target (f i); body not reversed yet
+    hkpSimulationIsland const * getFixedIsland() const; // $TODO inline in the target (f i); body not reversed yet
+};
 
 /* ---------- prototypes */
 

@@ -1,6 +1,10 @@
 /* ---------- headers */
 
 #include "omaha\game\game_engine_player_traits_definitions.h"
+#include "omaha\game\game_engine_util.h"
+#include "omaha\cseries\cseries.h"
+#include "omaha\tag_files\string_ids.h"
+#include "core\corelib\cseries\cseries_events.h"
 
 /* ---------- constants */
 
@@ -41,8 +45,30 @@
 
 // bool postprocess_player_trait_weapons_block(long, void *, bool);
 
-//bool postprocess_player_trait_weapons_block(long, void *, bool)
-//{
-//    mangled_ppc("?postprocess_player_trait_weapons_block@@YA_NJPAX_N@Z");
-//};
+bool postprocess_player_trait_weapons_block(long block_index, void * element, bool for_editor)
+{
+    mangled_ppc("?postprocess_player_trait_weapons_block@@YA_NJPAX_N@Z");
+
+    s_player_trait_weapons * weapons = static_cast<s_player_trait_weapons *>(element);
+    if (!for_editor)
+    {
+        long primary_weapon_absolute_index = game_engine_get_multiplayer_weapon_selection_absolute_index(weapons->initial_primary_weapon);
+        long secondary_weapon_absolute_index = game_engine_get_multiplayer_weapon_selection_absolute_index(weapons->initial_secondary_weapon);
+        long equipment_absolute_index = game_engine_get_multiplayer_equipment_selection_absolute_index(weapons->initial_equipment);
+        if (primary_weapon_absolute_index == NONE && weapons->initial_primary_weapon != 333)
+        {
+            event_wrapped(_event_warning, "multiplayer:player_traits:failed to find initial primary weapon %s in the global multiplayer weapon list", string_id_get_string_const(weapons->initial_primary_weapon));
+        }
+        if (secondary_weapon_absolute_index == NONE && weapons->initial_secondary_weapon != 333)
+        {
+            event_wrapped(_event_warning, "multiplayer:player_traits:failed to find initial secondary weapon %s in the global multiplayer weapon list", string_id_get_string_const(weapons->initial_secondary_weapon));
+        }
+        if (equipment_absolute_index == NONE && weapons->initial_equipment != 333)
+        {
+            event_wrapped(_event_warning, "multiplayer:player_traits:failed to find initial equipment %s in the global multiplayer equipment list", string_id_get_string_const(weapons->initial_equipment));
+        }
+    }
+
+    return true;
+};
 

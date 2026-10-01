@@ -8,7 +8,11 @@
 
 /* ---------- definitions */
 
+typedef bool (*qsort_compare_function)(void const * element_a, void const * element_b, void const * context);
+
 /* ---------- prototypes */
+
+void qsort_elements(void * elements, long element_count, unsigned int element_size, qsort_compare_function const compare, void const * context);
 
 /* ---------- globals */
 

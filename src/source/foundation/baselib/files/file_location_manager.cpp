@@ -1,6 +1,11 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\foundation\\baselib\\files\\file_location_manager.cpp"
 /* ---------- headers */
 
 #include "foundation\baselib\files\file_location_manager.h"
+#include "foundation\baselib\files\file_location_manager_xenon.h"
+#include "foundation\baselib\multithreading\datatypes\initialization_container.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "core\corelib\cseries\cseries_macros.h"
 
 /* ---------- constants */
 
@@ -9,6 +14,8 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+t_initialization_container<s_file_location_globals> g_file_location_globals;
 
 /* ---------- public code */
 
@@ -44,123 +51,138 @@
 // public: t_initialization_container<struct s_file_location_globals>::~t_initialization_container<struct s_file_location_globals>(void);
 // void g_file_location_globals::`dynamic atexit destructor'(void);
 
-//void file_locations_initialize(void)
-//{
-//    mangled_ppc("?file_locations_initialize@@YAXXZ");
-//};
+void file_locations_initialize(void)
+{
+    mangled_ppc("?file_locations_initialize@@YAXXZ");
 
-//struct s_file_location_globals const * file_location_globals_get(void)
-//{
-//    mangled_ppc("?file_location_globals_get@@YAPBUs_file_location_globals@@XZ");
-//};
+    s_file_location_globals const * globals = file_location_globals_get();
+};
 
-//bool file_location_available(enum e_file_location, enum e_file_location_usage_mode)
-//{
-//    mangled_ppc("?file_location_available@@YA_NW4e_file_location@@W4e_file_location_usage_mode@@@Z");
-//};
+s_file_location_globals const * file_location_globals_get(void)
+{
+    mangled_ppc("?file_location_globals_get@@YAPBUs_file_location_globals@@XZ");
 
-//enum e_file_location_device file_location_get_device_type(enum e_file_location)
-//{
-//    mangled_ppc("?file_location_get_device_type@@YA?AW4e_file_location_device@@W4e_file_location@@@Z");
-//};
+    return g_file_location_globals.get(file_locations_configure);
+};
 
-//char const * file_location_get_root_absolute_path(enum e_file_location)
-//{
-//    mangled_ppc("?file_location_get_root_absolute_path@@YAPBDW4e_file_location@@@Z");
-//};
+bool file_location_available(e_file_location location, e_file_location_usage_mode usage_mode)
+{
+    mangled_ppc("?file_location_available@@YA_NW4e_file_location@@W4e_file_location_usage_mode@@@Z");
 
-//void file_locations_configure(struct s_file_location_globals *)
-//{
-//    mangled_ppc("?file_locations_configure@@YAXPAUs_file_location_globals@@@Z");
-//};
+    s_file_location_globals const * globals = file_location_globals_get();
+    s_file_location const * file_location = &globals->locations[location];
+    bool available = file_location->usage_flags.test(usage_mode);
 
-//void file_location_set_read_only(struct s_file_location *, struct s_file_available_location const *)
-//{
-//    mangled_ppc("?file_location_set_read_only@@YAXPAUs_file_location@@PBUs_file_available_location@@@Z");
-//};
+    return available;
+};
 
-//void file_location_set_read_write(struct s_file_location *, struct s_file_available_location const *)
-//{
-//    mangled_ppc("?file_location_set_read_write@@YAXPAUs_file_location@@PBUs_file_available_location@@@Z");
-//};
+e_file_location_device file_location_get_device_type(e_file_location location)
+{
+    mangled_ppc("?file_location_get_device_type@@YA?AW4e_file_location_device@@W4e_file_location@@@Z");
 
-//public: void s_flags<enum e_file_location_usage_mode, unsigned long, 2>::clear(void)
-//{
-//    mangled_ppc("?clear@?$s_flags@W4e_file_location_usage_mode@@K$01@@QAAXXZ");
-//};
+    s_file_location_globals const * globals = file_location_globals_get();
+    e_file_location_device device = globals->locations[location].device;
 
-//public: bool s_flags<enum e_file_location_usage_mode, unsigned long, 2>::test(enum e_file_location_usage_mode) const
-//{
-//    mangled_ppc("?test@?$s_flags@W4e_file_location_usage_mode@@K$01@@QBA_NW4e_file_location_usage_mode@@@Z");
-//};
+    return device;
+};
 
-//public: void s_flags<enum e_file_location_usage_mode, unsigned long, 2>::set(enum e_file_location_usage_mode, bool)
-//{
-//    mangled_ppc("?set@?$s_flags@W4e_file_location_usage_mode@@K$01@@QAAXW4e_file_location_usage_mode@@_N@Z");
-//};
+char const * file_location_get_root_absolute_path(e_file_location location)
+{
+    mangled_ppc("?file_location_get_root_absolute_path@@YAPBDW4e_file_location@@@Z");
 
-//?get@?$t_initialization_container@Us_file_location_globals@@@@QAAPBUs_file_location_globals@@Q6AXPAU2@@Z@Z
-//{
-//    mangled_ppc("?get@?$t_initialization_container@Us_file_location_globals@@@@QAAPBUs_file_location_globals@@Q6AXPAU2@@Z@Z");
-//};
+    s_file_location_globals const * globals = file_location_globals_get();
+    s_file_location const * file_location = &globals->locations[location];
+    assert_tag_debug_untracked_jul_11_2011(66, file_location->usage_flags.test(_file_location_read));
+    char const * root_path = file_location->root_path.get_string();
 
-//public: struct s_file_location const & s_static_array<struct s_file_location, 5>::operator[]<enum e_file_location>(enum e_file_location) const
-//{
-//    mangled_ppc("??$?AW4e_file_location@@@?$s_static_array@Us_file_location@@$04@@QBAABUs_file_location@@W4e_file_location@@@Z");
-//};
+    return root_path;
+};
 
-//public: struct s_file_location & s_static_array<struct s_file_location, 5>::operator[]<long>(long)
-//{
-//    mangled_ppc("??$?AJ@?$s_static_array@Us_file_location@@$04@@QAAAAUs_file_location@@J@Z");
-//};
+void file_locations_configure(s_file_location_globals * globals)
+{
+    mangled_ppc("?file_locations_configure@@YAXPAUs_file_location_globals@@@Z");
 
-//public: static bool s_flags<enum e_file_location_usage_mode, unsigned long, 2>::valid_bit(enum e_file_location_usage_mode)
-//{
-//    mangled_ppc("?valid_bit@?$s_flags@W4e_file_location_usage_mode@@K$01@@SA_NW4e_file_location_usage_mode@@@Z");
-//};
+    s_file_available_location utility_drive[2];
+    unsigned long utility_drive_flags = file_locations_find_utility_drives(NUMBEROF(utility_drive), utility_drive);
 
-//public: bool s_flags<enum e_file_location_usage_mode, unsigned long, 2>::valid(void) const
-//{
-//    mangled_ppc("?valid@?$s_flags@W4e_file_location_usage_mode@@K$01@@QBA_NXZ");
-//};
+    s_file_available_location working_directory_location;
+    bool on_devkit;
+    bool found_working_directory = file_locations_find_working_directory(&working_directory_location, &on_devkit);
 
-//private: static unsigned long s_flags<enum e_file_location_usage_mode, unsigned long, 2>::flag_size_type(enum e_file_location_usage_mode)
-//{
-//    mangled_ppc("?flag_size_type@?$s_flags@W4e_file_location_usage_mode@@K$01@@CAKW4e_file_location_usage_mode@@@Z");
-//};
+    s_file_available_location media_location;
+    bool media_directory_available = file_locations_find_media_directory(&media_location);
 
-//public: static bool s_static_array<struct s_file_location, 5>::valid<enum e_file_location>(enum e_file_location)
-//{
-//    mangled_ppc("??$valid@W4e_file_location@@@?$s_static_array@Us_file_location@@$04@@SA_NW4e_file_location@@@Z");
-//};
+    for (long location_index = 0; location_index < k_file_location_count; location_index++)
+    {
+        s_file_location * file_location = &globals->locations[location_index];
+        file_location->usage_flags.clear();
 
-//public: static bool s_static_array<struct s_file_location, 5>::valid<long>(long)
-//{
-//    mangled_ppc("??$valid@J@?$s_static_array@Us_file_location@@$04@@SA_NJ@Z");
-//};
+        switch (location_index)
+        {
+        case _file_location_development_relative:
+        {
+            if (found_working_directory)
+            {
+                file_location_set_read_write(file_location, &working_directory_location);
+            }
+        }
+        break;
+        case _file_location_1:
+        case _file_location_2:
+        {
+            if (found_working_directory && on_devkit)
+            {
+                file_location_set_read_write(file_location, &working_directory_location);
+            }
+            else if (media_directory_available)
+            {
+                file_location_set_read_only(file_location, &media_location);
+            }
+        }
+        break;
+        case _file_location_3:
+        {
+            if (TEST_BIT(utility_drive_flags, 0))
+            {
+                file_location_set_read_write(file_location, &utility_drive[0]);
+            }
+        }
+        break;
+        case _file_location_4:
+        {
+            if (TEST_BIT(utility_drive_flags, 1))
+            {
+                file_location_set_read_write(file_location, &utility_drive[1]);
+            }
+        }
+        break;
+        default:
+        {
+            dassert_tag_debug_untracked_jul_11_2011(137, false, "unreachable");
+        }
+        break;
+        }
+    }
+};
 
-//private: static unsigned long s_flags<enum e_file_location_usage_mode, unsigned long, 2>::make_mask_with_all_valid_bits_on_size_type(void)
-//{
-//    mangled_ppc("?make_mask_with_all_valid_bits_on_size_type@?$s_flags@W4e_file_location_usage_mode@@K$01@@CAKXZ");
-//};
+void file_location_set_read_only(s_file_location * file_location, s_file_available_location const * available_location)
+{
+    mangled_ppc("?file_location_set_read_only@@YAXPAUs_file_location@@PBUs_file_available_location@@@Z");
 
-//private: static unsigned long s_flags<enum e_file_location_usage_mode, unsigned long, 2>::make_N_bit_mask_size_type(enum e_file_location_usage_mode)
-//{
-//    mangled_ppc("?make_N_bit_mask_size_type@?$s_flags@W4e_file_location_usage_mode@@K$01@@CAKW4e_file_location_usage_mode@@@Z");
-//};
+    file_location->usage_flags.clear();
+    file_location->usage_flags.set(_file_location_read, true);
+    file_location->device = available_location->device;
+    file_location->root_path.set(available_location->path.get_string());
+};
 
-//public: t_initialization_container<struct s_file_location_globals>::t_initialization_container<struct s_file_location_globals>(void)
-//{
-//    mangled_ppc("??0?$t_initialization_container@Us_file_location_globals@@@@QAA@XZ");
-//};
+void file_location_set_read_write(s_file_location * file_location, s_file_available_location const * available_location)
+{
+    mangled_ppc("?file_location_set_read_write@@YAXPAUs_file_location@@PBUs_file_available_location@@@Z");
 
-//public: t_initialization_container<struct s_file_location_globals>::~t_initialization_container<struct s_file_location_globals>(void)
-//{
-//    mangled_ppc("??1?$t_initialization_container@Us_file_location_globals@@@@QAA@XZ");
-//};
-
-//void g_file_location_globals::`dynamic atexit destructor'(void)
-//{
-//    mangled_ppc("??__Fg_file_location_globals@@YAXXZ");
-//};
+    file_location->usage_flags.clear();
+    file_location->usage_flags.set(_file_location_read, true);
+    file_location->usage_flags.set(_file_location_write, true);
+    file_location->device = available_location->device;
+    file_location->root_path.set(available_location->path.get_string());
+};
 

@@ -27,18 +27,26 @@
 // public: static bool s_bolt_definition::postprocess_block_proc(long, void *, bool);
 // public: static bool s_lightning_system_definition::postprocess_proc(class c_tag_index, bool);
 
-//public: static bool s_bolt_definition::new_block_proc(void *)
-//{
-//    mangled_ppc("?new_block_proc@s_bolt_definition@@SA_NPAX@Z");
-//};
+bool s_bolt_definition::new_block_proc(void * element)
+{
+    mangled_ppc("?new_block_proc@s_bolt_definition@@SA_NPAX@Z");
 
-//public: static bool s_bolt_definition::postprocess_block_proc(long, void *, bool)
-//{
-//    mangled_ppc("?postprocess_block_proc@s_bolt_definition@@SA_NJPAX_N@Z");
-//};
+    return true;
+};
 
-//public: static bool s_lightning_system_definition::postprocess_proc(class c_tag_index, bool)
-//{
-//    mangled_ppc("?postprocess_proc@s_lightning_system_definition@@SA_NVc_tag_index@@_N@Z");
-//};
+bool s_bolt_definition::postprocess_block_proc(long element_index, void * element, bool for_editor)
+{
+    mangled_ppc("?postprocess_block_proc@s_bolt_definition@@SA_NJPAX_N@Z");
+
+    bool success = true;
+
+    return success;
+};
+
+bool s_lightning_system_definition::postprocess_proc(c_tag_index tag_index, bool for_editor)
+{
+    mangled_ppc("?postprocess_proc@s_lightning_system_definition@@SA_NVc_tag_index@@_N@Z");
+
+    return true;
+};
 

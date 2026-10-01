@@ -10,6 +10,10 @@
 
 /* ---------- prototypes */
 
+void scenario_zone_debugger_initialize();
+void scenario_zone_debugger_update();
+void scenario_zone_debugger_synchronize();
+
 /* ---------- globals */
 
 /* ---------- public code */

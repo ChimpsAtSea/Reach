@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+extern bool system_is_debugger_present(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

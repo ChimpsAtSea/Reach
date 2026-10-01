@@ -1,6 +1,11 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\foundation\\baselib\\memory\\allocation_interface.cpp"
 /* ---------- headers */
 
 #include "foundation\baselib\memory\allocation_interface.h"
+#include "foundation\baselib\memory\base\base_memory_windows.h"
+#include "foundation\baselib\memory\debug_memory\debug_memory_allocators.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "omaha\cseries\cseries.h"
 
 /* ---------- constants */
 
@@ -9,6 +14,14 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+static c_base_allocation g_base_allocation_instance;
+static c_heap_allocation g_heap_allocation_instance;
+static c_null_allocation g_null_allocation_instance;
+
+c_base_allocation * g_base_allocation = &g_base_allocation_instance;
+c_heap_allocation * g_heap_allocation = &g_heap_allocation_instance;
+c_null_allocation * g_null_allocation = &g_null_allocation_instance;
 
 /* ---------- public code */
 
@@ -30,48 +43,48 @@
 // public: c_heap_allocation::c_heap_allocation(void);
 // public: c_null_allocation::c_null_allocation(void);
 
-//public: virtual void * c_base_allocation::allocate(unsigned int, char const *, long, char const *, char const *, char const *)
-//{
-//    mangled_ppc("?allocate@c_base_allocation@@UAAPAXIPBDJ000@Z");
-//};
+void * c_base_allocation::allocate(unsigned int size, char const * file, long line, char const * type, char const * subtype, char const * name)
+{
+    mangled_ppc("?allocate@c_base_allocation@@UAAPAXIPBDJ000@Z");
 
-//public: virtual void c_base_allocation::deallocate(void *, char const *, long)
-//{
-//    mangled_ppc("?deallocate@c_base_allocation@@UAAXPAXPBDJ@Z");
-//};
+    return base_malloc(size);
+};
 
-//public: virtual void * c_heap_allocation::allocate(unsigned int, char const *, long, char const *, char const *, char const *)
-//{
-//    mangled_ppc("?allocate@c_heap_allocation@@UAAPAXIPBDJ000@Z");
-//};
+void c_base_allocation::deallocate(void * pointer, char const * file, long line)
+{
+    mangled_ppc("?deallocate@c_base_allocation@@UAAXPAXPBDJ@Z");
 
-//public: virtual void c_heap_allocation::deallocate(void *, char const *, long)
-//{
-//    mangled_ppc("?deallocate@c_heap_allocation@@UAAXPAXPBDJ@Z");
-//};
+    base_free(pointer);
+};
 
-//public: virtual void * c_null_allocation::allocate(unsigned int, char const *, long, char const *, char const *, char const *)
-//{
-//    mangled_ppc("?allocate@c_null_allocation@@UAAPAXIPBDJ000@Z");
-//};
+void * c_heap_allocation::allocate(unsigned int size, char const * file, long line, char const * type, char const * subtype, char const * name)
+{
+    mangled_ppc("?allocate@c_heap_allocation@@UAAPAXIPBDJ000@Z");
 
-//public: virtual void c_null_allocation::deallocate(void *, char const *, long)
-//{
-//    mangled_ppc("?deallocate@c_null_allocation@@UAAXPAXPBDJ@Z");
-//};
+    return debug_malloc(size, static_cast<e_debug_memory_flags>(0), file, line, NONE, type, subtype, name);
+};
 
-//public: c_base_allocation::c_base_allocation(void)
-//{
-//    mangled_ppc("??0c_base_allocation@@QAA@XZ");
-//};
+void c_heap_allocation::deallocate(void * pointer, char const * file, long line)
+{
+    mangled_ppc("?deallocate@c_heap_allocation@@UAAXPAXPBDJ@Z");
 
-//public: c_heap_allocation::c_heap_allocation(void)
-//{
-//    mangled_ppc("??0c_heap_allocation@@QAA@XZ");
-//};
+    debug_free(pointer, file, line);
+};
 
-//public: c_null_allocation::c_null_allocation(void)
-//{
-//    mangled_ppc("??0c_null_allocation@@QAA@XZ");
-//};
+void * c_null_allocation::allocate(unsigned int size, char const * file, long line, char const * type, char const * subtype, char const * name)
+{
+    mangled_ppc("?allocate@c_null_allocation@@UAAPAXIPBDJ000@Z");
 
+    dassert_tag_debug_untracked_jul_11_2011(91, false, "g_null_allocation::allocate");
+
+    return NULL;
+};
+
+void c_null_allocation::deallocate(void * pointer, char const * file, long line)
+{
+    mangled_ppc("?deallocate@c_null_allocation@@UAAXPAXPBDJ@Z");
+};
+
+// c_base_allocation::c_base_allocation(void), c_heap_allocation::c_heap_allocation(void) and
+// c_null_allocation::c_null_allocation(void) are implicit (compiler-generated) and are emitted
+// by the static instance definitions above ("??0c_base_allocation@@QAA@XZ" etc.)

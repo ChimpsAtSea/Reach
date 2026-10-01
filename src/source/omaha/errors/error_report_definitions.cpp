@@ -10,6 +10,8 @@
 
 /* ---------- globals */
 
+bool prune_error_geometry;
+
 /* ---------- public code */
 
 /* ---------- private code */
@@ -22,8 +24,17 @@
 
 // bool postprocess_error_report(long, void *, bool);
 
-//bool postprocess_error_report(long, void *, bool)
-//{
-//    mangled_ppc("?postprocess_error_report@@YA_NJPAX_N@Z");
-//};
+bool postprocess_error_report(long element_index, void * element, bool for_editor)
+{
+    mangled_ppc("?postprocess_error_report@@YA_NJPAX_N@Z");
+
+    error_report_category * category = static_cast<error_report_category *>(element);
+
+    if (!for_editor && prune_error_geometry)
+    {
+        tag_block_delete_all_elements(&category->reports);
+    }
+
+    return true;
+};
 

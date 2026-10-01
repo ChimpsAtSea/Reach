@@ -10,6 +10,10 @@
 
 /* ---------- prototypes */
 
+bool damaged_media_get_global_memory(unsigned long * out_size, void const ** out_address);
+
+extern void damaged_media_halt_and_display_error(char const * format, ...);
+
 /* ---------- globals */
 
 /* ---------- public code */

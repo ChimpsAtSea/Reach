@@ -10,6 +10,10 @@
 
 /* ---------- prototypes */
 
+class c_game_variant;
+
+extern bool network_squad_session_set_game_variant(c_game_variant const * game_variant);
+
 /* ---------- globals */
 
 /* ---------- public code */

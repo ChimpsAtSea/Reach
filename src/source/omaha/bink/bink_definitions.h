@@ -8,9 +8,13 @@
 
 /* ---------- definitions */
 
+struct s_tag_resource_definition;
+
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+extern s_tag_resource_definition bink_resource;
 
 /* ---------- public code */
 

@@ -8,9 +8,14 @@
 
 /* ---------- definitions */
 
+struct s_cache_file_tag_interop_vtable;
+
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+extern s_cache_file_tag_interop_vtable const g_d3d_texture_interop_vtable;
+extern s_cache_file_tag_interop_vtable const g_d3d_texture_interleaved_interop_vtable;
 
 /* ---------- public code */
 

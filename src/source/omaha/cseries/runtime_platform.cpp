@@ -1,6 +1,9 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\cseries\\runtime_platform.cpp"
 /* ---------- headers */
 
 #include "omaha\cseries\runtime_platform.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "core\corelib\cseries\cseries_macros.h"
 
 /* ---------- constants */
 
@@ -9,6 +12,12 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+e_runtime_platform_type active_type;
+bool g_building_cache_file;
+bool g_building_cache_file_cache;
+bool g_building_cache_file_for_ship;
+bool g_building_cache_file_language_specific_cache;
 
 /* ---------- public code */
 
@@ -37,73 +46,107 @@
 // char const * describe_runtime_platform_type(enum e_runtime_platform_type);
 // bool runtime_platform_on_target_platform(void);
 
-//enum e_runtime_platform_type get_runtime_platform_type(void)
-//{
-//    mangled_ppc("?get_runtime_platform_type@@YA?AW4e_runtime_platform_type@@XZ");
-//};
+e_runtime_platform_type get_runtime_platform_type(void)
+{
+    mangled_ppc("?get_runtime_platform_type@@YA?AW4e_runtime_platform_type@@XZ");
 
-//enum e_runtime_platform_type set_runtime_platform_type(enum e_runtime_platform_type)
-//{
-//    mangled_ppc("?set_runtime_platform_type@@YA?AW4e_runtime_platform_type@@W41@@Z");
-//};
+    return active_type;
+};
 
-//bool runtime_platform_needs_byteswapping(void)
-//{
-//    mangled_ppc("?runtime_platform_needs_byteswapping@@YA_NXZ");
-//};
+e_runtime_platform_type set_runtime_platform_type(e_runtime_platform_type new_type)
+{
+    mangled_ppc("?set_runtime_platform_type@@YA?AW4e_runtime_platform_type@@W41@@Z");
 
-//bool runtime_platform_needs_byteswapping(enum e_runtime_platform_type)
-//{
-//    mangled_ppc("?runtime_platform_needs_byteswapping@@YA_NW4e_runtime_platform_type@@@Z");
-//};
+    e_runtime_platform_type old_type = active_type;
+    active_type = new_type;
+    return old_type;
+};
 
-//bool runtime_platform_building_for_cache_file(void)
-//{
-//    mangled_ppc("?runtime_platform_building_for_cache_file@@YA_NXZ");
-//};
+bool runtime_platform_needs_byteswapping(void)
+{
+    mangled_ppc("?runtime_platform_needs_byteswapping@@YA_NXZ");
 
-//void set_runtime_platform_building_for_cache_file(bool)
-//{
-//    mangled_ppc("?set_runtime_platform_building_for_cache_file@@YAX_N@Z");
-//};
+    return runtime_platform_needs_byteswapping(active_type);
+};
 
-//bool runtime_platform_building_for_cache_file_cache(void)
-//{
-//    mangled_ppc("?runtime_platform_building_for_cache_file_cache@@YA_NXZ");
-//};
+bool runtime_platform_needs_byteswapping(e_runtime_platform_type runtime_platform)
+{
+    mangled_ppc("?runtime_platform_needs_byteswapping@@YA_NW4e_runtime_platform_type@@@Z");
 
-//void set_runtime_platform_building_for_cache_file_cache(bool)
-//{
-//    mangled_ppc("?set_runtime_platform_building_for_cache_file_cache@@YAX_N@Z");
-//};
+    bool needs_byteswapping = false;
+    needs_byteswapping = runtime_platform == _runtime_platform_pc;
+    return needs_byteswapping;
+};
 
-//bool runtime_platform_building_cache_file_for_ship(void)
-//{
-//    mangled_ppc("?runtime_platform_building_cache_file_for_ship@@YA_NXZ");
-//};
+bool runtime_platform_building_for_cache_file(void)
+{
+    mangled_ppc("?runtime_platform_building_for_cache_file@@YA_NXZ");
 
-//void set_runtime_platform_building_cache_file_for_ship(bool)
-//{
-//    mangled_ppc("?set_runtime_platform_building_cache_file_for_ship@@YAX_N@Z");
-//};
+    return g_building_cache_file;
+};
 
-//bool runtime_platform_building_for_cache_file_language_specific_cache(void)
-//{
-//    mangled_ppc("?runtime_platform_building_for_cache_file_language_specific_cache@@YA_NXZ");
-//};
+void set_runtime_platform_building_for_cache_file(bool building)
+{
+    mangled_ppc("?set_runtime_platform_building_for_cache_file@@YAX_N@Z");
 
-//void set_runtime_platform_building_for_cache_file_language_specific_cache(bool)
-//{
-//    mangled_ppc("?set_runtime_platform_building_for_cache_file_language_specific_cache@@YAX_N@Z");
-//};
+    g_building_cache_file = building;
+};
 
-//char const * describe_runtime_platform_type(enum e_runtime_platform_type)
-//{
-//    mangled_ppc("?describe_runtime_platform_type@@YAPBDW4e_runtime_platform_type@@@Z");
-//};
+bool runtime_platform_building_for_cache_file_cache(void)
+{
+    mangled_ppc("?runtime_platform_building_for_cache_file_cache@@YA_NXZ");
 
-//bool runtime_platform_on_target_platform(void)
-//{
-//    mangled_ppc("?runtime_platform_on_target_platform@@YA_NXZ");
-//};
+    return g_building_cache_file_cache;
+};
 
+void set_runtime_platform_building_for_cache_file_cache(bool building)
+{
+    mangled_ppc("?set_runtime_platform_building_for_cache_file_cache@@YAX_N@Z");
+
+    g_building_cache_file_cache = building;
+};
+
+bool runtime_platform_building_cache_file_for_ship(void)
+{
+    mangled_ppc("?runtime_platform_building_cache_file_for_ship@@YA_NXZ");
+
+    return g_building_cache_file_for_ship;
+};
+
+void set_runtime_platform_building_cache_file_for_ship(bool building)
+{
+    mangled_ppc("?set_runtime_platform_building_cache_file_for_ship@@YAX_N@Z");
+
+    g_building_cache_file_for_ship = building;
+};
+
+bool runtime_platform_building_for_cache_file_language_specific_cache(void)
+{
+    mangled_ppc("?runtime_platform_building_for_cache_file_language_specific_cache@@YA_NXZ");
+
+    return g_building_cache_file_language_specific_cache;
+};
+
+void set_runtime_platform_building_for_cache_file_language_specific_cache(bool building)
+{
+    mangled_ppc("?set_runtime_platform_building_for_cache_file_language_specific_cache@@YAX_N@Z");
+
+    g_building_cache_file_language_specific_cache = building;
+};
+
+char const *describe_runtime_platform_type(e_runtime_platform_type runtime_platform)
+{
+    mangled_ppc("?describe_runtime_platform_type@@YAPBDW4e_runtime_platform_type@@@Z");
+
+    char const *k_platform_descriptions[NUMBER_OF_RUNTIME_PLATFORMS] = { "xenon", "pc" };
+    assert_tag_debug_untracked_jul_11_2011(234, VALID_INDEX(runtime_platform, NUMBEROF(k_platform_descriptions)));
+
+    return k_platform_descriptions[runtime_platform];
+};
+
+bool runtime_platform_on_target_platform(void)
+{
+    mangled_ppc("?runtime_platform_on_target_platform@@YA_NXZ");
+
+    return active_type != _runtime_platform_pc;
+};

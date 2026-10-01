@@ -1,6 +1,9 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\blamlib\\tag_marker.cpp"
 /* ---------- headers */
 
 #include "blamlib\tag_marker.h"
+#include "foundation\baselib\datatypes\data_array.h"
+#include "omaha\cseries\cseries.h"
 
 /* ---------- constants */
 
@@ -36,88 +39,79 @@
 // public: bool c_big_flags_typed_no_init<long, 20000>::is_clear(void) const;
 // protected: static unsigned long c_big_flags_typed_no_init<long, 20000>::get_mask_of_first_slice_of_chunk_inclusive(long);
 
-//public: c_tag_marker::c_tag_marker(void)
-//{
-//    mangled_ppc("??0c_tag_marker@@QAA@XZ");
-//};
+c_tag_marker::c_tag_marker(void)
+{
+    mangled_ppc("??0c_tag_marker@@QAA@XZ");
+};
 
-//public: bool c_tag_marker::mark_tag(long)
-//{
-//    mangled_ppc("?mark_tag@c_tag_marker@@QAA_NJ@Z");
-//};
+bool c_tag_marker::mark_tag(long tag_index)
+{
+    mangled_ppc("?mark_tag@c_tag_marker@@QAA_NJ@Z");
 
-//public: bool c_tag_marker::try_to_mark_tag(long)
-//{
-//    mangled_ppc("?try_to_mark_tag@c_tag_marker@@QAA_NJ@Z");
-//};
+    long absolute_index = DATUM_INDEX_TO_ABSOLUTE_INDEX(tag_index);
+    bool was_marked = m_marked_tags.test(absolute_index);
+    m_marked_tags.set(absolute_index, true);
 
-//public: bool c_tag_marker::tag_is_marked(long) const
-//{
-//    mangled_ppc("?tag_is_marked@c_tag_marker@@QBA_NJ@Z");
-//};
+    return !was_marked;
+};
 
-//public: bool c_tag_marker::unmark_tag(long)
-//{
-//    mangled_ppc("?unmark_tag@c_tag_marker@@QAA_NJ@Z");
-//};
+bool c_tag_marker::try_to_mark_tag(long tag_index)
+{
+    mangled_ppc("?try_to_mark_tag@c_tag_marker@@QAA_NJ@Z");
 
-//public: void c_tag_marker::reset(void)
-//{
-//    mangled_ppc("?reset@c_tag_marker@@QAAXXZ");
-//};
+    return tag_index != NONE && mark_tag(tag_index);
+};
 
-//public: void c_tag_marker::merge(class c_tag_marker const &)
-//{
-//    mangled_ppc("?merge@c_tag_marker@@QAAXABV1@@Z");
-//};
+bool c_tag_marker::tag_is_marked(long tag_index) const
+{
+    mangled_ppc("?tag_is_marked@c_tag_marker@@QBA_NJ@Z");
 
-//public: void c_tag_marker::exclude(class c_tag_marker const &)
-//{
-//    mangled_ppc("?exclude@c_tag_marker@@QAAXABV1@@Z");
-//};
+    long absolute_index = DATUM_INDEX_TO_ABSOLUTE_INDEX(tag_index);
+    bool was_marked = m_marked_tags.test(absolute_index);
 
-//public: class c_big_flags<20000> const * c_tag_marker::get_marked_tags_flags(void) const
-//{
-//    mangled_ppc("?get_marked_tags_flags@c_tag_marker@@QBAPBV?$c_big_flags@$0EOCA@@@XZ");
-//};
+    return was_marked;
+};
 
-//public: c_big_flags<20000>::c_big_flags<20000>(void)
-//{
-//    mangled_ppc("??0?$c_big_flags@$0EOCA@@@QAA@XZ");
-//};
+bool c_tag_marker::unmark_tag(long tag_index)
+{
+    mangled_ppc("?unmark_tag@c_tag_marker@@QAA_NJ@Z");
 
-//public: void c_big_flags_typed_no_init<long, 20000>::clear(void)
-//{
-//    mangled_ppc("?clear@?$c_big_flags_typed_no_init@J$0EOCA@@@QAAXXZ");
-//};
+    long absolute_index = DATUM_INDEX_TO_ABSOLUTE_INDEX(tag_index);
+    bool was_marked = m_marked_tags.test(absolute_index);
+    m_marked_tags.set(absolute_index, false);
+
+    return was_marked;
+};
+
+void c_tag_marker::reset(void)
+{
+    mangled_ppc("?reset@c_tag_marker@@QAAXXZ");
+
+    m_marked_tags.clear();
+};
+
+void c_tag_marker::merge(c_tag_marker const & other)
+{
+    mangled_ppc("?merge@c_tag_marker@@QAAXABV1@@Z");
+
+    m_marked_tags |= other.m_marked_tags;
+};
+
+void c_tag_marker::exclude(c_tag_marker const & other)
+{
+    mangled_ppc("?exclude@c_tag_marker@@QAAXABV1@@Z");
+
+    m_marked_tags.and_not_range(&other.m_marked_tags, 0, 20000 - 1);
+};
+
+c_big_flags<20000> const * c_tag_marker::get_marked_tags_flags(void) const
+{
+    mangled_ppc("?get_marked_tags_flags@c_tag_marker@@QBAPBV?$c_big_flags@$0EOCA@@@XZ");
+
+    return &m_marked_tags;
+};
 
 //public: void c_big_flags_typed_no_init<long, 20000>::set(long, bool)
 //{
 //    mangled_ppc("?set@?$c_big_flags_typed_no_init@J$0EOCA@@@QAAXJ_N@Z");
 //};
-
-//public: class c_big_flags_typed_no_init<long, 20000> & c_big_flags_typed_no_init<long, 20000>::operator|=(class c_big_flags_typed_no_init<long, 20000> const &)
-//{
-//    mangled_ppc("??_5?$c_big_flags_typed_no_init@J$0EOCA@@@QAAAAV0@ABV0@@Z");
-//};
-
-//public: void c_big_flags_typed_no_init<long, 20000>::and_not_range(class c_big_flags_typed_no_init<long, 20000> const *, long, long)
-//{
-//    mangled_ppc("?and_not_range@?$c_big_flags_typed_no_init@J$0EOCA@@@QAAXPBV1@JJ@Z");
-//};
-
-//public: c_big_flags_typed<long, 20000>::c_big_flags_typed<long, 20000>(void)
-//{
-//    mangled_ppc("??0?$c_big_flags_typed@J$0EOCA@@@QAA@XZ");
-//};
-
-//public: bool c_big_flags_typed_no_init<long, 20000>::is_clear(void) const
-//{
-//    mangled_ppc("?is_clear@?$c_big_flags_typed_no_init@J$0EOCA@@@QBA_NXZ");
-//};
-
-//protected: static unsigned long c_big_flags_typed_no_init<long, 20000>::get_mask_of_first_slice_of_chunk_inclusive(long)
-//{
-//    mangled_ppc("?get_mask_of_first_slice_of_chunk_inclusive@?$c_big_flags_typed_no_init@J$0EOCA@@@KAKJ@Z");
-//};
-

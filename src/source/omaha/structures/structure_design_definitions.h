@@ -6,9 +6,16 @@
 
 /* ---------- constants */
 
+enum
+{
+    k_structure_design_definition_tag = 'sddt',
+};
+
 /* ---------- definitions */
 
 /* ---------- prototypes */
+
+void structure_design_fixup(long structure_design_definition_index);
 
 /* ---------- globals */
 

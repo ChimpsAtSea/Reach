@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void havok_convex_decomposition_render_debug(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

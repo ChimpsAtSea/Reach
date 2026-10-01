@@ -4,11 +4,15 @@
 
 /* ---------- headers */
 
+#include "omaha\game\materials.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
 
 /* ---------- prototypes */
+
+c_global_material_type model_damage_info_get_indirect_material_type(long model_definition_index);
 
 /* ---------- globals */
 

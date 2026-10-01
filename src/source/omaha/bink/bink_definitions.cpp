@@ -1,6 +1,8 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\bink\\bink_definitions.cpp"
 /* ---------- headers */
 
 #include "omaha\bink\bink_definitions.h"
+#include "omaha\memory\byte_swapping.h"
 
 /* ---------- constants */
 
@@ -9,6 +11,19 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+long const bink_bs_codes[] = { _begin_bs_array, _1byte, _4byte, _end_bs_array };
+
+static byte_swap_definition bink_bs_definition =
+{
+    "bink",
+    4,
+    bink_bs_codes,
+    __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__,
+    __LINE__,
+    BYTE_SWAP_DEFINITION_SIGNATURE,
+    false
+};
 
 /* ---------- public code */
 
@@ -30,8 +45,14 @@
 
 // void byte_swap_bink_resource_data(void *, void *, long, bool);
 
-//void byte_swap_bink_resource_data(void *, void *, long, bool)
-//{
-//    mangled_ppc("?byte_swap_bink_resource_data@@YAXPAX0J_N@Z");
-//};
+void byte_swap_bink_resource_data(void *resource, void *data, long data_size, bool unknown)
+{
+    mangled_ppc("?byte_swap_bink_resource_data@@YAXPAX0J_N@Z");
+
+    if (!unknown && data_size > 0)
+    {
+        long data_count = (data_size - 1) / 4 + 1;
+        byte_swap_data(&bink_bs_definition, data, data_count);
+    }
+};
 

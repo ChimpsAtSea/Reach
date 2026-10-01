@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+extern unsigned long system_milliseconds(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

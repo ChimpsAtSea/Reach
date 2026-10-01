@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+void chud_initialize_for_saved_game(long game_state_proc_flags);
+void chud_awarded_cookies(long player_index, long cookies);
+
 /* ---------- globals */
 
 /* ---------- public code */

@@ -6,7 +6,37 @@
 
 /* ---------- constants */
 
+// Reach: c_enum_no_init<e_scenario_type, short, 0, 5>; values checked against cache_file_get_maximum_size
+enum e_scenario_type
+{
+    _scenario_type_invalid = -1,
+    _scenario_type_solo = 0,
+    _scenario_type_multiplayer,
+    _scenario_type_main_menu,
+    _scenario_type_multiplayer_shared,
+    _scenario_type_single_player_shared,
+
+    k_scenario_type_count
+};
+
 /* ---------- definitions */
+
+struct scenario;
+struct s_game_globals;
+struct structure_bsp;
+struct s_cluster_reference;
+union real_point3d;
+
+struct s_scenario_game_state
+{
+    unsigned long flags; // 0x0 c_flags_no_init<e_scenario_game_state_bit, unsigned long, 1>
+    long zone_set_index; // 0x4
+    unsigned long designer_zone_mask; // 0x8
+    unsigned long active_bsp_mask; // 0xC
+    unsigned long touched_bsp_mask; // 0x10
+    unsigned long cinematic_zone_mask; // 0x14
+    unsigned long touched_cinematic_zone_mask; // 0x18
+};
 
 /* ---------- prototypes */
 
@@ -57,16 +87,19 @@
 // char const * scenario_get_cinematic_zone_string_from_mask(unsigned long, char *, unsigned int);
 // char const * scenario_zone_set_get_name(long);
 // long global_structure_bsp_first_active_index_get(void);
+extern long global_structure_bsp_first_active_index_get();
 // long global_structure_bsp_next_active_index_get(long);
+extern long global_structure_bsp_next_active_index_get(long structure_bsp_index);
 // long global_structure_design_first_active_index_get(void);
 // unsigned long global_structure_design_active_mask_get(void);
 // long global_structure_design_next_active_index_get(long);
 // bool global_structure_design_is_active(long);
 // unsigned long global_structure_bsp_active_mask_get(void);
+extern unsigned long global_structure_bsp_active_mask_get();
 // bool global_structure_bsp_is_active(long);
 // bool global_cinematic_zone_is_active(long);
 // unsigned long scenario_get_touched_bsp_mask_internal(void);
-// unsigned long global_designer_zone_active_mask_get(void);
+extern unsigned long global_designer_zone_active_mask_get();
 // unsigned long global_cinematic_zone_active_mask_get(void);
 // unsigned long scenario_get_touched_cinematics_mask_internal(void);
 // class c_collision_bsp_reference global_collision_bsp_get(long);
@@ -77,9 +110,12 @@
 // bool global_structure_tag_manifest_matches(struct scenario const *, char const *, enum e_scenario_content_source);
 // struct s_tag_reference const * global_structure_bsp_tag_reference_get_explicit_source(struct scenario const *, long, enum e_scenario_content_source);
 // struct s_tag_reference const * global_structure_bsp_tag_reference_get(struct scenario const *, long);
+extern struct s_tag_reference const * global_structure_bsp_tag_reference_get(scenario const * scenario, long structure_bsp_index);
 // struct s_tag_reference * global_structure_bsp_tag_reference_get_writable(struct scenario *, long);
 // long global_structure_bsp_tag_index_get(struct scenario const *, long);
+extern long global_structure_bsp_tag_index_get(scenario const * scenario, long structure_bsp_index);
 // struct structure_bsp const * global_structure_bsp_get(long);
+extern structure_bsp const * global_structure_bsp_get(long structure_bsp_index);
 // struct structure_bsp const * global_structure_bsp_get(struct scenario const *, long);
 // struct structure_bsp const * global_structure_bsp_try_and_get(long);
 // struct structure_bsp const * global_structure_bsp_try_and_get(struct scenario const *, long);
@@ -90,14 +126,18 @@
 // struct s_structure_design const * global_structure_design_get(struct scenario const *, long);
 // struct s_tag_reference const * global_structure_lighting_info_tag_reference_get(struct scenario const *, long);
 // struct s_structure_lighting_info const * global_structure_lighting_info_get(long);
-// long global_scenario_index_get(void);
+extern long global_scenario_index_get();
 // long global_scenario_game_globals_index_get(void);
+extern long global_scenario_game_globals_index_get();
 // struct scenario * global_scenario_get_internal(bool);
 // bool game_tag_defense_enabled(void);
 // struct scenario * global_scenario_get(void);
+extern scenario * global_scenario_get();
 // struct scenario * global_scenario_try_and_get(void);
+extern scenario * global_scenario_try_and_get();
 // struct s_game_globals * scenario_get_game_globals(void);
-// struct s_game_globals * scenario_try_and_get_game_globals(void);
+extern struct s_game_globals * scenario_get_game_globals();
+extern s_game_globals * scenario_try_and_get_game_globals();
 // long global_structure_bsp_tag_index_get(long);
 // bool scenario_location_valid(struct s_location);
 // bool scenario_cluster_reference_valid(struct s_cluster_reference);
@@ -112,6 +152,7 @@
 // struct s_cluster_reference scenario_cluster_reference_from_leaf_index(long, long);
 // struct s_cluster_reference scenario_cluster_reference_from_point(long, union real_point3d const *);
 // struct s_cluster_reference scenario_cluster_reference_from_point(union real_point3d const *);
+extern s_cluster_reference scenario_cluster_reference_from_point(real_point3d const * point);
 // short scenario_structure_index_from_point(union real_point3d const *);
 // bool scenario_test_pvs(struct s_cluster_reference, struct s_cluster_reference);
 // bool scenario_location_potentially_visible_local(struct s_location const *);
@@ -121,6 +162,7 @@
 // public: s_water_physics_test_sphere_result::s_water_physics_test_sphere_result(void);
 // float scenario_position_water_depth(union real_point3d const *);
 // long scenario_zone_set_index_get(void);
+extern long scenario_zone_set_index_get();
 // long scenario_zone_set_index_from_string(char const *);
 // char const * scenario_zone_set_string_get(void);
 // char const * scenario_zone_set_string_get(long);
@@ -216,6 +258,7 @@ extern bool scenario_switch_zone_set(long);
 // long scenario_budget_resource_get_looping_sound_reference(long);
 // long scenario_budget_resource_get_sound_reference(long);
 // bool scenario_use_designer_zones(void);
+extern bool scenario_use_designer_zones();
 // bool scenario_do_not_attach_unused_designer_zone_resources(void);
 // bool scenario_couple_structure_objects_to_structure(void);
 // void scenario_initialize_game_state(struct s_scenario_game_state *);
@@ -227,7 +270,9 @@ extern bool scenario_switch_zone_set(long);
 // void scenario_prepare_for_map_reset(char const *);
 // class c_static_string<256> scenario_game_state_describe(struct s_scenario_game_state const *);
 // void scenario_handle_tag_resource_lock(long);
+extern void scenario_handle_tag_resource_lock(long thread_index);
 // void scenario_handle_tag_resource_unlock(long);
+extern void scenario_handle_tag_resource_unlock(long thread_index);
 // void scenario_alias_tag_resource_shortcuts_to_thread(long);
 // void scenario_clear_tag_resource_shortcuts_in_thread(long);
 // bool scenario_is_in_space(void);
@@ -343,5 +388,33 @@ extern bool scenario_switch_zone_set(long);
 /* ---------- globals */
 
 /* ---------- public code */
+
+inline void game_tag_defense_push(bool enable)
+{
+    mangled_ppc("?game_tag_defense_push@@YAX_N@Z");
+};
+
+inline void game_tag_defense_pop(void)
+{
+    mangled_ppc("?game_tag_defense_pop@@YAXXZ");
+};
+
+class c_game_tag_defense_push_scope
+{
+public:
+    c_game_tag_defense_push_scope(bool enable)
+    {
+        mangled_ppc("??0c_game_tag_defense_push_scope@@QAA@_N@Z");
+
+        game_tag_defense_push(enable);
+    };
+
+    ~c_game_tag_defense_push_scope(void)
+    {
+        mangled_ppc("??1c_game_tag_defense_push_scope@@QAA@XZ");
+
+        game_tag_defense_pop();
+    };
+};
 
 #endif // __SCENARIO_H__

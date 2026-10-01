@@ -10,6 +10,11 @@
 
 /* ---------- prototypes */
 
+void errors_initialize(void);
+void errors_dispose(void);
+bool errors_add_fatal_error_callback(void (*callback)(void));
+void call_fatal_error_callbacks(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void ai_initialize_for_saved_game(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

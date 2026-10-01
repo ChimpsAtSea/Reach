@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+unsigned long get_unaligned_allocation_size(unsigned long allocation_size, unsigned long allocation_bits); // $TODO inline in the target ("f i", owned by contiguous_allocation.obj), body not yet recovered
+
 /* ---------- globals */
 
 /* ---------- public code */

@@ -1,6 +1,8 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\foundation\\baselib\\errors\\output\\output_handler.cpp"
 /* ---------- headers */
 
 #include "foundation\baselib\errors\output\output_handler.h"
+#include "core\corelib\cseries\cseries_asserts.h"
 
 /* ---------- constants */
 
@@ -9,6 +11,8 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+c_static_stack<c_output_handler *, c_output_handler_registry::k_maximum_output_handlers> c_output_handler_registry::g_handlers;
 
 /* ---------- public code */
 
@@ -47,143 +51,137 @@
 // public: bool c_static_stack<class c_output_handler *, 8>::full(void) const;
 // public: c_static_stack<class c_output_handler *, 8>::c_static_stack<class c_output_handler *, 8>(void);
 
-//public: virtual void c_output_handler::handle_output_message(union argb_color const *, char const *, bool)
-//{
-//    mangled_ppc("?handle_output_message@c_output_handler@@UAAXPBTargb_color@@PBD_N@Z");
-//};
+void c_output_handler::handle_output_message(argb_color const * color, char const * message, bool message_is_right_aligned)
+{
+    mangled_ppc("?handle_output_message@c_output_handler@@UAAXPBTargb_color@@PBD_N@Z");
+};
 
-//public: virtual void c_output_handler::handle_output_message_block_begin(void)
-//{
-//    mangled_ppc("?handle_output_message_block_begin@c_output_handler@@UAAXXZ");
-//};
+void c_output_handler::handle_output_message_block_begin()
+{
+    mangled_ppc("?handle_output_message_block_begin@c_output_handler@@UAAXXZ");
+};
 
-//public: virtual void c_output_handler::handle_output_message_block_end(void)
-//{
-//    mangled_ppc("?handle_output_message_block_end@c_output_handler@@UAAXXZ");
-//};
+void c_output_handler::handle_output_message_block_end()
+{
+    mangled_ppc("?handle_output_message_block_end@c_output_handler@@UAAXXZ");
+};
 
-//public: virtual void c_output_handler::handle_output_error(char const *)
-//{
-//    mangled_ppc("?handle_output_error@c_output_handler@@UAAXPBD@Z");
-//};
+void c_output_handler::handle_output_error(char const * error_string)
+{
+    mangled_ppc("?handle_output_error@c_output_handler@@UAAXPBD@Z");
+};
 
-//public: virtual void c_output_handler::handle_output_debug(char const *)
-//{
-//    mangled_ppc("?handle_output_debug@c_output_handler@@UAAXPBD@Z");
-//};
+void c_output_handler::handle_output_debug(char const * debug_string)
+{
+    mangled_ppc("?handle_output_debug@c_output_handler@@UAAXPBD@Z");
+};
 
-//public: virtual void c_output_handler::handle_output_event(enum e_event_level, char const *, char const *, union rgb_color const *)
-//{
-//    mangled_ppc("?handle_output_event@c_output_handler@@UAAXW4e_event_level@@PBD1PBTrgb_color@@@Z");
-//};
+void c_output_handler::handle_output_event(e_event_level event_level, char const * event_category, char const * event_string, rgb_color const * event_color)
+{
+    mangled_ppc("?handle_output_event@c_output_handler@@UAAXW4e_event_level@@PBD1PBTrgb_color@@@Z");
+};
 
-//public: virtual bool c_output_handler::provides_console_window(void)
-//{
-//    mangled_ppc("?provides_console_window@c_output_handler@@UAA_NXZ");
-//};
+bool c_output_handler::provides_console_window()
+{
+    mangled_ppc("?provides_console_window@c_output_handler@@UAA_NXZ");
 
-//public: virtual bool c_output_handler::handle_wait_for_keypress(void)
-//{
-//    mangled_ppc("?handle_wait_for_keypress@c_output_handler@@UAA_NXZ");
-//};
+    return false;
+};
 
-//public: virtual bool c_output_handler::handle_alert(char const *)
-//{
-//    mangled_ppc("?handle_alert@c_output_handler@@UAA_NPBD@Z");
-//};
+bool c_output_handler::handle_wait_for_keypress()
+{
+    mangled_ppc("?handle_wait_for_keypress@c_output_handler@@UAA_NXZ");
 
-//public: virtual enum e_output_user_choice c_output_handler::handle_ask_user_with_timeout(char const *, char const *, enum e_output_user_query, long, enum e_output_user_choice)
-//{
-//    mangled_ppc("?handle_ask_user_with_timeout@c_output_handler@@UAA?AW4e_output_user_choice@@PBD0W4e_output_user_query@@JW42@@Z");
-//};
+    return false;
+};
 
-//public: static void c_output_handler_registry::attach_handler(class c_output_handler *)
-//{
-//    mangled_ppc("?attach_handler@c_output_handler_registry@@SAXPAVc_output_handler@@@Z");
-//};
+bool c_output_handler::handle_alert(char const * alert_string)
+{
+    mangled_ppc("?handle_alert@c_output_handler@@UAA_NPBD@Z");
 
-//public: static void c_output_handler_registry::detach_handler(class c_output_handler *)
-//{
-//    mangled_ppc("?detach_handler@c_output_handler_registry@@SAXPAVc_output_handler@@@Z");
-//};
+    return false;
+};
 
-//public: static bool c_output_handler_registry::active(void)
-//{
-//    mangled_ppc("?active@c_output_handler_registry@@SA_NXZ");
-//};
+e_output_user_choice c_output_handler::handle_ask_user_with_timeout(char const * title, char const * message, e_output_user_query query_type, long timeout_milliseconds, e_output_user_choice timeout_choice)
+{
+    mangled_ppc("?handle_ask_user_with_timeout@c_output_handler@@UAA?AW4e_output_user_choice@@PBD0W4e_output_user_query@@JW42@@Z");
 
-//public: c_output_handler_iterator::c_output_handler_iterator(void)
-//{
-//    mangled_ppc("??0c_output_handler_iterator@@QAA@XZ");
-//};
+    return _output_user_choice_none;
+};
 
-//public: class c_output_handler * c_output_handler_iterator::get_first(void)
-//{
-//    mangled_ppc("?get_first@c_output_handler_iterator@@QAAPAVc_output_handler@@XZ");
-//};
+void c_output_handler_registry::attach_handler(c_output_handler * handler)
+{
+    mangled_ppc("?attach_handler@c_output_handler_registry@@SAXPAVc_output_handler@@@Z");
 
-//public: class c_output_handler * c_output_handler_iterator::get_next(void)
-//{
-//    mangled_ppc("?get_next@c_output_handler_iterator@@QAAPAVc_output_handler@@XZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(88, handler);
 
-//public: bool c_static_stack<class c_output_handler *, 8>::valid(void) const
-//{
-//    mangled_ppc("?valid@?$c_static_stack@PAVc_output_handler@@$07@@QBA_NXZ");
-//};
+    g_handlers.push_back(handler);
+};
 
-//public: bool c_static_stack<class c_output_handler *, 8>::empty(void) const
-//{
-//    mangled_ppc("?empty@?$c_static_stack@PAVc_output_handler@@$07@@QBA_NXZ");
-//};
+void c_output_handler_registry::detach_handler(c_output_handler * handler)
+{
+    mangled_ppc("?detach_handler@c_output_handler_registry@@SAXPAVc_output_handler@@@Z");
 
-//public: long c_static_stack<class c_output_handler *, 8>::top(void) const
-//{
-//    mangled_ppc("?top@?$c_static_stack@PAVc_output_handler@@$07@@QBAJXZ");
-//};
+    bool found = false;
 
-//public: long c_static_stack<class c_output_handler *, 8>::count(void) const
-//{
-//    mangled_ppc("?count@?$c_static_stack@PAVc_output_handler@@$07@@QBAJXZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(97, handler);
+    assert_tag_debug_untracked_jul_11_2011(98, g_handlers.valid());
 
-//public: void c_static_stack<class c_output_handler *, 8>::push_back(class c_output_handler *const &)
-//{
-//    mangled_ppc("?push_back@?$c_static_stack@PAVc_output_handler@@$07@@QAAXABQAVc_output_handler@@@Z");
-//};
+    for (long index = 0; index < g_handlers.count(); index++)
+    {
+        if (g_handlers[index] == handler)
+        {
+            if (index != g_handlers.top())
+            {
+                g_handlers[index] = g_handlers[g_handlers.top()];
+            }
 
-//public: void c_static_stack<class c_output_handler *, 8>::pop(void)
-//{
-//    mangled_ppc("?pop@?$c_static_stack@PAVc_output_handler@@$07@@QAAXXZ");
-//};
+            g_handlers.pop();
+            found = true;
+            break;
+        }
+    }
 
-//public: class c_output_handler *& c_static_stack<class c_output_handler *, 8>::operator[](long)
-//{
-//    mangled_ppc("??A?$c_static_stack@PAVc_output_handler@@$07@@QAAAAPAVc_output_handler@@J@Z");
-//};
+    dassert_tag_debug_untracked_jul_11_2011(114, found, "can't detach a handler that was never attached");
+};
 
-//public: bool c_static_stack<class c_output_handler *, 8>::valid(long) const
-//{
-//    mangled_ppc("?valid@?$c_static_stack@PAVc_output_handler@@$07@@QBA_NJ@Z");
-//};
+bool c_output_handler_registry::active()
+{
+    mangled_ppc("?active@c_output_handler_registry@@SA_NXZ");
 
-//public: long c_static_stack<class c_output_handler *, 8>::push(void)
-//{
-//    mangled_ppc("?push@?$c_static_stack@PAVc_output_handler@@$07@@QAAJXZ");
-//};
+    return !g_handlers.empty();
+};
 
-//public: class c_output_handler ** c_static_stack<class c_output_handler *, 8>::get(long)
-//{
-//    mangled_ppc("?get@?$c_static_stack@PAVc_output_handler@@$07@@QAAPAPAVc_output_handler@@J@Z");
-//};
+c_output_handler_iterator::c_output_handler_iterator() :
+    m_index(-1)
+{
+    mangled_ppc("??0c_output_handler_iterator@@QAA@XZ");
+};
 
-//public: bool c_static_stack<class c_output_handler *, 8>::full(void) const
-//{
-//    mangled_ppc("?full@?$c_static_stack@PAVc_output_handler@@$07@@QBA_NXZ");
-//};
+c_output_handler * c_output_handler_iterator::get_first()
+{
+    mangled_ppc("?get_first@c_output_handler_iterator@@QAAPAVc_output_handler@@XZ");
 
-//public: c_static_stack<class c_output_handler *, 8>::c_static_stack<class c_output_handler *, 8>(void)
-//{
-//    mangled_ppc("??0?$c_static_stack@PAVc_output_handler@@$07@@QAA@XZ");
-//};
+    m_index = 0;
 
+    return get_next();
+};
+
+c_output_handler * c_output_handler_iterator::get_next()
+{
+    mangled_ppc("?get_next@c_output_handler_iterator@@QAAPAVc_output_handler@@XZ");
+
+    c_output_handler * handler = NULL;
+
+    dassert_tag_debug_untracked_jul_11_2011(143, m_index >= 0, "must call get_first() before get_next()");
+    assert_tag_debug_untracked_jul_11_2011(144, c_output_handler_registry::g_handlers.valid());
+
+    if (m_index < c_output_handler_registry::g_handlers.count())
+    {
+        long index = m_index++;
+        handler = c_output_handler_registry::g_handlers[index];
+        assert_tag_debug_untracked_jul_11_2011(150, handler);
+    }
+
+    return handler;
+};

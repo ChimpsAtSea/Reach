@@ -1,6 +1,8 @@
 /* ---------- headers */
 
 #include "omaha\effects\particle_emitter_custom_shapes.h"
+#include "omaha\tag_files\tag_groups.h"
+#include "core\corelib\cseries\cseries_string.h"
 
 /* ---------- constants */
 
@@ -28,8 +30,28 @@
 
 // void particle_emitter_custom_points_import_callback(long, long, char *, long);
 
-//void particle_emitter_custom_points_import_callback(long, long, char *, long)
-//{
-//    mangled_ppc("?particle_emitter_custom_points_import_callback@@YAXJJPADJ@Z");
-//};
+void particle_emitter_custom_points_import_callback(long tag_index, long field_index, char * buffer, long buffer_size)
+{
+    mangled_ppc("?particle_emitter_custom_points_import_callback@@YAXJJPADJ@Z");
+
+    switch (field_index)
+    {
+    case 0:
+        csnzprintf(buffer, buffer_size, "%s", tag_get_name(tag_index));
+        break;
+    default:
+    {
+        s_particle_emitter_custom_points * custom_points = s_particle_emitter_custom_points::get(tag_index);
+        if (custom_points->source_reference.name == NULL)
+        {
+            csnzprintf(buffer, buffer_size, "");
+        }
+        else
+        {
+            csnzprintf(buffer, buffer_size, "%s", custom_points->source_reference.name);
+        }
+    }
+        break;
+    }
+};
 

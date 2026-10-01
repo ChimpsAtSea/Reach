@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void * sound_xaudio_xenon_allocate_packet_completion_event(void * context);
+
 /* ---------- globals */
 
 /* ---------- public code */

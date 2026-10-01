@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void font_reload(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

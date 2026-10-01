@@ -18,8 +18,8 @@
 
 // void havok_convex_decomposition_render_debug(void);
 
-//void havok_convex_decomposition_render_debug(void)
-//{
-//    mangled_ppc("?havok_convex_decomposition_render_debug@@YAXXZ");
-//};
+void havok_convex_decomposition_render_debug(void)
+{
+    mangled_ppc("?havok_convex_decomposition_render_debug@@YAXXZ");
+};
 

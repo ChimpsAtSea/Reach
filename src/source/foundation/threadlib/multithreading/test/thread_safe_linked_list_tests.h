@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+extern void thread_safe_linked_list_run_unit_test(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

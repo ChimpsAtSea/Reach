@@ -4,9 +4,19 @@
 
 /* ---------- headers */
 
+#include "havok\hkbase\hkArray.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
+
+class hkpEntity;
+
+class hkpSimulationIsland
+{
+public:
+    hkArray<hkpEntity *, hkContainerHeapAllocator> const & getEntities() const; // $TODO inline in the target (f i); body not reversed yet
+};
 
 /* ---------- prototypes */
 

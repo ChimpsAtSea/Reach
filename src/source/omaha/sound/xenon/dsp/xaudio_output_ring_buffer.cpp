@@ -1,6 +1,12 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\sound\\xenon\\dsp\\xaudio_output_ring_buffer.cpp"
 /* ---------- headers */
 
 #include "omaha\sound\xenon\dsp\xaudio_output_ring_buffer.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "core\corelib\cseries\cseries_macros.h"
+#include "omaha\cseries\runtime_state.h"
+
+#include <string.h>
 
 /* ---------- constants */
 
@@ -45,143 +51,85 @@
 // public: c_wrapped_array<class s_static_array<float, 256> >::c_wrapped_array<class s_static_array<float, 256> >(class s_static_array<float, 256> *, long);
 // public: static bool s_static_array<class c_wrapped_array<class s_static_array<float, 256> >, 2>::valid<long>(long);
 
-//public: void c_xaudio_output_ring_buffer::initialize(char const *, long)
-//{
-//    mangled_ppc("?initialize@c_xaudio_output_ring_buffer@@QAAXPBDJ@Z");
-//};
+void c_xaudio_output_ring_buffer::initialize(char const * name, long ring_count)
+{
+    mangled_ppc("?initialize@c_xaudio_output_ring_buffer@@QAAXPBDJ@Z");
 
-//public: long c_xaudio_output_ring_buffer::get_ring_count(void) const
-//{
-//    mangled_ppc("?get_ring_count@c_xaudio_output_ring_buffer@@QBAJXZ");
-//};
+    m_ring_count = ring_count;
+    long size = ring_count * sizeof(s_static_array<float, XAUDIOFRAMESIZE_NATIVE>) * NUMBEROF(m_ring_buffers.m_elements);
+    s_static_array<float, XAUDIOFRAMESIZE_NATIVE> * ring_buffer_raw_data = static_cast<s_static_array<float, XAUDIOFRAMESIZE_NATIVE> *>(runtime_state_malloc_verbose(__FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__, 21, name, NULL, size));
+    assert_tag_debug_untracked_jul_11_2011(23, ring_buffer_raw_data);
+    m_current_ring_buffer_index = 0;
+    for (long ring_buffer_index = 0; ring_buffer_index < NUMBEROF(m_ring_buffers.m_elements); ring_buffer_index++)
+    {
+        m_ring_buffers[ring_buffer_index] = make_wrapped_array(ring_buffer_raw_data + ring_buffer_index * ring_count, ring_count);
+    }
+    reset();
+    register_engine_callbacks();
+};
 
-//public: float const * c_xaudio_output_ring_buffer::get_last_frame_output(long) const
-//{
-//    mangled_ppc("?get_last_frame_output@c_xaudio_output_ring_buffer@@QBAPBMJ@Z");
-//};
+long c_xaudio_output_ring_buffer::get_ring_count() const
+{
+    mangled_ppc("?get_ring_count@c_xaudio_output_ring_buffer@@QBAJXZ");
 
-//public: void c_xaudio_output_ring_buffer::accumulate_current_frame_output(long, class c_wrapped_array<float const>) const
-//{
-//    mangled_ppc("?accumulate_current_frame_output@c_xaudio_output_ring_buffer@@QBAXJV?$c_wrapped_array@$$CBM@@@Z");
-//};
+    return m_ring_count;
+};
 
-//public: void c_xaudio_output_ring_buffer::update_on_frame_start(void)
-//{
-//    mangled_ppc("?update_on_frame_start@c_xaudio_output_ring_buffer@@QAAXXZ");
-//};
+float const * c_xaudio_output_ring_buffer::get_last_frame_output(long ring_index) const
+{
+    mangled_ppc("?get_last_frame_output@c_xaudio_output_ring_buffer@@QBAPBMJ@Z");
 
-//public: void c_xaudio_output_ring_buffer::reset(void)
-//{
-//    mangled_ppc("?reset@c_xaudio_output_ring_buffer@@QAAXXZ");
-//};
+    return (m_last_frame_ring_buffer && m_last_frame_ring_buffer->valid_index(ring_index)) ? (*m_last_frame_ring_buffer)[ring_index].get_elements() : NULL;
+};
 
-//public: void c_xaudio_output_ring_buffer::register_engine_callbacks(void)
-//{
-//    mangled_ppc("?register_engine_callbacks@c_xaudio_output_ring_buffer@@QAAXXZ");
-//};
+void c_xaudio_output_ring_buffer::accumulate_current_frame_output(long ring_index, c_wrapped_array<float const> samples) const
+{
+    mangled_ppc("?accumulate_current_frame_output@c_xaudio_output_ring_buffer@@QBAXJV?$c_wrapped_array@$$CBM@@@Z");
 
-//private: static void c_xaudio_output_ring_buffer::xaudio_frame_start_callback(void *)
-//{
-//    mangled_ppc("?xaudio_frame_start_callback@c_xaudio_output_ring_buffer@@CAXPAX@Z");
-//};
+    if (m_current_frame_ring_buffer && m_current_frame_ring_buffer->valid_index(ring_index))
+    {
+        assert_tag_debug_untracked_jul_11_2011(57, samples.count()==XAUDIOFRAMESIZE_NATIVE);
+        float * output = (*m_current_frame_ring_buffer)[ring_index].get_elements();
+        float const * input = samples.begin();
+        for (long sample_index = 0; sample_index < XAUDIOFRAMESIZE_NATIVE; sample_index++)
+        {
+            output[sample_index] += input[sample_index];
+        }
+    }
+};
 
-//public: static long s_static_array<class c_wrapped_array<class s_static_array<float, 256> >, 2>::get_count(void)
-//{
-//    mangled_ppc("?get_count@?$s_static_array@V?$c_wrapped_array@V?$s_static_array@M$0BAA@@@@@$01@@SAJXZ");
-//};
+void c_xaudio_output_ring_buffer::update_on_frame_start()
+{
+    mangled_ppc("?update_on_frame_start@c_xaudio_output_ring_buffer@@QAAXXZ");
 
-//public: class s_static_array<float, 256> & c_array_operator_interface<class c_wrapped_array_no_init<class s_static_array<float, 256> >, class s_static_array<float, 256> >::operator[](long)
-//{
-//    mangled_ppc("??A?$c_array_operator_interface@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@V?$s_static_array@M$0BAA@@@@@QAAAAV?$s_static_array@M$0BAA@@@J@Z");
-//};
+    long next_ring_buffer_index = (m_current_ring_buffer_index + 1) % m_ring_buffers.get_count();
+    m_last_frame_ring_buffer = &m_ring_buffers[m_current_ring_buffer_index];
+    m_current_frame_ring_buffer = &m_ring_buffers[next_ring_buffer_index];
+    memset(m_current_frame_ring_buffer->get_elements(), 0, m_current_frame_ring_buffer->get_total_element_size());
+    m_current_ring_buffer_index = next_ring_buffer_index;
+};
 
-//public: class s_static_array<float, 256> const & c_array_operator_interface<class c_wrapped_array_no_init<class s_static_array<float, 256> >, class s_static_array<float, 256> >::operator[](long) const
-//{
-//    mangled_ppc("??A?$c_array_operator_interface@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@V?$s_static_array@M$0BAA@@@@@QBAABV?$s_static_array@M$0BAA@@@J@Z");
-//};
+void c_xaudio_output_ring_buffer::reset()
+{
+    mangled_ppc("?reset@c_xaudio_output_ring_buffer@@QAAXXZ");
 
-//public: class s_static_array<float, 256> * c_array_operator_interface<class c_wrapped_array_no_init<class s_static_array<float, 256> >, class s_static_array<float, 256> >::get_elements(void)
-//{
-//    mangled_ppc("?get_elements@?$c_array_operator_interface@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@V?$s_static_array@M$0BAA@@@@@QAAPAV?$s_static_array@M$0BAA@@@XZ");
-//};
+    for (long ring_buffer_index = 0; ring_buffer_index < NUMBEROF(m_ring_buffers.m_elements); ring_buffer_index++)
+    {
+        memset(m_ring_buffers[ring_buffer_index].get_elements(), 0, m_ring_buffers[ring_buffer_index].get_total_element_size());
+    }
+};
 
-//public: long c_array_operator_interface<class c_wrapped_array_no_init<class s_static_array<float, 256> >, class s_static_array<float, 256> >::get_total_element_size(void) const
-//{
-//    mangled_ppc("?get_total_element_size@?$c_array_operator_interface@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@V?$s_static_array@M$0BAA@@@@@QBAJXZ");
-//};
+void c_xaudio_output_ring_buffer::register_engine_callbacks()
+{
+    mangled_ppc("?register_engine_callbacks@c_xaudio_output_ring_buffer@@QAAXXZ");
 
-//public: bool c_array_operator_interface<class c_wrapped_array_no_init<class s_static_array<float, 256> >, class s_static_array<float, 256> >::valid_index(long) const
-//{
-//    mangled_ppc("?valid_index@?$c_array_operator_interface@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@V?$s_static_array@M$0BAA@@@@@QBA_NJ@Z");
-//};
+    XAudioRegisterEngineCallback(0, xaudio_frame_start_callback, this, &m_frame_start_callback_handle);
+};
 
-//public: float const * s_static_array<float, 256>::get_elements(void) const
-//{
-//    mangled_ppc("?get_elements@?$s_static_array@M$0BAA@@@QBAPBMXZ");
-//};
+void c_xaudio_output_ring_buffer::xaudio_frame_start_callback(void * context)
+{
+    mangled_ppc("?xaudio_frame_start_callback@c_xaudio_output_ring_buffer@@CAXPAX@Z");
 
-//public: float const * c_wrapped_array_no_init<float const>::begin(void)
-//{
-//    mangled_ppc("?begin@?$c_wrapped_array_no_init@$$CBM@@QAAPBMXZ");
-//};
-
-//public: long c_wrapped_array_no_init<float const>::count(void) const
-//{
-//    mangled_ppc("?count@?$c_wrapped_array_no_init@$$CBM@@QBAJXZ");
-//};
-
-//public: class s_static_array<float, 256> * c_wrapped_array_no_init<class s_static_array<float, 256> >::begin(void)
-//{
-//    mangled_ppc("?begin@?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@QAAPAV?$s_static_array@M$0BAA@@@XZ");
-//};
-
-//public: class s_static_array<float, 256> const * c_wrapped_array_no_init<class s_static_array<float, 256> >::begin(void) const
-//{
-//    mangled_ppc("?begin@?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@QBAPBV?$s_static_array@M$0BAA@@@XZ");
-//};
-
-//public: class s_static_array<float, 256> * c_array_operator_interface<class c_wrapped_array_no_init<class s_static_array<float, 256> >, class s_static_array<float, 256> >::begin(void)
-//{
-//    mangled_ppc("?begin@?$c_array_operator_interface@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@V?$s_static_array@M$0BAA@@@@@QAAPAV?$s_static_array@M$0BAA@@@XZ");
-//};
-
-//public: long c_array_operator_interface<class c_wrapped_array_no_init<class s_static_array<float, 256> >, class s_static_array<float, 256> >::count(void) const
-//{
-//    mangled_ppc("?count@?$c_array_operator_interface@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@V?$s_static_array@M$0BAA@@@@@QBAJXZ");
-//};
-
-//public: class c_wrapped_array_no_init<class s_static_array<float, 256> > * c_recursive_template_pattern<class c_wrapped_array_no_init<class s_static_array<float, 256> > >::get_super_class(void)
-//{
-//    mangled_ppc("?get_super_class@?$c_recursive_template_pattern@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@@@QAAPAV?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@XZ");
-//};
-
-//public: class c_wrapped_array_no_init<class s_static_array<float, 256> > const * c_recursive_template_pattern<class c_wrapped_array_no_init<class s_static_array<float, 256> > >::get_super_class(void) const
-//{
-//    mangled_ppc("?get_super_class@?$c_recursive_template_pattern@V?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@@@QBAPBV?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@XZ");
-//};
-
-//public: long c_wrapped_array_no_init<class s_static_array<float, 256> >::count(void) const
-//{
-//    mangled_ppc("?count@?$c_wrapped_array_no_init@V?$s_static_array@M$0BAA@@@@@QBAJXZ");
-//};
-
-//public: class c_wrapped_array<class s_static_array<float, 256> > & s_static_array<class c_wrapped_array<class s_static_array<float, 256> >, 2>::operator[]<long>(long)
-//{
-//    mangled_ppc("??$?AJ@?$s_static_array@V?$c_wrapped_array@V?$s_static_array@M$0BAA@@@@@$01@@QAAAAV?$c_wrapped_array@V?$s_static_array@M$0BAA@@@@@J@Z");
-//};
-
-//class c_wrapped_array<class s_static_array<float, 256> > make_wrapped_array<class s_static_array<float, 256> >(class s_static_array<float, 256> *, long)
-//{
-//    mangled_ppc("??$make_wrapped_array@V?$s_static_array@M$0BAA@@@@@YA?AV?$c_wrapped_array@V?$s_static_array@M$0BAA@@@@@PAV?$s_static_array@M$0BAA@@@J@Z");
-//};
-
-//public: c_wrapped_array<class s_static_array<float, 256> >::c_wrapped_array<class s_static_array<float, 256> >(class s_static_array<float, 256> *, long)
-//{
-//    mangled_ppc("??0?$c_wrapped_array@V?$s_static_array@M$0BAA@@@@@QAA@PAV?$s_static_array@M$0BAA@@@J@Z");
-//};
-
-//public: static bool s_static_array<class c_wrapped_array<class s_static_array<float, 256> >, 2>::valid<long>(long)
-//{
-//    mangled_ppc("??$valid@J@?$s_static_array@V?$c_wrapped_array@V?$s_static_array@M$0BAA@@@@@$01@@SA_NJ@Z");
-//};
-
+    c_xaudio_output_ring_buffer * ring_buffer = static_cast<c_xaudio_output_ring_buffer *>(context);
+    ring_buffer->update_on_frame_start();
+};

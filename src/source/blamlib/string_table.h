@@ -8,6 +8,16 @@
 
 /* ---------- definitions */
 
+class c_string_table_scratch_buffer
+{
+public:
+    c_string_table_scratch_buffer();
+    ~c_string_table_scratch_buffer();
+
+    void * get_buffer();
+    unsigned long get_buffer_size();
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

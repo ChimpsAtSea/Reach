@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+void breakable_surfaces_save_to_game_state(long game_state_proc_flags);
+void breakable_surfaces_load_from_game_state(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

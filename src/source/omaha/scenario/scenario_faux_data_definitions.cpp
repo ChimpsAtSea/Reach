@@ -1,6 +1,8 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\scenario\\scenario_faux_data_definitions.cpp"
 /* ---------- headers */
 
 #include "omaha\scenario\scenario_faux_data_definitions.h"
+#include "omaha\cseries\cseries.h"
 
 /* ---------- constants */
 
@@ -25,8 +27,24 @@
 
 // struct s_faux_data_lightmap_group_data * faux_data_find_lightgroup_for_bsp(long, long);
 
-//struct s_faux_data_lightmap_group_data * faux_data_find_lightgroup_for_bsp(long, long)
-//{
-//    mangled_ppc("?faux_data_find_lightgroup_for_bsp@@YAPAUs_faux_data_lightmap_group_data@@JJ@Z");
-//};
+s_faux_data_lightmap_group_data * faux_data_find_lightgroup_for_bsp(long faux_data_index, long bsp_index)
+{
+    mangled_ppc("?faux_data_find_lightgroup_for_bsp@@YAPAUs_faux_data_lightmap_group_data@@JJ@Z");
+
+    s_faux_data_lightmap_group_data * result = NULL;
+    if (faux_data_index != NONE)
+    {
+        s_scenario_faux_data * faux_data = static_cast<s_scenario_faux_data *>(tag_get(SCENARIO_FAUX_DATA_TAG, faux_data_index));
+        for (long lightmap_group_index = 0; result == NULL && lightmap_group_index < faux_data->lightmap_groups.count; lightmap_group_index++)
+        {
+            s_faux_data_lightmap_group_data * lightmap_group = static_cast<s_faux_data_lightmap_group_data *>(tag_block_get_element_with_size(&faux_data->lightmap_groups, lightmap_group_index, sizeof(s_faux_data_lightmap_group_data)));
+            if (lightmap_group->bsp_reference_index == bsp_index)
+            {
+                result = lightmap_group;
+            }
+        }
+    }
+
+    return result;
+};
 

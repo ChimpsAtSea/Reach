@@ -40,6 +40,7 @@ extern long ascii_stricmp(char const * s1, char const * s2);
 extern long csstricmp(char const * s1, char const * s2);
 extern long csstrnicmp(char const* s1, char const* s2, size_t count);
 extern char * csstristr(char const * haystack, char const * needle);
+extern size_t csstrnlen(char const * s, size_t size);
 extern char * csstrnzcpy(char * s1, char const * s2, size_t s1_size);
 extern char* csstrnzcat(char* s1, char const* s2, size_t s1_size);
 extern char * csstrnzncat(char * s1, char const * s2, size_t s1_size, size_t count);
@@ -47,6 +48,7 @@ extern char * csstrnupr(char * s, unsigned int size);
 extern char * csstrnlwr(char * s, unsigned int size);
 extern char * csnzappendf(char * buffer, size_t size, char const * format, ...);
 extern char * csnzprintf(char * buffer, size_t size, char const *format, ...);
+extern long cvsnzprintf(char * buffer, size_t size, char const * format, va_list arglist);
 extern char * csstrtok(char * s, char const * delimiters, e_csstrtok_delimiter_mode delimiter_mode, csstrtok_data * data);
 
 extern "C" 

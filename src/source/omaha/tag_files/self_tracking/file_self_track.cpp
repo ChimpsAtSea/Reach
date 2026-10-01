@@ -21,8 +21,10 @@
 
 // public: bool c_self_log::build_entry(void);
 
-//public: bool c_self_log::build_entry(void)
-//{
-//    mangled_ppc("?build_entry@c_self_log@@QAA_NXZ");
-//};
+bool c_self_log::build_entry()
+{
+    mangled_ppc("?build_entry@c_self_log@@QAA_NXZ");
+
+    return true;
+};
 

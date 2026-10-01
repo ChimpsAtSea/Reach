@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+extern void lockfree_event_fifo_run_unit_test(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

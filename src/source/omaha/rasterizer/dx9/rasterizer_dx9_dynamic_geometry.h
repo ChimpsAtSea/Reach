@@ -8,6 +8,15 @@
 
 /* ---------- definitions */
 
+union real_point3d;
+
+class c_rasterizer_dynamic_geometry
+{
+public:
+    static void draw_fullscreen_quad(int target_width, int target_height);
+    static void draw_worldspace_polygon(real_point3d const * points, long point_count);
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

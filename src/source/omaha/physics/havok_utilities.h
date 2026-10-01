@@ -6,6 +6,11 @@
 
 /* ---------- constants */
 
+enum
+{
+    k_havok_alignment_bits = 4,
+};
+
 /* ---------- definitions */
 
 /* ---------- prototypes */

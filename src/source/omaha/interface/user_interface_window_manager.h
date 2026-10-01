@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void window_manager_reset_screens(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

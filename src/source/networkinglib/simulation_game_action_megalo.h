@@ -4,11 +4,15 @@
 
 /* ---------- headers */
 
+#include "omaha\game\megalogamengine\megalogamengine_variant_variable.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
 
 /* ---------- prototypes */
+
+extern void simulation_update_global_megalo_variable(e_variable_type variable_type, long variable_index);
 
 /* ---------- globals */
 

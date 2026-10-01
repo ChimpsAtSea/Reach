@@ -10,6 +10,10 @@
 
 /* ---------- prototypes */
 
+void stack_walk(short levels_to_ignore);
+void stack_walk_initialize(void);
+void stack_walk_dispose(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

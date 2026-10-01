@@ -6,9 +6,16 @@
 
 /* ---------- constants */
 
+enum
+{
+    SCENERY_DEFINITION_TAG = 'scen',
+};
+
 /* ---------- definitions */
 
 /* ---------- prototypes */
+
+void scenery_definition_fixup(long scenery_definition_index);
 
 /* ---------- globals */
 

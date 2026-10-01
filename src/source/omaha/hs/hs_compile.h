@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+long hs_compile_expression(long source_size, char const * source, char const ** error_message_pointer, char const ** error_source_pointer);
+
 /* ---------- globals */
 
 /* ---------- public code */

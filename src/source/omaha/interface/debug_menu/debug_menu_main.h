@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+bool debug_menu_get_active();
+
 /* ---------- globals */
 
 /* ---------- public code */

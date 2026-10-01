@@ -1,6 +1,18 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\camera\\camera.cpp"
 /* ---------- headers */
 
 #include "omaha\camera\camera.h"
+#include "omaha\camera\observer.h"
+#include "omaha\cseries\cseries.h"
+#include "omaha\editor\editor_stubs.h"
+#include "omaha\input\input.h"
+#include "omaha\interface\cui\cui_screen_manager.h"
+#include "omaha\interface\debug_menu\debug_menu_main.h"
+#include "omaha\interface\gui_screens\scoreboard\gui_screen_scoreboard.h"
+#include "omaha\interface\user_interface_mapping.h"
+#include "omaha\main\main.h"
+#include "omaha\objects\objects.h"
+#include "core\corelib\cseries\cseries_asserts.h"
 
 /* ---------- constants */
 
@@ -9,6 +21,23 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+char const * global_camera_mode_names[k_number_of_camera_modes] =
+{
+    "following",
+    "orbiting",
+    "flying",
+    "first person",
+    "dead",
+    "static",
+    "scripted",
+    "authored",
+    "respawning",
+    "animated trick",
+    "tracked target",
+    "sandbox",
+    "space_fighter"
+};
 
 /* ---------- public code */
 
@@ -46,138 +75,107 @@
 // public: bool c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::valid(void) const;
 // private: static unsigned long c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::make_N_bit_mask_size_type(enum e_cui_screen_category);
 
-//bool camera_input_inhibited(enum e_controller_index)
-//{
-//    mangled_ppc("?camera_input_inhibited@@YA_NW4e_controller_index@@@Z");
-//};
+bool camera_input_inhibited(e_controller_index controller_index)
+{
+    mangled_ppc("?camera_input_inhibited@@YA_NW4e_controller_index@@@Z");
 
-//public: class c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver> c_cui_screen_manager::get_active_category_flags(enum e_window_index) const
-//{
-//    mangled_ppc("?get_active_category_flags@c_cui_screen_manager@@QBA?AV?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@W4e_window_index@@@Z");
-//};
+    bool camera_input_inhibited = false;
+    c_cui_screen_manager * manager = cui_screen_manager_get();
+    e_window_index window_index = user_interface_get_window_for_controller(controller_index);
 
-//public: class c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver> c_cui_screen_manager::get_closing_category_flags(enum e_window_index) const
-//{
-//    mangled_ppc("?get_closing_category_flags@c_cui_screen_manager@@QBA?AV?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@W4e_window_index@@@Z");
-//};
+    c_cui_screen_category_flags active_categories = manager->get_active_category_flags(_console_window) | manager->get_active_category_flags(window_index);
+    c_cui_screen_category_flags closing_screen_categories = manager->get_closing_category_flags(_console_window) | manager->get_closing_category_flags(window_index);
 
-//public: c_camera::c_camera(void)
-//{
-//    mangled_ppc("??0c_camera@@QAA@XZ");
-//};
+    c_cui_screen_category_flags blocking_screen_categories;
+    blocking_screen_categories.set_all();
+    blocking_screen_categories.set(_cui_screen_category4, false);
+    blocking_screen_categories.set(_cui_screen_category5, false);
+    blocking_screen_categories.set(_cui_screen_category8, false);
+    blocking_screen_categories.set(_cui_screen_category1, c_gui_screen_scoreboard::is_scoreboard_interactive(controller_index));
+    blocking_screen_categories.set(_cui_screen_category14, false);
 
-//public: void c_camera::pre_update(void)
-//{
-//    mangled_ppc("?pre_update@c_camera@@QAAXXZ");
-//};
+    c_cui_screen_category_flags closing_blocking_categories = blocking_screen_categories;
+    closing_blocking_categories.set(_cui_screen_category0, false);
 
-//public: void c_camera::post_update(struct s_observer_command *)
-//{
-//    mangled_ppc("?post_update@c_camera@@QAAXPAUs_observer_command@@@Z");
-//};
+    camera_input_inhibited |= !((active_categories & blocking_screen_categories) | (closing_screen_categories & closing_blocking_categories)).is_clear();
+    camera_input_inhibited |= main_events_pending();
+    camera_input_inhibited |= game_in_editor() && (input_get_mouse_state() == NULL || editor_input_inhibited());
+    camera_input_inhibited |= debug_menu_get_active();
 
-//public: void c_camera::set_next_move_instantly(void)
-//{
-//    mangled_ppc("?set_next_move_instantly@c_camera@@QAAXXZ");
-//};
+    return camera_input_inhibited;
+};
 
-//public: virtual long c_camera::get_target(void) const
-//{
-//    mangled_ppc("?get_target@c_camera@@UBAJXZ");
-//};
+c_camera::c_camera()
+{
+    mangled_ppc("??0c_camera@@QAA@XZ");
 
-//public: virtual void c_camera::set_target(long)
-//{
-//    mangled_ppc("?set_target@c_camera@@UAAXJ@Z");
-//};
+    m_base_camera_flags.clear();
+    m_target_object_index = NONE;
+    m_move_instant_ticks = 0;
+};
 
-//public: virtual void c_camera::handle_deleted_player(long)
-//{
-//    mangled_ppc("?handle_deleted_player@c_camera@@UAAXJ@Z");
-//};
+void c_camera::pre_update()
+{
+    mangled_ppc("?pre_update@c_camera@@QAAXXZ");
 
-//public: virtual void c_camera::handle_deleted_object(long)
-//{
-//    mangled_ppc("?handle_deleted_object@c_camera@@UAAXJ@Z");
-//};
+    get_target();
+};
 
-//public: virtual void c_camera::assemble_screen_effects(class c_global_screen_effect_state *)
-//{
-//    mangled_ppc("?assemble_screen_effects@c_camera@@UAAXPAVc_global_screen_effect_state@@@Z");
-//};
+void c_camera::post_update(s_observer_command * result)
+{
+    mangled_ppc("?post_update@c_camera@@QAAXPAUs_observer_command@@@Z");
 
-//public: void c_flags_no_init<enum c_camera::e_base_camera_flags, long, 1, struct s_default_enum_string_resolver>::clear(void)
-//{
-//    mangled_ppc("?clear@?$c_flags_no_init@W4e_base_camera_flags@c_camera@@J$00Us_default_enum_string_resolver@@@@QAAXXZ");
-//};
+    if (m_base_camera_flags.test(_move_instantly))
+    {
+        result->timer = 0.0f;
+        long move_instant_ticks = m_move_instant_ticks - 1;
+        m_move_instant_ticks = move_instant_ticks;
+        if (move_instant_ticks == 0)
+        {
+            m_base_camera_flags.set(_move_instantly, false);
+        }
+    }
+};
 
-//public: bool c_flags_no_init<enum c_camera::e_base_camera_flags, long, 1, struct s_default_enum_string_resolver>::test(enum c_camera::e_base_camera_flags) const
-//{
-//    mangled_ppc("?test@?$c_flags_no_init@W4e_base_camera_flags@c_camera@@J$00Us_default_enum_string_resolver@@@@QBA_NW4e_base_camera_flags@c_camera@@@Z");
-//};
+void c_camera::set_next_move_instantly()
+{
+    mangled_ppc("?set_next_move_instantly@c_camera@@QAAXXZ");
 
-//public: void c_flags_no_init<enum c_camera::e_base_camera_flags, long, 1, struct s_default_enum_string_resolver>::set(enum c_camera::e_base_camera_flags, bool)
-//{
-//    mangled_ppc("?set@?$c_flags_no_init@W4e_base_camera_flags@c_camera@@J$00Us_default_enum_string_resolver@@@@QAAXW4e_base_camera_flags@c_camera@@_N@Z");
-//};
+    m_move_instant_ticks = 5;
+    m_base_camera_flags.set(_move_instantly, true);
+};
 
-//public: bool c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::is_clear(void) const
-//{
-//    mangled_ppc("?is_clear@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@QBA_NXZ");
-//};
+long c_camera::get_target() const
+{
+    mangled_ppc("?get_target@c_camera@@UBAJXZ");
 
-//public: void c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::set_all(void)
-//{
-//    mangled_ppc("?set_all@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@QAAXXZ");
-//};
+    return m_target_object_index;
+};
 
-//public: void c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::set(enum e_cui_screen_category, bool)
-//{
-//    mangled_ppc("?set@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@QAAXW4e_cui_screen_category@@_N@Z");
-//};
+void c_camera::set_target(long object_index)
+{
+    mangled_ppc("?set_target@c_camera@@UAAXJ@Z");
 
-//public: class c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver> c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::operator&(class c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver> const &) const
-//{
-//    mangled_ppc("??I?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@QBA?AV0@ABV0@@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(145, object_index==NONE || object_get(object_index)!=NULL);
+    m_target_object_index = object_index;
+};
 
-//public: class c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver> c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::operator|(class c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver> const &) const
-//{
-//    mangled_ppc("??U?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@QBA?AV0@ABV0@@Z");
-//};
+void c_camera::handle_deleted_player(long player_index)
+{
+    mangled_ppc("?handle_deleted_player@c_camera@@UAAXJ@Z");
+};
 
-//public: static bool c_flags_no_init<enum c_camera::e_base_camera_flags, long, 1, struct s_default_enum_string_resolver>::valid_bit(enum c_camera::e_base_camera_flags)
-//{
-//    mangled_ppc("?valid_bit@?$c_flags_no_init@W4e_base_camera_flags@c_camera@@J$00Us_default_enum_string_resolver@@@@SA_NW4e_base_camera_flags@c_camera@@@Z");
-//};
+void c_camera::handle_deleted_object(long object_index)
+{
+    mangled_ppc("?handle_deleted_object@c_camera@@UAAXJ@Z");
 
-//private: static long c_flags_no_init<enum c_camera::e_base_camera_flags, long, 1, struct s_default_enum_string_resolver>::flag_size_type(enum c_camera::e_base_camera_flags)
-//{
-//    mangled_ppc("?flag_size_type@?$c_flags_no_init@W4e_base_camera_flags@c_camera@@J$00Us_default_enum_string_resolver@@@@CAJW4e_base_camera_flags@c_camera@@@Z");
-//};
+    if (m_target_object_index == object_index)
+    {
+        m_target_object_index = NONE;
+    }
+};
 
-//public: static class c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver> c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::make_mask_from_range(enum e_cui_screen_category, enum e_cui_screen_category)
-//{
-//    mangled_ppc("?make_mask_from_range@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@SA?AV1@W4e_cui_screen_category@@0@Z");
-//};
-
-//public: void c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::set_unsafe(unsigned long)
-//{
-//    mangled_ppc("?set_unsafe@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@QAAXK@Z");
-//};
-
-//private: static unsigned long c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::make_mask_with_all_valid_bits_on_size_type(void)
-//{
-//    mangled_ppc("?make_mask_with_all_valid_bits_on_size_type@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@CAKXZ");
-//};
-
-//public: bool c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::valid(void) const
-//{
-//    mangled_ppc("?valid@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@QBA_NXZ");
-//};
-
-//private: static unsigned long c_flags_no_init<enum e_cui_screen_category, unsigned long, 18, struct s_default_enum_string_resolver>::make_N_bit_mask_size_type(enum e_cui_screen_category)
-//{
-//    mangled_ppc("?make_N_bit_mask_size_type@?$c_flags_no_init@W4e_cui_screen_category@@K$0BC@Us_default_enum_string_resolver@@@@CAKW4e_cui_screen_category@@@Z");
-//};
-
+void c_camera::assemble_screen_effects(c_global_screen_effect_state * screen_effect_state)
+{
+    mangled_ppc("?assemble_screen_effects@c_camera@@UAAXPAVc_global_screen_effect_state@@@Z");
+};

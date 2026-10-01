@@ -12,6 +12,8 @@
 
 /* ---------- globals */
 
+extern unsigned long g_rasterizer_profile_pix_colors[];
+
 /* ---------- public code */
 
 #endif // __RASTERIZER_PROFILE_H__

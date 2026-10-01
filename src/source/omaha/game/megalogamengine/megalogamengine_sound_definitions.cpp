@@ -1,6 +1,9 @@
 /* ---------- headers */
 
 #include "omaha\game\megalogamengine\megalogamengine_sound_definitions.h"
+#include "omaha\cseries\cseries.h"
+#include "omaha\game\multiplayer_definitions.h"
+#include "omaha\tag_files\tag_groups.h"
 
 /* ---------- constants */
 
@@ -26,8 +29,25 @@
 
 // long megalogamengine_get_sound_definition_index(enum e_megalo_sound);
 
-//long megalogamengine_get_sound_definition_index(enum e_megalo_sound)
-//{
-//    mangled_ppc("?megalogamengine_get_sound_definition_index@@YAJW4e_megalo_sound@@@Z");
-//};
+long megalogamengine_get_sound_definition_index(e_megalo_sound megalo_sound)
+{
+    mangled_ppc("?megalogamengine_get_sound_definition_index@@YAJW4e_megalo_sound@@@Z");
+
+    long sound_definition_index = NONE;
+    if (megalo_sound != _megalo_sound_none)
+    {
+        s_multiplayer_runtime_globals_definition * runtime_data = scenario_multiplayer_globals_try_and_get_runtime_data();
+        if (runtime_data)
+        {
+            long megalo_sounds_index = runtime_data->megalo_sounds.index;
+            if (megalo_sounds_index != NONE)
+            {
+                s_megalogamengine_sound_group * sound_group = static_cast<s_megalogamengine_sound_group *>(tag_get(k_megalogamengine_sounds_definition_tag, megalo_sounds_index));
+                sound_definition_index = sound_group->sounds[megalo_sound].index;
+            }
+        }
+    }
+
+    return sound_definition_index;
+};
 

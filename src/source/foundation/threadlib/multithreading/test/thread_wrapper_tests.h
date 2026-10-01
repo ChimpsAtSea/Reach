@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+extern void thread_wrapper_run_unit_tests(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

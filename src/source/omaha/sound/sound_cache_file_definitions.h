@@ -6,9 +6,18 @@
 
 /* ---------- constants */
 
+enum
+{
+    SOUND_CACHE_FILE_GESTALT_TAG = 'ugh!'
+};
+
 /* ---------- definitions */
 
+class c_cache_file_global_tag_registry;
+
 /* ---------- prototypes */
+
+bool build_cache_file_prepare_sound_gestalt(c_cache_file_global_tag_registry * registry);
 
 /* ---------- globals */
 

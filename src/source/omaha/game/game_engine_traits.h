@@ -8,7 +8,11 @@
 
 /* ---------- definitions */
 
+class c_game_engine_base_variant;
+
 /* ---------- prototypes */
+
+extern unsigned __int64 game_engine_variant_get_uid(c_game_engine_base_variant const * variant, unsigned int variant_index);
 
 /* ---------- globals */
 

@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void initialize_performance_counters(void);
+
 /* ---------- globals */
 
 /* ---------- public code */

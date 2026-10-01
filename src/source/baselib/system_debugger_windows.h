@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void system_output_debug_string(char const *string);
+
 /* ---------- globals */
 
 /* ---------- public code */

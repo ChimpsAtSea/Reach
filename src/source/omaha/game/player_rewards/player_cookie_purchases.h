@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void cookie_purchase_force_grant_all_prerequisites_hs();
+
 /* ---------- globals */
 
 /* ---------- public code */

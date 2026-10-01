@@ -6,6 +6,11 @@
 
 /* ---------- constants */
 
+enum
+{
+    PROJECTILE_DEFINITION_TAG = 'proj',
+};
+
 /* ---------- definitions */
 
 /* ---------- prototypes */

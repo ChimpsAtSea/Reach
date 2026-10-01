@@ -2,6 +2,8 @@
 
 #include "baselib\thread_execution_windows.h"
 
+#include <xtl.h>
+
 /* ---------- constants */
 
 /* ---------- definitions */
@@ -19,13 +21,23 @@
 // bool thread_switch(void);
 // void thread_sleep(unsigned long);
 
-//bool thread_switch(void)
-//{
-//    mangled_ppc("?thread_switch@@YA_NXZ");
-//};
+bool thread_switch(void)
+{
+    mangled_ppc("?thread_switch@@YA_NXZ");
 
-//void thread_sleep(unsigned long)
-//{
-//    mangled_ppc("?thread_sleep@@YAXK@Z");
-//};
+    bool result = false;
+    if (SwitchToThread())
+    {
+        result = true;
+    }
+
+    return result;
+};
+
+void thread_sleep(unsigned long milliseconds)
+{
+    mangled_ppc("?thread_sleep@@YAXK@Z");
+
+    Sleep(milliseconds);
+};
 

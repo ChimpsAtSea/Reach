@@ -4,11 +4,15 @@
 
 /* ---------- headers */
 
+#include "omaha\game\game_constants.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
 
 /* ---------- prototypes */
+
+extern c_game_team game_get_player_team(long player_index);
 
 /* ---------- globals */
 

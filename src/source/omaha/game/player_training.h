@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void player_training_handle_saved_game(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

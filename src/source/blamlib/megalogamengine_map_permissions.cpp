@@ -1,6 +1,9 @@
 /* ---------- headers */
 
 #include "blamlib\megalogamengine_map_permissions.h"
+#include <string.h>
+#include "core\corelib\cseries\cseries_events.h"
+#include "omaha\memory\bitstream.h"
 
 /* ---------- constants */
 
@@ -31,73 +34,87 @@
 // public: void c_bitstream::write_count<32, long>(char const *, long);
 // public: long c_bitstream::read_count<32>(char const *);
 
-//public: void c_megalogamengine_map_permissions::initialize(void)
-//{
-//    mangled_ppc("?initialize@c_megalogamengine_map_permissions@@QAAXXZ");
-//};
+void c_megalogamengine_map_permissions::initialize(void)
+{
+    mangled_ppc("?initialize@c_megalogamengine_map_permissions@@QAAXXZ");
 
-//public: bool c_megalogamengine_map_permissions::is_valid(void) const
-//{
-//    mangled_ppc("?is_valid@c_megalogamengine_map_permissions@@QBA_NXZ");
-//};
+    memset(this, 0, sizeof(*this));
+    m_default_permission = true;
+};
 
-//public: void c_megalogamengine_map_permissions::encode(class c_bitstream *) const
-//{
-//    mangled_ppc("?encode@c_megalogamengine_map_permissions@@QBAXPAVc_bitstream@@@Z");
-//};
+bool c_megalogamengine_map_permissions::is_valid(void) const
+{
+    mangled_ppc("?is_valid@c_megalogamengine_map_permissions@@QBA_NXZ");
 
-//public: void c_megalogamengine_map_permissions::decode(class c_bitstream *)
-//{
-//    mangled_ppc("?decode@c_megalogamengine_map_permissions@@QAAXPAVc_bitstream@@@Z");
-//};
+    return IN_RANGE_INCLUSIVE(m_exception_map_ids.count(), 0, 32);
+};
 
-//public: bool c_megalogamengine_map_permissions::is_default_map_allowed(enum e_map_id) const
-//{
-//    mangled_ppc("?is_default_map_allowed@c_megalogamengine_map_permissions@@QBA_NW4e_map_id@@@Z");
-//};
+void c_megalogamengine_map_permissions::encode(c_bitstream * packet) const
+{
+    mangled_ppc("?encode@c_megalogamengine_map_permissions@@QBAXPAVc_bitstream@@@Z");
 
-//private: bool c_megalogamengine_map_permissions::map_in_exception_list(enum e_map_id) const
-//{
-//    mangled_ppc("?map_in_exception_list@c_megalogamengine_map_permissions@@ABA_NW4e_map_id@@@Z");
-//};
+    packet->write_count<32>("exception-count", m_exception_map_ids.count());
+    for (long exception_index = 0; exception_index < m_exception_map_ids.count(); exception_index++)
+    {
+        packet->write_signed_integer("map-id", m_exception_map_ids[exception_index], 16);
+    }
+    packet->write_bool("default-permission", m_default_permission);
+};
 
-//public: long c_static_stack<short, 32>::count(void) const
-//{
-//    mangled_ppc("?count@?$c_static_stack@F$0CA@@@QBAJXZ");
-//};
+void c_megalogamengine_map_permissions::decode(c_bitstream * packet)
+{
+    mangled_ppc("?decode@c_megalogamengine_map_permissions@@QAAXPAVc_bitstream@@@Z");
 
-//public: void c_static_stack<short, 32>::resize(long)
-//{
-//    mangled_ppc("?resize@?$c_static_stack@F$0CA@@@QAAXJ@Z");
-//};
+    initialize();
+    long exception_count = packet->read_count<32>("exception-count");
+    if (VALID_COUNT(exception_count, 32))
+    {
+        m_exception_map_ids.resize(exception_count);
+        for (long exception_index = 0; exception_index < exception_count; exception_index++)
+        {
+            m_exception_map_ids[exception_index] = static_cast<short>(packet->read_signed_integer("map-id", 16));
+        }
+        m_default_permission = packet->read_bool("default-permission");
+    }
+    else
+    {
+        event_wrapped(_event_error, "megalogamengine:map_permissions: read out-of-range exception count %d", exception_count);
+    }
+};
 
-//public: short const & c_static_stack<short, 32>::operator[](long) const
-//{
-//    mangled_ppc("??A?$c_static_stack@F$0CA@@@QBAABFJ@Z");
-//};
+bool c_megalogamengine_map_permissions::is_default_map_allowed(e_map_id map_id) const
+{
+    mangled_ppc("?is_default_map_allowed@c_megalogamengine_map_permissions@@QBA_NW4e_map_id@@@Z");
 
-//public: short & c_static_stack<short, 32>::operator[](long)
-//{
-//    mangled_ppc("??A?$c_static_stack@F$0CA@@@QAAAAFJ@Z");
-//};
+    bool allowed = m_default_permission;
+    if (map_in_exception_list(map_id))
+    {
+        allowed = !allowed;
+    }
+    return allowed;
+};
 
-//public: bool c_static_stack<short, 32>::valid(void) const
-//{
-//    mangled_ppc("?valid@?$c_static_stack@F$0CA@@@QBA_NXZ");
-//};
+bool c_megalogamengine_map_permissions::map_in_exception_list(e_map_id map_id) const
+{
+    mangled_ppc("?map_in_exception_list@c_megalogamengine_map_permissions@@ABA_NW4e_map_id@@@Z");
 
-//public: bool c_static_stack<short, 32>::valid(long) const
-//{
-//    mangled_ppc("?valid@?$c_static_stack@F$0CA@@@QBA_NJ@Z");
-//};
+    bool result = false;
+    for (long exception_index = 0; exception_index < m_exception_map_ids.count(); exception_index++)
+    {
+        if (m_exception_map_ids[exception_index] == map_id)
+        {
+            result = true;
+            break;
+        }
+    }
+    return result;
+};
 
-//public: void c_bitstream::write_count<32, long>(char const *, long)
-//{
-//    mangled_ppc("??$write_count@$0CA@J@c_bitstream@@QAAXPBDJ@Z");
-//};
 
-//public: long c_bitstream::read_count<32>(char const *)
-//{
-//    mangled_ppc("??$read_count@$0CA@@c_bitstream@@QAAJPBD@Z");
-//};
+
+
+
+
+
+
 

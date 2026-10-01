@@ -4,6 +4,8 @@
 
 /* ---------- headers */
 
+#include "omaha\tag_files\tag_group_definitions.h"
+
 /* ---------- constants */
 
 /* ---------- definitions */
@@ -11,6 +13,8 @@
 /* ---------- prototypes */
 
 /* ---------- globals */
+
+extern s_string_list_definition object_type_enum_definition;
 
 /* ---------- public code */
 

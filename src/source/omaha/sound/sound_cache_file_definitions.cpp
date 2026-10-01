@@ -1,6 +1,9 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\sound\\sound_cache_file_definitions.cpp"
 /* ---------- headers */
 
 #include "omaha\sound\sound_cache_file_definitions.h"
+#include "omaha\cache\cache_file_builder.h"
+#include "omaha\tag_files\tag_groups.h"
 
 /* ---------- constants */
 
@@ -33,8 +36,17 @@
 
 // bool build_cache_file_prepare_sound_gestalt(class c_cache_file_global_tag_registry *);
 
-//bool build_cache_file_prepare_sound_gestalt(class c_cache_file_global_tag_registry *)
-//{
-//    mangled_ppc("?build_cache_file_prepare_sound_gestalt@@YA_NPAVc_cache_file_global_tag_registry@@@Z");
-//};
+bool build_cache_file_prepare_sound_gestalt(c_cache_file_global_tag_registry * registry)
+{
+    mangled_ppc("?build_cache_file_prepare_sound_gestalt@@YA_NPAVc_cache_file_global_tag_registry@@@Z");
 
+    bool success = false;
+    long sound_gestalt_tag_index = registry->get_global_tag_index(SOUND_CACHE_FILE_GESTALT_TAG);
+    if (sound_gestalt_tag_index != 0)
+    {
+        tag_rename(sound_gestalt_tag_index, "I've got a lovely bunch of coconuts");
+        success = true;
+    }
+
+    return success;
+};

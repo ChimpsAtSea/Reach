@@ -8,6 +8,21 @@
 
 /* ---------- definitions */
 
+// $TODO layout: only the methods referenced so far are declared
+class c_light_volume_definition
+{
+public:
+    unsigned long get_used_states() const;
+};
+
+// $TODO layout: only the methods referenced so far are declared
+class c_light_volume_system_definition
+{
+public:
+    long get_light_volume_count() const;
+    c_light_volume_definition const * get_light_volume_definition(long light_volume_index) const;
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

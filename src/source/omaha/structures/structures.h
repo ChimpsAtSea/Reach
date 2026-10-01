@@ -10,6 +10,8 @@
 
 /* ---------- prototypes */
 
+void structures_context_cache_load_from_game_state(long game_state_proc_flags);
+
 /* ---------- globals */
 
 /* ---------- public code */

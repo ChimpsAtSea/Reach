@@ -2,6 +2,8 @@
 
 #include "baselib\system_time_xenon.h"
 
+#include <xtl.h>
+
 /* ---------- constants */
 
 /* ---------- definitions */
@@ -18,8 +20,10 @@
 
 // unsigned long system_milliseconds(void);
 
-//unsigned long system_milliseconds(void)
-//{
-//    mangled_ppc("?system_milliseconds@@YAKXZ");
-//};
+unsigned long system_milliseconds(void)
+{
+    mangled_ppc("?system_milliseconds@@YAKXZ");
+
+    return GetTickCount();
+};
 

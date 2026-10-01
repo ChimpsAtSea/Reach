@@ -1,14 +1,63 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\foundation\\threadlib\\multithreading\\profiler\\mt_profiler_store.cpp"
 /* ---------- headers */
 
 #include "foundation\threadlib\multithreading\profiler\mt_profiler_store.h"
+#include "core\corelib\cseries\cseries_asserts.h"
+#include "core\corelib\cseries\cseries_macros.h"
+#include "core\corelib\cseries\cseries_memory.h"
+#include "baselib\synchronized_value_windows.h"
+#include "foundation\baselib\datatypes\indexed_list.h"
 
 /* ---------- constants */
+
+long const k_mtp_colors_max = 27;
+long const k_mtp_max_global_defs = 1024;
+long const k_mtp_max_name_defs = 1024;
+long const k_mtp_alloc_history_count = 240;
+unsigned long const k_profiler_backing_memory_size = 0x20000;
 
 /* ---------- definitions */
 
 /* ---------- prototypes */
 
+float smoothstep(float edge0, float edge1, float x);
+unsigned short get_color_index(e_mt_color color);
+unsigned short get_name_index(char const * name);
+unsigned short get_global_index(unsigned short group_name_index, unsigned short name_index, unsigned short color_index);
+void initialize_history(void);
+long enough_free(long size);
+unsigned char * allocate_frame(long size);
+s_profiler_frame_header * get_frame(long offset);
+
 /* ---------- globals */
+
+// the table holds one entry past k_mtp_colors_max (.data size 0x70)
+unsigned long g_mtp_profiler_colors[k_mtp_colors_max + 1] =
+{
+    0xFFFF0000, 0xFF3F0000,
+    0xFF00FF00, 0xFF003F00,
+    0xFF0000FF, 0xFF00003F,
+    0xFF00FFFF, 0xFF003F3F,
+    0xFFFF00FF, 0xFF3F003F,
+    0xFFFFFF00, 0xFF3F3F00,
+    0xFF800080, 0xFF200020,
+    0xFFFFC0CB, 0xFF3F3032,
+    0xFFFF69B4, 0xFF3F1A2D,
+    0xFFFFA500, 0xFF3F2900,
+    0x1F7F7F7F, 0x1F1F1F1F,
+    0xFFFF0000, 0xFF3F0000,
+    0xFFFFFFFF, 0xFF000000,
+    0xFFFFFFFF, 0x00000000,
+};
+bool g_capture_allowed = true;
+c_indexed_list<long, k_mtp_alloc_history_count> g_alloc_list;
+unsigned char profiler_backing_memory[k_profiler_backing_memory_size];
+s_global_def g_mtp_global_defs[k_mtp_max_global_defs];
+char const * g_mtp_name_defs[k_mtp_max_name_defs];
+long g_cur_offset;
+e_mt_profiler_mode g_mt_profiler_mode;
+c_synchronized_int32 g_mtp_used_global_defs;
+c_synchronized_int32 g_mtp_used_name_defs;
 
 /* ---------- public code */
 
@@ -73,228 +122,321 @@
 // void g_mtp_used_global_defs::`dynamic atexit destructor'(void);
 // void g_mtp_used_name_defs::`dynamic atexit destructor'(void);
 
-//unsigned long mt_profiler_get_color_from_index(long)
-//{
-//    mangled_ppc("?mt_profiler_get_color_from_index@@YAKJ@Z");
-//};
+unsigned long mt_profiler_get_color_from_index(long index)
+{
+    mangled_ppc("?mt_profiler_get_color_from_index@@YAKJ@Z");
 
-//float smoothstep(float, float, float)
-//{
-//    mangled_ppc("?smoothstep@@YAMMMM@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(68, index < k_mtp_colors_max);
 
-//unsigned long mt_profiler_get_color_from_user(float, float)
-//{
-//    mangled_ppc("?mt_profiler_get_color_from_user@@YAKMM@Z");
-//};
+    return g_mtp_profiler_colors[index];
+};
 
-//char const * mt_profiler_get_name_from_index(long)
-//{
-//    mangled_ppc("?mt_profiler_get_name_from_index@@YAPBDJ@Z");
-//};
+float smoothstep(float edge0, float edge1, float x)
+{
+    mangled_ppc("?smoothstep@@YAMMMM@Z");
 
-//unsigned short get_color_index(enum e_mt_color)
-//{
-//    mangled_ppc("?get_color_index@@YAGW4e_mt_color@@@Z");
-//};
+    if (x < edge0)
+    {
+        return 0.0f;
+    }
 
-//unsigned short get_name_index(char const *)
-//{
-//    mangled_ppc("?get_name_index@@YAGPBD@Z");
-//};
+    if (x >= edge1)
+    {
+        return 1.0f;
+    }
 
-//unsigned short get_global_index(unsigned short, unsigned short, unsigned short)
-//{
-//    mangled_ppc("?get_global_index@@YAGGGG@Z");
-//};
+    x = (x - edge0) / (edge1 - edge0);
+    return x * x * (3.0f - 2.0f * x);
+};
 
-//public: void s_global_def::set(unsigned short, unsigned short, unsigned short)
-//{
-//    mangled_ppc("?set@s_global_def@@QAAXGGG@Z");
-//};
+unsigned long mt_profiler_get_color_from_user(float user, float max_user)
+{
+    mangled_ppc("?mt_profiler_get_color_from_user@@YAKMM@Z");
 
-//unsigned short profiler_get_index(char const *, char const *, enum e_mt_color)
-//{
-//    mangled_ppc("?profiler_get_index@@YAGPBD0W4e_mt_color@@@Z");
-//};
+    // local names chosen to reproduce the target stack layout
+    float red_start;
+    float green_lower;
+    float blue_value;
+    float blue_max;
+    unsigned char blue_char;
+    float fraction;
+    float red;
+    float green_amount;
+    unsigned char red_bits;
+    float green_end_value;
+    float red_to;
+    float blue_min;
+    unsigned char green_u8;
 
-//struct s_mt_context_detail mt_profiler_get_context_detail(unsigned short)
-//{
-//    mangled_ppc("?mt_profiler_get_context_detail@@YA?AUs_mt_context_detail@@G@Z");
-//};
+    fraction = user / max_user;
+    red_start = 0.0f;
+    red_to = 0.3f;
+    green_lower = 0.2f;
+    green_end_value = 0.4f;
+    blue_min = 0.3f;
+    blue_max = 1.0f;
+    red = smoothstep(red_start, red_to, fraction);
+    green_amount = smoothstep(green_lower, green_end_value, fraction);
+    blue_value = smoothstep(blue_min, blue_max, fraction);
 
-//void initialize_history(void)
-//{
-//    mangled_ppc("?initialize_history@@YAXXZ");
-//};
+    red -= 3.0f * green_amount;
+    green_amount -= 3.0f * blue_value;
 
-//long enough_free(long)
-//{
-//    mangled_ppc("?enough_free@@YAJJ@Z");
-//};
+    if (red < 0.0f || red > 1.0f)
+    {
+        red = 0.0f;
+    }
+    if (green_amount < 0.0f || green_amount > 1.0f)
+    {
+        green_amount = 0.0f;
+    }
+    if (blue_value < 0.0f || blue_value > 1.0f)
+    {
+        blue_value = 0.0f;
+    }
 
-//unsigned char * allocate_frame(long)
-//{
-//    mangled_ppc("?allocate_frame@@YAPAEJ@Z");
-//};
+    red *= 255.0f;
+    green_amount *= 255.0f;
+    blue_value *= 255.0f;
 
-//struct s_profiler_frame_header * get_frame(long)
-//{
-//    mangled_ppc("?get_frame@@YAPAUs_profiler_frame_header@@J@Z");
-//};
+    blue_char = static_cast<unsigned char>(blue_value);
+    green_u8 = static_cast<unsigned char>(green_amount);
+    red_bits = static_cast<unsigned char>(red);
 
-//struct s_profiler_frame_header * profiler_storage_request(unsigned long, unsigned long)
-//{
-//    mangled_ppc("?profiler_storage_request@@YAPAUs_profiler_frame_header@@KK@Z");
-//};
+    return (0xFF << 24) | (blue_char << 16) | (green_u8 << 8) | red_bits;
+};
 
-//struct s_profiler_frame_header * mt_profiler_get_frame(long)
-//{
-//    mangled_ppc("?mt_profiler_get_frame@@YAPAUs_profiler_frame_header@@J@Z");
-//};
+char const * mt_profiler_get_name_from_index(long index)
+{
+    mangled_ppc("?mt_profiler_get_name_from_index@@YAPBDJ@Z");
 
-//void mt_profiler_toggle_capture(void)
-//{
-//    mangled_ppc("?mt_profiler_toggle_capture@@YAXXZ");
-//};
+    assert_tag_debug_untracked_jul_11_2011(168, index < g_mtp_used_name_defs.peek());
 
-//void profiler_publish_frame(struct s_profiler_frame_header *)
-//{
-//    mangled_ppc("?profiler_publish_frame@@YAXPAUs_profiler_frame_header@@@Z");
-//};
+    return g_mtp_name_defs[index];
+};
 
-//void mt_profiler_initialize(void)
-//{
-//    mangled_ppc("?mt_profiler_initialize@@YAXXZ");
-//};
+unsigned short get_color_index(e_mt_color color)
+{
+    mangled_ppc("?get_color_index@@YAGW4e_mt_color@@@Z");
 
-//void mt_profiler_dispose(void)
-//{
-//    mangled_ppc("?mt_profiler_dispose@@YAXXZ");
-//};
+    return static_cast<unsigned short>(color);
+};
 
-//void mt_profiler_set_mode(enum e_mt_profiler_mode)
-//{
-//    mangled_ppc("?mt_profiler_set_mode@@YAXW4e_mt_profiler_mode@@@Z");
-//};
+unsigned short get_name_index(char const * name)
+{
+    mangled_ppc("?get_name_index@@YAGPBD@Z");
 
-//enum e_mt_profiler_mode mt_profiler_get_mode(void)
-//{
-//    mangled_ppc("?mt_profiler_get_mode@@YA?AW4e_mt_profiler_mode@@XZ");
-//};
+    for (long used_count = g_mtp_used_name_defs.peek(), index = 0; index < used_count; index++)
+    {
+        if (name == g_mtp_name_defs[index])
+        {
+            return static_cast<unsigned short>(index);
+        }
+    }
 
-//public: class c_indexed_list<long, 240>::iterator c_indexed_list<long, 240>::begin(void)
-//{
-//    mangled_ppc("?begin@?$c_indexed_list@J$0PA@@@QAA?AViterator@1@XZ");
-//};
+    long new_index = g_mtp_used_name_defs.increment() - 1;
+    g_mtp_name_defs[new_index] = name;
+    return static_cast<unsigned short>(new_index);
+};
 
-//public: class c_indexed_list<long, 240>::iterator c_indexed_list<long, 240>::end(void)
-//{
-//    mangled_ppc("?end@?$c_indexed_list@J$0PA@@@QAA?AViterator@1@XZ");
-//};
+unsigned short get_global_index(unsigned short group_name_index, unsigned short name_index, unsigned short color_index)
+{
+    mangled_ppc("?get_global_index@@YAGGGG@Z");
 
-//public: long c_indexed_list<long, 240>::count(void) const
-//{
-//    mangled_ppc("?count@?$c_indexed_list@J$0PA@@@QBAJXZ");
-//};
+    s_global_def global_def;
+    global_def.set(group_name_index, name_index, color_index);
+    for (long used_count = g_mtp_used_global_defs.peek(), index = 0; index < used_count; index++)
+    {
+        if (global_def.value == g_mtp_global_defs[index].value)
+        {
+            return static_cast<unsigned short>(index);
+        }
+    }
 
-//public: bool c_indexed_list<long, 240>::full(void) const
-//{
-//    mangled_ppc("?full@?$c_indexed_list@J$0PA@@@QBA_NXZ");
-//};
+    long new_index = g_mtp_used_global_defs.increment() - 1;
+    g_mtp_global_defs[new_index].set(group_name_index, name_index, color_index);
+    return static_cast<unsigned short>(new_index);
+};
 
-//public: c_indexed_list<long, 240>::const_iterator::const_iterator(class c_indexed_list<long, 240>::iterator const &)
-//{
-//    mangled_ppc("??0const_iterator@?$c_indexed_list@J$0PA@@@QAA@ABViterator@1@@Z");
-//};
+unsigned short profiler_get_index(char const * group_name, char const * name, e_mt_color color)
+{
+    mangled_ppc("?profiler_get_index@@YAGPBD0W4e_mt_color@@@Z");
 
-//public: long const & c_indexed_list<long, 240>::const_iterator::operator*(void) const
-//{
-//    mangled_ppc("??Dconst_iterator@?$c_indexed_list@J$0PA@@@QBAABJXZ");
-//};
+    unsigned short global_index;
+    unsigned short name_index;
+    unsigned short color_index;
+    unsigned short group_name_index;
 
-//public: long & c_indexed_list<long, 240>::iterator::operator*(void)
-//{
-//    mangled_ppc("??Diterator@?$c_indexed_list@J$0PA@@@QAAAAJXZ");
-//};
+    group_name_index = get_name_index(group_name);
+    name_index = get_name_index(name);
+    color_index = get_color_index(color);
+    global_index = get_global_index(group_name_index, name_index, color_index);
+    return global_index;
+};
 
-//public: class c_indexed_list<long, 240>::iterator & c_indexed_list<long, 240>::iterator::operator--(void)
-//{
-//    mangled_ppc("??Fiterator@?$c_indexed_list@J$0PA@@@QAAAAV01@XZ");
-//};
+s_mt_context_detail mt_profiler_get_context_detail(unsigned short id)
+{
+    mangled_ppc("?mt_profiler_get_context_detail@@YA?AUs_mt_context_detail@@G@Z");
 
-//private: unsigned short c_indexed_list<long, 240>::get_next(unsigned short) const
-//{
-//    mangled_ppc("?get_next@?$c_indexed_list@J$0PA@@@ABAGG@Z");
-//};
+    assert_tag_debug_untracked_jul_11_2011(255, id < g_mtp_used_global_defs);
 
-//private: unsigned short c_indexed_list<long, 240>::get_prev(unsigned short) const
-//{
-//    mangled_ppc("?get_prev@?$c_indexed_list@J$0PA@@@ABAGG@Z");
-//};
+    s_mt_context_detail detail;
+    detail.color_index = g_mtp_global_defs[id].color;
+    detail.name_index = g_mtp_global_defs[id].name;
+    return detail;
+};
 
-//private: unsigned short c_indexed_list<long, 240>::get_head(void) const
-//{
-//    mangled_ppc("?get_head@?$c_indexed_list@J$0PA@@@ABAGXZ");
-//};
+void initialize_history(void)
+{
+    mangled_ppc("?initialize_history@@YAXXZ");
 
-//private: unsigned short c_indexed_list<long, 240>::get_tail(void) const
-//{
-//    mangled_ppc("?get_tail@?$c_indexed_list@J$0PA@@@ABAGXZ");
-//};
+    g_alloc_list.initialize();
+    g_alloc_list.push_back(0);
+};
 
-//private: long & c_indexed_list<long, 240>::get_data(unsigned short)
-//{
-//    mangled_ppc("?get_data@?$c_indexed_list@J$0PA@@@AAAAAJG@Z");
-//};
+long enough_free(long size)
+{
+    mangled_ppc("?enough_free@@YAJJ@Z");
 
-//private: long const & c_indexed_list<long, 240>::get_data(unsigned short) const
-//{
-//    mangled_ppc("?get_data@?$c_indexed_list@J$0PA@@@ABAABJG@Z");
-//};
+    long free_size;
+    {
+        c_indexed_list<long, k_mtp_alloc_history_count>::const_iterator oldest = g_alloc_list.begin();
+        free_size = *oldest - g_cur_offset;
+        if (free_size < 0)
+        {
+            if (g_cur_offset + size > k_profiler_backing_memory_size)
+            {
+                g_cur_offset = 0;
+                free_size = *oldest;
+            }
+            else
+            {
+                free_size = k_profiler_backing_memory_size - g_cur_offset;
+            }
+        }
+    }
 
-//public: c_indexed_list<long, 240>::iterator::iterator(class c_indexed_list<long, 240> *, unsigned short, unsigned short, unsigned short)
-//{
-//    mangled_ppc("??0iterator@?$c_indexed_list@J$0PA@@@QAA@PAV1@GGG@Z");
-//};
+    return free_size >= size;
+};
 
-//public: void c_indexed_list<long, 240>::initialize(void)
-//{
-//    mangled_ppc("?initialize@?$c_indexed_list@J$0PA@@@QAAXXZ");
-//};
+unsigned char * allocate_frame(long size)
+{
+    mangled_ppc("?allocate_frame@@YAPAEJ@Z");
 
-//public: bool c_indexed_list<long, 240>::push_back(long const &)
-//{
-//    mangled_ppc("?push_back@?$c_indexed_list@J$0PA@@@QAA_NABJ@Z");
-//};
+    size = (size + 15) & ~15;
+    if (static_cast<unsigned long>(size) < k_profiler_backing_memory_size)
+    {
+        while (!enough_free(size) && g_alloc_list.count() > 0)
+        {
+            g_alloc_list.pop_head();
+        }
 
-//public: long c_indexed_list<long, 240>::pop_head(void)
-//{
-//    mangled_ppc("?pop_head@?$c_indexed_list@J$0PA@@@QAAJXZ");
-//};
+        long offset = g_cur_offset;
+        g_cur_offset += size;
+        return &profiler_backing_memory[offset];
+    }
 
-//private: unsigned short c_indexed_list<long, 240>::pop(void)
-//{
-//    mangled_ppc("?pop@?$c_indexed_list@J$0PA@@@AAAGXZ");
-//};
+    return NULL;
+};
 
-//private: void c_indexed_list<long, 240>::push(struct s_il_node *)
-//{
-//    mangled_ppc("?push@?$c_indexed_list@J$0PA@@@AAAXPAUs_il_node@@@Z");
-//};
+s_profiler_frame_header * get_frame(long offset)
+{
+    mangled_ppc("?get_frame@@YAPAUs_profiler_frame_header@@J@Z");
 
-//public: void c_indexed_list<long, 240>::clear(void)
-//{
-//    mangled_ppc("?clear@?$c_indexed_list@J$0PA@@@QAAXXZ");
-//};
+    return static_cast<s_profiler_frame_header *>(offset_pointer(profiler_backing_memory, offset));
+};
 
-//void g_mtp_used_global_defs::`dynamic atexit destructor'(void)
-//{
-//    mangled_ppc("??__Fg_mtp_used_global_defs@@YAXXZ");
-//};
+s_profiler_frame_header * profiler_storage_request(unsigned long context_count, unsigned long thread_count)
+{
+    mangled_ppc("?profiler_storage_request@@YAPAUs_profiler_frame_header@@KK@Z");
 
-//void g_mtp_used_name_defs::`dynamic atexit destructor'(void)
-//{
-//    mangled_ppc("??__Fg_mtp_used_name_defs@@YAXXZ");
-//};
+    if (!g_capture_allowed)
+    {
+        return NULL;
+    }
 
+    unsigned long size = sizeof(s_profiler_frame_header);
+    size += context_count * sizeof(s_storage_context);
+    size += thread_count * sizeof(s_storage_thread);
+    assert_tag_debug_untracked_jul_11_2011(412, size < k_profiler_backing_memory_size);
+
+    s_profiler_frame_header * frame = reinterpret_cast<s_profiler_frame_header *>(allocate_frame(size));
+    frame->size = size;
+    frame->context_count = context_count;
+    frame->thread_count = static_cast<unsigned short>(thread_count);
+    return frame;
+};
+
+s_profiler_frame_header * mt_profiler_get_frame(long frame_offset)
+{
+    mangled_ppc("?mt_profiler_get_frame@@YAPAUs_profiler_frame_header@@J@Z");
+
+    long count = g_alloc_list.count();
+    if (count == 0)
+    {
+        return NULL;
+    }
+
+    frame_offset = frame_offset < 0 ? -frame_offset : frame_offset;
+    frame_offset = frame_offset > count ? count : frame_offset;
+
+    c_indexed_list<long, k_mtp_alloc_history_count>::iterator it = g_alloc_list.end();
+    --it;
+    while (frame_offset != 0)
+    {
+        --it;
+        frame_offset--;
+    }
+
+    s_profiler_frame_header * frame = get_frame(*it);
+    return frame;
+};
+
+void mt_profiler_toggle_capture(void)
+{
+    mangled_ppc("?mt_profiler_toggle_capture@@YAXXZ");
+
+    g_capture_allowed = g_capture_allowed ? false : true;
+};
+
+void profiler_publish_frame(s_profiler_frame_header * frame)
+{
+    mangled_ppc("?profiler_publish_frame@@YAXPAUs_profiler_frame_header@@@Z");
+
+    if (g_capture_allowed && frame != NULL)
+    {
+        long offset = pointer_distance(profiler_backing_memory, frame);
+        if (g_alloc_list.full())
+        {
+            g_alloc_list.pop_head();
+        }
+        g_alloc_list.push_back(offset);
+    }
+};
+
+void mt_profiler_initialize(void)
+{
+    mangled_ppc("?mt_profiler_initialize@@YAXXZ");
+
+    g_capture_allowed = true;
+    initialize_history();
+};
+
+void mt_profiler_dispose(void)
+{
+    mangled_ppc("?mt_profiler_dispose@@YAXXZ");
+};
+
+void mt_profiler_set_mode(e_mt_profiler_mode mode)
+{
+    mangled_ppc("?mt_profiler_set_mode@@YAXW4e_mt_profiler_mode@@@Z");
+
+    g_mt_profiler_mode = mode;
+};
+
+e_mt_profiler_mode mt_profiler_get_mode(void)
+{
+    mangled_ppc("?mt_profiler_get_mode@@YA?AW4e_mt_profiler_mode@@XZ");
+
+    return g_mt_profiler_mode;
+};

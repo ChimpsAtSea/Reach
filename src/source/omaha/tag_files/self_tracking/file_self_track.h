@@ -8,6 +8,12 @@
 
 /* ---------- definitions */
 
+class c_self_log
+{
+public:
+    bool build_entry();
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */

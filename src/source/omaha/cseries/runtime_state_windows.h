@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+void * runtime_state_allocate_buffer(long size);
+void runtime_state_free_buffer(void * buffer);
+
 /* ---------- globals */
 
 /* ---------- public code */
