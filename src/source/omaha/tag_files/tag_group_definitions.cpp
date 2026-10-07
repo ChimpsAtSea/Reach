@@ -8,6 +8,27 @@
 
 /* ---------- definitions */
 
+// Partial layouts for the recovered accessors only. The storage lengths cover
+// the fields read here; they do not establish the complete definition sizes.
+// Offsets are from the July 7 tag_play bodies; see docs/recovery/tag_definition_accessors.md.
+struct s_tag_struct_definition
+{
+	long get_struct_size(void) const;
+	long get_cache_file_struct_size(void) const;
+	long get_alignment_bits(void) const;
+	unsigned long get_runtime_flags(void) const;
+	__int64 get_exploded_struct_size(void) const;
+	c_tag_struct_vtable_interface const *get_struct_vtable(void) const;
+	char const *get_name(void) const;
+	unsigned char storage[136];
+};
+
+struct s_tag_block_definition
+{
+	char const *get_block_name(void) const;
+	unsigned char storage[8];
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */
@@ -65,30 +86,30 @@
 //    mangled_ppc("?owns_field@s_tag_struct_definition@@QBA_NPBUs_tag_field@@@Z");
 //};
 
-//public: long s_tag_struct_definition::get_struct_size(void) const
-//{
-//    mangled_ppc("?get_struct_size@s_tag_struct_definition@@QBAJXZ");
-//};
+long s_tag_struct_definition::get_struct_size(void) const
+{
+	return *reinterpret_cast<long const *>(storage + 28);
+}
 
-//public: long s_tag_struct_definition::get_cache_file_struct_size(void) const
-//{
-//    mangled_ppc("?get_cache_file_struct_size@s_tag_struct_definition@@QBAJXZ");
-//};
+long s_tag_struct_definition::get_cache_file_struct_size(void) const
+{
+	return *reinterpret_cast<long const *>(storage + 132);
+}
 
-//public: long s_tag_struct_definition::get_alignment_bits(void) const
-//{
-//    mangled_ppc("?get_alignment_bits@s_tag_struct_definition@@QBAJXZ");
-//};
+long s_tag_struct_definition::get_alignment_bits(void) const
+{
+	return *reinterpret_cast<long const *>(storage + 36);
+}
 
 //public: char const * s_tag_struct_definition::get_size_string(void) const
 //{
 //    mangled_ppc("?get_size_string@s_tag_struct_definition@@QBAPBDXZ");
 //};
 
-//public: unsigned long s_tag_struct_definition::get_runtime_flags(void) const
-//{
-//    mangled_ppc("?get_runtime_flags@s_tag_struct_definition@@QBAKXZ");
-//};
+unsigned long s_tag_struct_definition::get_runtime_flags(void) const
+{
+	return *reinterpret_cast<unsigned long const *>(storage + 124);
+}
 
 //public: bool s_tag_struct_definition::is_built_from_disk(void) const
 //{
@@ -100,15 +121,15 @@
 //    mangled_ppc("?get_byte_swap_definition@s_tag_struct_definition@@QBAPAUbyte_swap_definition@@XZ");
 //};
 
-//public: __int64 s_tag_struct_definition::get_exploded_struct_size(void) const
-//{
-//    mangled_ppc("?get_exploded_struct_size@s_tag_struct_definition@@QBA_JXZ");
-//};
+__int64 s_tag_struct_definition::get_exploded_struct_size(void) const
+{
+	return *reinterpret_cast<__int64 const *>(storage + 80);
+}
 
-//public: class c_tag_struct_vtable_interface const * s_tag_struct_definition::get_struct_vtable(void) const
-//{
-//    mangled_ppc("?get_struct_vtable@s_tag_struct_definition@@QBAPBVc_tag_struct_vtable_interface@@XZ");
-//};
+c_tag_struct_vtable_interface const *s_tag_struct_definition::get_struct_vtable(void) const
+{
+	return *reinterpret_cast<c_tag_struct_vtable_interface const *const *>(storage + 72);
+}
 
 //public: void const * s_tag_struct_definition::get_type_key(void) const
 //{
@@ -145,10 +166,10 @@
 //    mangled_ppc("?get_pretty_name@s_tag_struct_definition@@QBAPBDXZ");
 //};
 
-//public: char const * s_tag_struct_definition::get_name(void) const
-//{
-//    mangled_ppc("?get_name@s_tag_struct_definition@@QBAPBDXZ");
-//};
+char const *s_tag_struct_definition::get_name(void) const
+{
+	return *reinterpret_cast<char const *const *>(storage + 4);
+}
 
 //public: void s_tag_struct_definition::set_descendent_definition(struct s_tag_struct_definition *)
 //{
@@ -240,10 +261,10 @@
 //    mangled_ppc("?get_elements_name@s_tag_block_definition@@QBAPBDXZ");
 //};
 
-//public: char const * s_tag_block_definition::get_block_name(void) const
-//{
-//    mangled_ppc("?get_block_name@s_tag_block_definition@@QBAPBDXZ");
-//};
+char const *s_tag_block_definition::get_block_name(void) const
+{
+	return *reinterpret_cast<char const *const *>(storage + 4);
+}
 
 //public: unsigned long s_tag_block_definition::get_allocation_flags(void) const
 //{
