@@ -9,6 +9,7 @@
 #define assert(expression) if(!(expression) && !assert_handle(#expression, __FILE__, __LINE__)) { if(assert_is_debugger_present()) { __debugbreak(); } else { assert_halt(); } }
 #define assert_decomp(expression, file, line) if(!(expression) && !assert_handle(#expression, file, line)) { if(assert_is_debugger_present()) { __debugbreak(); } else { assert_halt(); } }
 #define assert_tag_debug_untracked_jul_11_2011(LINE, ...) if(!(__VA_ARGS__) && !assert_handle(#__VA_ARGS__, __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__, LINE)) { if(assert_is_debugger_present()) { __debugbreak(); } else { assert_halt(); } }
+#define vassert_tag_debug_untracked_jul_11_2011(LINE, EXPRESSION, MESSAGE) if(!(EXPRESSION) && !assert_handle(MESSAGE, __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__, LINE)) { if(assert_is_debugger_present()) { __debugbreak(); } else { assert_halt(); } }
 
 /* ---------- definitions */
 
