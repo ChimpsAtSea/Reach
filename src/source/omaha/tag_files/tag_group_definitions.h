@@ -5,6 +5,7 @@
 /* ---------- headers */
 
 #include "omaha/memory/static_arrays.h"
+#include "omaha/tag_files/tag_groups.h"
 
 /* ---------- constants */
 
@@ -31,7 +32,6 @@ enum e_tag_reload_stage;
 /* ---------- definitions */
 
 struct s_tag_struct_definition;
-struct s_tag_block;
 struct s_cache_file_builder_stream_context;
 struct s_tag_group_stream_list;
 struct s_tag_field;
