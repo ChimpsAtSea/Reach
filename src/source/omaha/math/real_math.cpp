@@ -1,6 +1,9 @@
+#define __FILE_TAG_DEBUG_UNTRACKED_JUL_11_2011__ "C:\\SD\\Reach\\Publishing\\Main\\shared\\engine\\source\\omaha\\math\\real_math.cpp"
 /* ---------- headers */
 
 #include "omaha\math\real_math.h"
+
+#include "core\corelib\cseries\cseries_asserts.h"
 
 #include <float.h>
 
@@ -35,6 +38,9 @@ extern vector3d* cross_product3d(vector3d const* a, vector3d const* b, vector3d*
 extern real real_min(real a, real b);
 extern real real_max(real a, real b);
 extern real fabs(real x);
+extern real acos(real x);
+extern real sin(real x);
+extern real cos(real x);
 extern real normalize3d(vector3d* v);
 
 real angle_between_normals3d(vector3d const* a, vector3d const* b);
@@ -635,10 +641,38 @@ void quaternion_inverse(real32_quaternion* q)
 //    mangled_ppc("?quaternion_raise_to_power@@YAXPBUreal32_quaternion@@MPAU1@@Z");
 //};
 
-//void quaternion_fix_to_use_shortest_path(struct real32_quaternion *)
-//{
-//    mangled_ppc("?quaternion_fix_to_use_shortest_path@@YAXPAUreal32_quaternion@@@Z");
-//};
+void quaternion_fix_to_use_shortest_path(real32_quaternion* q)
+{
+	mangled_ppc("?quaternion_fix_to_use_shortest_path@@YAXPAUreal32_quaternion@@@Z");
+
+	real angle;
+	real sine_half_angle;
+	real dot;
+
+	dot = quaternions_dot(q, q);
+	assert_tag_debug_untracked_jul_11_2011(1234, realcmp(dot, 1.0f));
+
+	angle = acos(q->w) * 2.0f;
+	sine_half_angle = sin(angle * 0.5f);
+
+	if (angle > k_pi)
+	{
+		real scale;
+		real new_angle;
+		real sine_new_half_angle;
+
+		new_angle = k_2pi - angle;
+		sine_new_half_angle = sin(new_angle * 0.5f);
+		scale = sine_new_half_angle / sine_half_angle;
+
+		q->w = cos(new_angle * 0.5f);
+		q->v.i = -q->v.i * scale;
+		q->v.j = -q->v.j * scale;
+		q->v.k = -q->v.k * scale;
+
+		assert_tag_debug_untracked_jul_11_2011(1255, acos(q->w) * 2.0f <= k_pi);
+	}
+};
 
 //void quaternion_normalize(struct real32_quaternion *)
 //{
