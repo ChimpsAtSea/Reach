@@ -8,6 +8,15 @@
 
 /* ---------- definitions */
 
+struct s_tag_block_definition;
+
+struct s_tag_block
+{
+    long count;
+    void * address;
+    s_tag_block_definition * definition;
+};
+
 /* ---------- prototypes */
 
 /* ---------- globals */
