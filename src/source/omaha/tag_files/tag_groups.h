@@ -8,10 +8,13 @@
 
 /* ---------- definitions */
 
-// $TODO: only `count` is confirmed so far; add the remaining fields as code needs them
+struct s_tag_block_definition;
+
 struct s_tag_block
 {
     long count;
+    void * address;
+    s_tag_block_definition * definition;
 };
 
 /* ---------- prototypes */

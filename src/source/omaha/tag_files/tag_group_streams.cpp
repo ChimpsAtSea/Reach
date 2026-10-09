@@ -29,7 +29,7 @@ void * tag_get_alternate_stream(long tag_index, unsigned long stream_tag)
 
     void * stream = tag_block_get_element(stream_block, 0);
     return stream;
-}
+};
 
 void * tag_try_and_get_alternate_stream(long tag_index, unsigned long stream_tag)
 {
@@ -39,7 +39,7 @@ void * tag_try_and_get_alternate_stream(long tag_index, unsigned long stream_tag
 
     void * stream = stream_block ? tag_block_get_element(stream_block, 0) : NULL;
     return stream;
-}
+};
 
 bool tag_alternate_stream_exists(long tag_index, unsigned long stream_tag)
 {
@@ -48,7 +48,7 @@ bool tag_alternate_stream_exists(long tag_index, unsigned long stream_tag)
     s_tag_block * stream_block = tag_try_and_get_alternate_stream_block(tag_index, stream_tag);
 
     return stream_block && stream_block->count > 0;
-}
+};
 
 bool tag_alternate_stream_create(long tag_index, unsigned long stream_tag)
 {
@@ -68,7 +68,7 @@ bool tag_alternate_stream_create(long tag_index, unsigned long stream_tag)
     }
 
     return result;
-}
+};
 
 void tag_alternate_stream_destroy(long tag_index, unsigned long stream_tag)
 {
@@ -78,7 +78,7 @@ void tag_alternate_stream_destroy(long tag_index, unsigned long stream_tag)
     assert_tag_debug_untracked_jul_11_2011(73, stream_block);
 
     tag_block_delete_all_elements(stream_block);
-}
+};
 
 bool tag_alternate_stream_reset(long tag_index, unsigned long stream_tag)
 {
@@ -91,7 +91,7 @@ bool tag_alternate_stream_reset(long tag_index, unsigned long stream_tag)
     bool success = tag_block_resize(stream_block, 1);
 
     return success;
-}
+};
 
 void * tag_try_and_get_or_create_alternate_stream(long tag_index, unsigned long stream_tag)
 {
@@ -107,7 +107,7 @@ void * tag_try_and_get_or_create_alternate_stream(long tag_index, unsigned long 
     }
 
     return stream;
-}
+};
 
 s_tag_block * tag_get_alternate_stream_root_block(long tag_index, unsigned long stream_tag)
 {
@@ -117,7 +117,7 @@ s_tag_block * tag_get_alternate_stream_root_block(long tag_index, unsigned long 
     assert_tag_debug_untracked_jul_11_2011(116, stream_block);
 
     return stream_block;
-}
+};
 
 /* ---------- private code */
 
