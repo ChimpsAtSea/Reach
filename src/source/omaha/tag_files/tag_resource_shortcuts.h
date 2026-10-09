@@ -10,6 +10,9 @@
 
 /* ---------- prototypes */
 
+extern void tag_resource_shortcuts_handle_lock(void);
+extern void tag_resource_shortcuts_handle_unlock(void);
+
 /* ---------- globals */
 
 /* ---------- public code */
