@@ -33,7 +33,7 @@ void tag_resource_shortcuts_handle_lock(void)
     vassert_tag_debug_untracked_jul_11_2011(17, VALID_INDEX(thread_index, k_tag_resource_shortcuts_thread_count), "invalid thread index");
 
     scenario_handle_tag_resource_lock(thread_index);
-}
+};
 
 void tag_resource_shortcuts_handle_unlock(void)
 {
@@ -43,7 +43,7 @@ void tag_resource_shortcuts_handle_unlock(void)
     vassert_tag_debug_untracked_jul_11_2011(25, VALID_INDEX(thread_index, k_tag_resource_shortcuts_thread_count), "invalid thread index");
 
     scenario_handle_tag_resource_unlock(thread_index);
-}
+};
 
 /* ---------- private code */
 

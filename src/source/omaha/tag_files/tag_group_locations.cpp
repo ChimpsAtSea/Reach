@@ -31,7 +31,7 @@ char const * tag_group_location_get_tag_path(e_tag_group_location location)
     assert_tag_debug_untracked_jul_11_2011(23, VALID_INDEX(location, NUMBEROF(k_tag_group_location_paths)));
 
     return k_tag_group_location_paths[location];
-}
+};
 
 bool tag_path_is_valid_for_location(e_tag_group_location location, char const * tag_path)
 {
@@ -45,7 +45,7 @@ bool tag_path_is_valid_for_location(e_tag_group_location location, char const * 
     bool valid = ascii_strnicmp(tag_path, location_path, location_path_length) == 0;
 
     return valid;
-}
+};
 
 /* ---------- private code */
 
